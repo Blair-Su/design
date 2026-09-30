@@ -1,0 +1,122 @@
+/* Shared rails and navigation frame the preserved case-study artwork. */
+.case-page { --directory-height: 56px; padding-bottom: calc(var(--directory-height) + env(safe-area-inset-bottom)); overflow-x: clip; }
+.case-page .site-header { z-index: 30; }
+.case-page .case-content { position: relative; }
+.case-content .case-rule-host { overflow: visible; }
+.case-content .case-canvas { gap: 0; }
+.case-content .case-body { width: 100%; max-width: 100%; padding-inline: var(--cell-inset); justify-content: center; }
+.case-content .case-article { flex: 0 1 auto; width: 100%; max-width: none; }
+.case-content [data-source$="PF_24jbVk"] { height: auto; aspect-ratio: 2048 / 1450; background-size: contain; background-position: center; }
+/* Full-width diagrams use the same inset as the text, without stretching their internal composition. */
+.case-content :is(.s559, .s630, .s633) { width: 100%; }
+.case-content .case-artwork-frame { width: 100%; height: auto; aspect-ratio: var(--artwork-width) / var(--artwork-height); }
+.case-artwork-canvas { position: absolute; top: 0; left: 0; width: calc(var(--artwork-width) * 1px); height: calc(var(--artwork-height) * 1px); transform-origin: top left; }
+.case-content .case-cover { padding-top: 0; }
+.case-content .case-cover > [role="img"] { height: auto; aspect-ratio: 16 / 9; border-bottom: 1px solid var(--rule); }
+.case-content .case-divider { position: relative; height: 1px; background: transparent; overflow: visible; }
+.case-content .case-divider::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100vw; height: 1px; background: var(--rule); pointer-events: none; }
+.case-content .case-divider::after { display: none; }
+.case-content .case-closing-divider { width: 100%; flex: 0 0 1px; }
+.case-content .case-closing-body { padding-bottom: 0; }
+.case-related-heading .frame { padding: 36px var(--cell-inset); }
+.case-related-heading h2 { font: 500 24px/1.5 "Inter", "Geist", sans-serif; }
+.case-page .copy-status { bottom: calc(var(--directory-height) + 16px); }
+.case-directory { position: fixed; bottom: 0; left: 0; right: 0; z-index: 25; background: #fff; border-top: 1px solid var(--rule); padding-bottom: env(safe-area-inset-bottom); }
+.directory-inner { display: flex; align-items: stretch; justify-content: space-between; position: relative; min-height: var(--directory-height); }
+.contents-toggle { display: flex; align-items: center; justify-content: space-between; gap: 28px; min-width: 170px; padding: 0 24px; background: #fff; border: 0; border-right: 1px solid var(--rule); font-family: "Geist", Arial, sans-serif; font-size: 15px; line-height: 1.3; font-weight: 500; }
+.contents-toggle:hover, .contents-toggle[aria-expanded="true"] { background: #fafafa; }
+.contents-toggle svg { width: 17px; height: 17px; transition: transform 160ms ease; }
+.contents-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+.directory-project { display: flex; align-items: center; border-left: 1px solid var(--rule); padding: 0 28px; font: 400 20px/1.2 "Newsreader", Georgia, serif; }
+.contents-menu { position: absolute; bottom: 100%; left: -1px; width: 320px; max-height: min(65dvh, calc(100dvh - var(--header-height) - var(--directory-height) - 24px)); overflow-y: auto; background: #fff; border: 1px solid var(--rule); box-shadow: 0 -12px 24px rgb(0 0 0 / 4%); }
+.contents-menu[hidden] { display: none; }
+.contents-menu a { display: flex; align-items: center; min-height: 48px; padding: 13px 24px; border-bottom: 1px solid var(--rule); font-size: 14px; line-height: 1.4; }
+.contents-menu a:last-child { border-bottom: 0; }
+.contents-menu a:hover { background: #fafafa; }
+.contents-menu a[aria-current] { background: #fff6f0; color: var(--accent-orange); }
+.contents-menu a:focus-visible, .contents-toggle:focus-visible { outline-offset: -4px; }
+.case-content [data-anchor] { scroll-margin-top: calc(var(--header-height) + 24px); }
+/* Place carousel arrows inside the artwork, centered on its left and right edges. */
+.case-content .case-carousel-slides { position: relative; }
+.case-content .case-carousel-controls { position: absolute; width: 1px; height: 1px; padding: 0; margin: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.case-content .case-carousel-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid var(--rule); border-radius: 50%; background: #fff; color: var(--ink); }
+.case-carousel-arrow[data-prev] { left: 12px; }
+.case-carousel-arrow[data-next] { right: 12px; }
+.case-content .case-carousel-arrow:hover { background: #f5f5f5; }
+.case-content .case-carousel-arrow:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.case-content .case-carousel-arrow::after { content: attr(aria-label); position: absolute; top: 50%; transform: translateY(-50%); padding: 8px 12px; border: 1px solid #000; border-radius: 4px; background: #000; color: #fff; font: 500 14px/1.3 "Geist", Arial, sans-serif; white-space: nowrap; opacity: 0; visibility: hidden; pointer-events: none; }
+.case-carousel-arrow[data-prev]::after { left: calc(100% + 8px); }
+.case-carousel-arrow[data-next]::after { right: calc(100% + 8px); }
+.case-content .case-carousel-arrow:focus-visible::after { opacity: 1; visibility: visible; }
+@media (hover: hover) and (pointer: fine) {
+  .case-content .case-carousel-arrow:hover::after { opacity: 1; visibility: visible; }
+}
+/* Show more of the long email before opening a full, scrollable view. */
+.case-content .case-email-row { height: auto; padding-bottom: 0; }
+.case-content .case-email-column { height: auto; overflow: visible; }
+.case-email-preview { display: block; position: relative; width: 100%; height: clamp(560px, 48vw, 720px); padding: 0; overflow: hidden; border: 1px solid var(--rule); background: #eafff6; cursor: pointer; }
+.case-email-preview .case-ticket-email { display: block; width: 100%; height: auto; }
+.case-email-prompt { position: absolute; right: 16px; bottom: 16px; padding: 10px 14px; border: 1px solid var(--rule); background: #fff; color: var(--ink); font: 400 14px/1.2 "Geist", sans-serif; transition: color 150ms ease; }
+.case-email-preview:hover .case-email-prompt { color: #777; }
+.case-email-preview:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.case-email-viewer { width: min(1040px, calc(100vw - 64px)); max-width: none; height: calc(100dvh - 64px); max-height: none; margin: auto; padding: 0; border: 1px solid var(--rule); background: #fff; color: var(--ink); overflow: hidden; }
+.case-email-viewer[open] { display: flex; flex-direction: column; }
+.case-email-viewer::backdrop { background: rgb(20 20 20 / 68%); }
+.case-email-toolbar { display: flex; flex-shrink: 0; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--rule); }
+.case-email-toolbar h2 { padding: 14px 20px; font: 400 16px/1.3 "Geist", sans-serif; }
+.case-email-close { display: grid; place-items: center; align-self: stretch; flex-shrink: 0; width: 56px; min-height: 56px; padding: 0; border: 0; border-left: 1px solid var(--rule); background: #fff; color: var(--ink); cursor: pointer; }
+.case-email-close:hover { background: #fafafa; }
+.case-email-close svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.case-email-full { min-height: 0; overflow: auto; overscroll-behavior: contain; }
+.case-email-full img { display: block; width: 100%; height: auto; }
+.case-email-close:focus-visible, .case-email-full:focus-visible { outline: 2px solid var(--ink); outline-offset: -4px; }
+html.case-email-open { overflow: hidden; }
+html.custom-cursor-ready .case-email-viewer, html.custom-cursor-ready .case-email-viewer * { cursor: auto !important; }
+html.custom-cursor-ready .case-email-close { cursor: pointer !important; }
+html.case-email-open .custom-cursor { visibility: hidden; }
+/* Use the exact same Desktop / Tablet / Phone breakpoints as the homepage. */
+.case-content .case-desktop { display: block; }
+.case-content .case-tablet, .case-content .case-phone { display: none; }
+@media (min-width: 768px) {
+  /* Equal outcome columns keep the middle metric centered and awards flush right. */
+  .case-content [data-source$="mogsbW4Fk"] { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); }
+  .case-content [data-source$="mogsbW4Fk"] > .case-node { width: 100%; align-items: flex-start; }
+  .case-content [data-source$="rvkYZc9Qx"] { width: 100%; }
+  /* Keep the prototype introduction and both email images on one column edge. */
+  .case-content .case-prototype-row { display: grid; grid-template-columns: minmax(0, 1fr) 50%; column-gap: 36px; }
+  .case-content .case-prototype-row > .case-node { width: 100%; }
+  /* Use the Overview / Roles columns for the title and project timing too. */
+  .case-content .case-article > :has(> [data-layer="Time"]) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 56px; }
+  .case-content .case-article > :has(> [data-layer="Time"]) > [data-layer="Time"] { justify-self: start; }
+  .case-content [data-layer="Time"] > :is([data-layer="Year"], [data-layer="Duration"]) { align-items: flex-start; }
+}
+@media (min-width: 1024px) {
+  .case-content .case-desktop article:has(>[data-layer="Overview and Roles"]) { --case-block-gap: 72px; --case-chapter-gap: 144px; --case-divider-gap: 48px; }
+  .case-content .case-desktop [data-source="JpNHIFman"] { font-size: 20px; line-height: 1.5; text-align: center; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .case-content .case-desktop, .case-content .case-phone { display: none; }
+  .case-content .case-tablet { display: block; }
+  .case-content article:has(>[data-layer="Overview and Roles"]) { --case-block-gap: 48px; --case-chapter-gap: 96px; --case-divider-gap: 32px; }
+}
+@media (max-width: 767px) {
+  .case-content .case-desktop, .case-content .case-tablet { display: none; }
+  .case-content .case-phone { display: block; }
+  .case-content .case-cover { padding-top: 0; }
+  .case-content article:has(>[data-layer="Overview and Roles"]) { --case-block-gap: 40px; --case-chapter-gap: 80px; --case-divider-gap: 28px; }
+  .contents-toggle { min-width: 132px; padding-inline: 16px; gap: 18px; }
+  .contents-menu { width: calc(100% + 2px); }
+  .contents-menu a { min-height: 48px; padding-inline: 24px; }
+  .directory-project { min-width: 0; padding-inline: 16px; font-size: 17px; text-align: right; }
+  .case-related-heading .frame { padding-block: 28px; }
+  .case-related-heading h2 { font-size: 20px; }
+  .case-carousel-arrow[data-prev] { left: 4px; }
+  .case-carousel-arrow[data-next] { right: 4px; }
+  .case-email-preview { height: 480px; }
+  .case-email-prompt { right: 12px; bottom: 12px; }
+  .case-email-viewer { width: calc(100vw - 24px); height: calc(100dvh - 32px); }
+  .case-email-toolbar h2 { padding-inline: 14px; font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contents-toggle svg { transition: none; }
+}

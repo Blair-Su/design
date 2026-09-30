@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blair Su — Responsive Previews</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/blair-photo-icon-rounded.svg">
+  <style>
+    @font-face { font-family: Geist; src: url('assets/fonts/geist.woff2') format('woff2'); font-weight: 100 900; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f3f3f3; color: #242424; font: 14px/1.4 Geist, Arial, sans-serif; }
+    .toolbar { position: sticky; top: 0; z-index: 2; padding: 14px 24px; display: flex; justify-content: space-between; gap: 16px; align-items: center; background: #fff; border-bottom: 1px solid #ddd; }
+    .toolbar strong { font-size: 14px; font-weight: 500; }
+    .page-picker { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+    .page-picker select { max-width: 190px; padding: 8px 10px; border: 1px solid #e5e5e5; border-radius: 4px; background: #fff; color: #242424; font: inherit; font-size: 14px; }
+    .devices { display: flex; gap: 4px; padding: 4px; border: 1px solid #e5e5e5; border-radius: 8px; }
+    button { font: inherit; padding: 7px 13px; border: 0; border-radius: 4px; color: #707070; background: transparent; cursor: pointer; }
+    button[aria-pressed="true"] { background: #202020; color: #fff; }
+    button span { font-size: 11px; opacity: .65; margin-left: 5px; }
+    a { color: #555; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .stage { padding: 28px 24px 48px; display: flex; justify-content: center; }
+    .canvas { position: relative; flex: 0 0 auto; background: #fff; box-shadow: 0 4px 24px #00000008; }
+    iframe { position: absolute; top: 0; left: 0; border: 0; transform-origin: top left; background: #fff; }
+    @media(max-width: 700px) { .toolbar { flex-wrap: wrap; justify-content: center; padding: 12px; } .toolbar strong { display: none; } .stage { padding: 16px 12px; } button { padding: 7px 10px; } }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <label class="page-picker">Page <select aria-label="Preview page"><option value="/">Homepage</option><option value="/about.html">About</option><option value="/project-3-hhi/">HHI Concours</option><option value="/project-1-lighthouse/">Lighthouse</option><option value="/project-2-southerncrafted/">Southern Crafted</option><option value="/project-4-nalu/">Nalu</option></select></label>
+    <div class="devices" role="group" aria-label="Preview screen size">
+      <button type="button" data-width="1440" aria-pressed="true">Desktop <span>1440</span></button>
+      <button type="button" data-width="834" aria-pressed="false">Tablet <span>834</span></button>
+      <button type="button" data-width="390" aria-pressed="false">Phone <span>390</span></button>
+    </div>
+    <a class="open-page" href="./" target="_blank" rel="noopener">Open page</a>
+  </div>
+  <div class="stage"><div class="canvas"><iframe title="Homepage preview" src="./" width="1440" height="2300" allow="clipboard-write"></iframe></div></div>
+  <script>
+    const canvas = document.querySelector('.canvas');
+    const frame = document.querySelector('iframe');
+    const stage = document.querySelector('.stage');
+    const pagePicker = document.querySelector('.page-picker select');
+    let contentObserver;
+    let deviceWidth = 1440;
+    const isViewportPage = () => frame.contentDocument?.body?.matches('.case-page, .about-page');
+    function fit() {
+      const style = getComputedStyle(stage);
+      const available = stage.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+      const scale = Math.min(1, available / deviceWidth);
+      frame.width = deviceWidth;
+      frame.style.transform = `scale(${scale})`;
+      // Case studies and About need a real viewport for fixed navigation
+      // and the photo lightbox while scrolling inside the frame.
+      const viewportHeight = innerHeight - document.querySelector('.toolbar').offsetHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+      const height = isViewportPage() ? Math.max(320, Math.floor(viewportHeight / scale)) : frame.contentDocument?.body?.scrollHeight || 2300;
+      frame.height = height;
+      canvas.style.width = `${deviceWidth * scale}px`;
+      canvas.style.height = `${height * scale}px`;
+    }
+    pagePicker.addEventListener('change', () => { frame.src = pagePicker.value; window.scrollTo(0, 0); });
+    for (const button of document.querySelectorAll('[data-width]')) {
+      button.addEventListener('click', () => {
+        deviceWidth = Number(button.dataset.width);
+        for (const other of document.querySelectorAll('[data-width]')) other.setAttribute('aria-pressed', String(other === button));
+        fit();
+        requestAnimationFrame(fit);
+        window.scrollTo(0, 0);
+      });
+    }
+    frame.addEventListener('load', () => {
+      fit();
+      pagePicker.value = frame.contentWindow.location.pathname;
+      document.querySelector('.open-page').href = frame.contentWindow.location.pathname;
+      frame.title = `${frame.contentDocument.body.dataset.pageTitle || frame.contentDocument.body.dataset.projectTitle || 'Homepage'} preview`;
+      frame.contentDocument.fonts.ready.then(fit);
+      contentObserver?.disconnect();
+      contentObserver = new ResizeObserver(fit);
+      contentObserver.observe(frame.contentDocument.body);
+      // The review frame is as tall as the page, so route fragment scrolling
+      // through the outer review window instead of scrolling the full-height frame.
+      frame.contentDocument.addEventListener('click', event => {
+        if (isViewportPage() || event.defaultPrevented) return;
+        const link = event.target.closest('a[href^="#"]');
+        if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        const target = frame.contentDocument.getElementById(link.getAttribute('href').slice(1));
+        if (!target) return;
+        event.preventDefault();
+        const scale = canvas.getBoundingClientRect().width / deviceWidth;
+        const top = window.scrollY + frame.getBoundingClientRect().top + target.getBoundingClientRect().top * scale - document.querySelector('.toolbar').offsetHeight;
+        window.scrollTo(0, top);
+      });
+      const hash = frame.contentWindow.location.hash;
+      if (!isViewportPage() && hash) {
+        frame.contentDocument.fonts.ready.then(() => {
+          const target = frame.contentDocument.getElementById(hash.slice(1));
+          if (!target) return;
+          frame.contentWindow.scrollTo(0, 0);
+          const scale = canvas.getBoundingClientRect().width / deviceWidth;
+          window.scrollTo(0, window.scrollY + frame.getBoundingClientRect().top + target.getBoundingClientRect().top * scale - document.querySelector('.toolbar').offsetHeight);
+        });
+      }
+    });
+    window.addEventListener('resize', fit);
+    const requestedPage = new URLSearchParams(location.search).get('page');
+    if ([...pagePicker.options].some(option => option.value === requestedPage)) frame.src = requestedPage;
+  </script>
+</body>
+</html>

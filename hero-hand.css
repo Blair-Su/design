@@ -1,0 +1,26 @@
+.hero { position: relative; isolation: isolate; }
+.intro-greeting { white-space: nowrap; }
+.hello-hand { display: inline-block; position: relative; width: 1.16em; height: 1.2em; min-width: 44px; min-height: 44px; margin: -.12em 0 -.12em .07em; padding: 0; border: 0; border-radius: 12px; background: transparent; vertical-align: -.13em; font: inherit; color: var(--ink); z-index: 3; touch-action: manipulation; }
+.hello-emoji { position: absolute; inset: 0; display: grid; place-items: center; font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; font-size: .88em; line-height: 1; letter-spacing: 0; }
+.hello-wave { transform-origin: 70% 80%; animation: hello-wave 4.8s ease-in-out infinite; }
+.hello-clap { opacity: 0; }
+.hello-hand.is-clapping .hello-wave { opacity: 0; }
+.hello-hand.is-clapping .hello-clap { opacity: 1; }
+.hello-hand.is-clapping .hello-clap { animation: hello-clap .45s ease-in-out 4; }
+.hero-celebration { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 2; }
+.hello-confetti { position: absolute; width: 6px; height: 10px; border-radius: 1px; opacity: 0; will-change: transform, opacity; }
+.hello-confetti-dot { width: 5px; height: 5px; border-radius: 50%; }
+.hello-confetti-ribbon { width: 12px; height: 3px; }
+.hello-confetti-star { width: 11px; height: 11px; clip-path: polygon(50% 0%, 61% 36%, 100% 50%, 63% 61%, 50% 100%, 38% 63%, 0% 50%, 36% 38%); }
+@keyframes hello-wave {
+  0%, 10%, 38%, 100% { transform: rotate(-8deg); }
+  17%, 29% { transform: rotate(9deg); }
+  23%, 34% { transform: rotate(-13deg); }
+}
+@keyframes hello-clap {
+  0%, 100% { transform: scale(1) rotate(-4deg); }
+  42%, 58% { transform: scale(1.1) rotate(4deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hello-wave, .hello-hand.is-clapping .hello-clap { animation: none; }
+}

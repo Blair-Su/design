@@ -1,0 +1,267 @@
+@font-face {
+  font-family: "Averia Serif Libre";
+  src: url("assets/fonts/averia-serif-libre.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("assets/fonts/source-serif-4.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist";
+  src: url("assets/fonts/geist.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("assets/fonts/geist-mono.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("assets/fonts/newsreader.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+  --paper: #fff;
+  --ink: #191919;
+  --rule: #e5e5e5;
+  --accent-orange: #ed612b;
+  --project-ink: #32404f;
+  --project-muted: rgb(50 64 79 / 58.4%);
+  --gutter: clamp(24px, 4.3vw, 80px);
+  --rail-width: 1680px;
+  --cell-inset: 24px;
+  --row-inset: 20px;
+  --header-height: 56px;
+  --hero-highlight-hue: 24;
+  --hero-highlight-saturation: 95%;
+  --hero-highlight-lightness: 54%;
+  --hero-highlight-opacity: 0.34;
+  font-family: "Geist", Arial, sans-serif;
+  font-synthesis: none;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-height); }
+body { margin: 0; background: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; }
+h1, h2, h3, p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; cursor: pointer; }
+a, button { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offset: 5px; }
+:where(body:not(.case-page)) svg, .site-header svg, .site-footer svg, .custom-cursor svg, .case-directory svg { width: 17px; height: 17px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.frame { width: calc(100% - var(--gutter) * 2); max-width: var(--rail-width); margin-inline: auto; border-inline: 1px solid var(--rule); }
+.band { border-bottom: 1px solid var(--rule); }
+.skip-link { position: fixed; z-index: 50; top: 8px; left: 8px; padding: 12px 20px; background: #fff; border: 1px solid var(--ink); transform: translateY(-160%); }
+.skip-link:focus { transform: none; }
+
+/* The header shares its outside rails with every section below it. */
+.site-header { position: sticky; top: 0; z-index: 10; background: #fff; }
+.header-inner { height: var(--header-height); display: flex; justify-content: space-between; align-items: center; padding-left: 20px; position: relative; }
+.menu-toggle { display: none; }
+.brand { display: flex; align-items: center; min-height: 44px; flex: 0 0 auto; font-family: "Averia Serif Libre", Georgia, serif; font-size: 20px; font-weight: 300; line-height: 1; letter-spacing: -0.025em; white-space: nowrap; }
+.site-header nav { display: flex; align-self: stretch; }
+.site-header nav a { min-width: 112px; padding: 0 28px; display: flex; justify-content: center; align-items: center; border-left: 1px solid var(--rule); font-family: "Geist", Arial, sans-serif; font-size: 15px; line-height: 1.3; font-weight: 500; text-transform: uppercase; }
+.site-header nav a:hover { background: #fafafa; }
+.site-header nav a:focus-visible { outline-offset: -5px; }
+
+.hero-inner { min-height: 560px; padding: 108px 72px 116px; display: flex; justify-content: center; align-items: center; }
+.hero h1 { max-width: 980px; font-family: "Averia Serif Libre", Georgia, serif; font-size: clamp(42px, 3.65vw, 62px); font-weight: 300; line-height: 1.26; letter-spacing: -0.025em; text-align: center; text-wrap: balance; }
+.intro-greeting { display: block; }
+.intro-highlight, .intro-underline { display: inline-block; position: relative; white-space: nowrap; }
+.intro-highlight { isolation: isolate; padding-inline: 0.16em; }
+.intro-highlight::after { content: ""; position: absolute; z-index: -1; inset: 0.04em 0; border-radius: 0.2em; background: hsl(var(--hero-highlight-hue) var(--hero-highlight-saturation) var(--hero-highlight-lightness) / var(--hero-highlight-opacity)); }
+.intro-underline { margin: 0; padding: 0; }
+.intro-underline svg { position: absolute; left: 0; bottom: -0.025em; width: 100%; height: 0.3em; overflow: visible; color: inherit; fill: none; stroke: currentColor; pointer-events: none; }
+.intro-underline svg path { stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.work-heading .frame { min-height: 142px; display: grid; place-items: center; }
+.work-heading h2 { font-family: "Averia Serif Libre", Georgia, serif; font-size: 36px; font-weight: 300; line-height: 1.2; }
+
+/* Outer rails enclose inset card rails; the centre gutter has two edges.
+   Card rails run through images, captions and the spacing between rows. */
+.project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--cell-inset); padding-inline: var(--cell-inset); position: relative; }
+.project-card { min-width: 0; padding-top: var(--row-inset); border-inline: 1px solid var(--rule); position: relative; display: flex; flex-direction: column; container-type: inline-size; }
+/* Image-top rules cross the outer gutters; caption-bottom rules stay inset. */
+.project-card::before { content: ""; position: absolute; top: var(--row-inset); left: calc(-1 * var(--cell-inset) - 1px); right: calc(-1 * var(--cell-inset) - 1px); height: 1px; background: var(--rule); pointer-events: none; z-index: 2; }
+.project-card::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--rule); pointer-events: none; }
+.project-card:nth-child(odd)::after { right: calc(-1 * var(--cell-inset) - 2px); }
+.project-link { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.project-image { aspect-ratio: 16 / 9; width: 100%; flex: 0 0 auto; background: #fafafa; user-select: none; }
+.project-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* Existing project artwork, composed in a shared 16:9 cover. */
+.hhi-cover { overflow: hidden; background: #bdb6a5; }
+.hhi-cover img { object-fit: contain; }
+.southern-cover { display: grid; place-items: center; background: #2b422d; overflow: hidden; }
+.southern-laptop { position: relative; width: 76%; aspect-ratio: 2048 / 1241; pointer-events: none; }
+.southern-laptop video { position: absolute; left: 10.2%; top: 6.3%; width: 79.6%; height: 82.9%; object-fit: cover; background: #fff; }
+.southern-laptop img { position: relative; z-index: 1; object-fit: contain; }
+.nalu-cover { position: relative; overflow: hidden; background: #fcf9fc; --nalu-cycle: 12s; }
+.nalu-cover::before { content: ""; position: absolute; inset: -30% -15% -90%; background: url("assets/case-studies/KUU4zVZwe0AyAhWi26OOCIMBDl4.webp") center / contain no-repeat; opacity: 0.75; }
+.nalu-cover .nalu-cover-scene { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transform: scale(1.035); pointer-events: none; }
+.nalu-cover-logo { position: absolute; left: 50%; top: 50%; width: 30%; transform: translate(-50%, -50%); pointer-events: none; }
+.nalu-cover-logo img { width: 100%; height: auto; object-fit: contain; }
+/* Recolor only the wordmark over the dark scene; the supplied icon stays intact. */
+.nalu-cover-logo::after { content: ""; position: absolute; inset: 0; background: #fcf8f3; -webkit-mask: url("assets/nalu-logo.png") center / 100% 100% no-repeat; mask: url("assets/nalu-logo.png") center / 100% 100% no-repeat; clip-path: inset(0 30% 0 0); opacity: 0; }
+/* One persistent logo travels from center to the scene's bottom-right mark. */
+.nalu-cover.is-ready .nalu-cover-scene { animation: nalu-scene-reveal var(--nalu-cycle) cubic-bezier(.4, 0, .2, 1) infinite both; }
+.nalu-cover.is-ready .nalu-cover-logo { animation: nalu-logo-travel var(--nalu-cycle) cubic-bezier(.4, 0, .2, 1) infinite both; }
+.nalu-cover.is-ready .nalu-cover-logo::after { animation: nalu-logo-contrast var(--nalu-cycle) ease-in-out infinite both; }
+@keyframes nalu-scene-reveal {
+  0%, 20%, 96%, 100% { opacity: 0; transform: scale(1.035); }
+  36%, 80% { opacity: 1; transform: scale(1); }
+}
+@keyframes nalu-logo-travel {
+  0%, 20%, 96%, 100% { left: 50%; top: 50%; transform: translate(-50%, -50%) scale(1); }
+  36%, 80% { left: 91.6%; top: 91%; transform: translate(-50%, -50%) scale(.3233); }
+}
+@keyframes nalu-logo-contrast {
+  0%, 23%, 94%, 100% { opacity: 0; }
+  36%, 80% { opacity: 1; }
+}
+/* Lighthouse keeps the Selected Projects default artwork; only its phones move.
+   Preserve its existing six-second movement and screen transitions. */
+.lighthouse-cover { position: relative; overflow: hidden; background: #fff; }
+.lighthouse-cover .lighthouse-droplet { position: absolute; left: 27%; top: 0; width: 85%; height: auto; }
+.lighthouse-cover .lighthouse-station { position: absolute; height: auto; }
+.lighthouse-cover .lighthouse-station-open { left: 47%; top: 8%; width: 70%; }
+.lighthouse-cover .lighthouse-station-front { left: 32%; bottom: -8%; width: 65%; }
+.lighthouse-phone { position: absolute; top: 20%; width: 18%; aspect-ratio: 107 / 217; animation: nalu-float 6s ease-in-out infinite; }
+.lighthouse-phone-left { left: 8%; }
+.lighthouse-phone-right { left: 30%; animation-name: nalu-float-opposite; }
+.lighthouse-screen { position: absolute; left: 5.65%; top: 2.17%; width: 89.25%; height: 95.53%; border-radius: 12% / 5.5%; overflow: hidden; background: #fff; }
+.lighthouse-screen img { position: absolute; inset: 0; }
+.lighthouse-screen-next { opacity: 0; animation: nalu-screen-swap 6s ease-in-out infinite; }
+.lighthouse-phone .lighthouse-phone-frame { position: relative; z-index: 1; object-fit: fill; }
+@keyframes nalu-float {
+  0%, 35%, 100% { transform: translateY(7%); }
+  50%, 85% { transform: translateY(-7%); }
+}
+@keyframes nalu-screen-swap {
+  0%, 35%, 100% { opacity: 0; }
+  50%, 85% { opacity: 1; }
+}
+@keyframes nalu-float-opposite {
+  0%, 35%, 100% { transform: translateY(-7%); }
+  50%, 85% { transform: translateY(7%); }
+}
+.project-caption { border-top: 1px solid var(--rule); padding: 18px 20px; min-height: 80px; display: flex; flex: 1; justify-content: space-between; align-items: center; gap: 18px; position: relative; }
+.project-description { font-family: "Source Serif 4", Georgia, serif; font-weight: 400; font-size: 17px; line-height: 1.5; color: var(--project-ink); text-wrap: pretty; }
+.project-name, .project-separator { color: var(--project-muted); }
+.project-link[href="/project-3-hhi/"] { --project-accent: #8a5c3b; }
+.project-link[href="/project-2-southerncrafted/"] { --project-accent: #60784b; }
+.project-link[href="/project-1-lighthouse/"] { --project-accent: #a3760d; }
+.project-link[href="/project-4-nalu/"] { --project-accent: #870e59; }
+.project-meta { flex: 0 0 auto; max-width: 45%; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; font-family: "Geist", Arial, sans-serif; font-size: 15px; font-weight: 400; line-height: 1.5; text-align: right; color: var(--project-muted); }
+.project-meta > span { color: var(--project-accent); font-weight: 500; }
+.project-meta time { white-space: nowrap; }
+/* Continue each card edge through the final spacer to the footer rule. */
+.work-end .frame { height: 28px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--cell-inset); padding-inline: var(--cell-inset); }
+.work-end .frame::before, .work-end .frame::after { content: ""; border-inline: 1px solid var(--rule); }
+
+/* Align the name and copyright with the inner edge of the project images. */
+.footer-frame { padding: 64px calc(var(--cell-inset) + 1px); }
+.footer-content { width: 100%; }
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 80px; }
+.footer-brand { flex: 1; }
+.footer-brand h2 { font-family: "Averia Serif Libre", Georgia, serif; font-size: 48px; line-height: 1.05; font-weight: 300; letter-spacing: -0.025em; color: #232321; }
+.footer-brand p { margin-top: 18px; font-size: 14px; line-height: 1.5; font-weight: 400; color: rgb(35 35 33 / 58%); }
+.footer-columns { display: grid; grid-template-columns: 150px 226px; gap: 20px; flex: 0 0 auto; }
+.footer-column { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.footer-column h3 { font-size: 15px; line-height: 1.3; font-weight: 500; color: rgb(35 35 33 / 58%); }
+.footer-column h3 { margin-bottom: 8px; }
+.footer-card { min-height: 36px; display: inline-flex; align-items: center; padding: 6px 0; border: 0; border-radius: 0; font-size: 15px; line-height: 1.3; font-weight: 500; background: transparent; text-align: left; transition: color 160ms ease; }
+.footer-card:hover { color: #929292; }
+.copy-status { position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 12px); z-index: 20; padding: 12px 20px; max-width: calc(100% - 32px); border: 1px solid var(--rule); border-radius: 7px; background: #fff; box-shadow: 0 4px 20px rgb(0 0 0 / 8%); font-size: 14px; opacity: 0; pointer-events: none; transition: opacity 160ms, transform 160ms; }
+.copy-status.visible { opacity: 1; transform: translate(-50%, 0); }
+.custom-cursor { display: none; }
+@media (hover: hover) and (pointer: fine) {
+  html.custom-cursor-ready, .custom-cursor-ready * { cursor: none !important; }
+  .custom-cursor { display: flex; align-items: center; justify-content: center; position: fixed; left: 0; top: 0; z-index: 100; width: 12px; height: 12px; border-radius: 999px; background: var(--accent-orange); color: #fff; pointer-events: none; opacity: 0; transform: translate(-50%, -50%); transition: width 160ms ease, height 160ms ease, opacity 100ms; }
+  .custom-cursor.is-visible { opacity: 1; }
+  .custom-cursor { --cursor-inline-padding: 14px; }
+  .custom-cursor.is-project, .custom-cursor.is-copy { width: calc(var(--cursor-label-width) + var(--cursor-inline-padding) * 2); height: 44px; }
+  .cursor-label { display: flex; align-items: center; gap: 11px; white-space: nowrap; opacity: 0; font: 400 17px/1 "Geist Mono", monospace; transition: opacity 100ms; }
+  .cursor-label svg { width: 21px; height: 21px; stroke-width: 2; }
+  .is-project .cursor-label, .is-copy .cursor-label { opacity: 1; }
+  .cursor-label .cursor-copy-icon, .is-copy .cursor-project-icon { display: none; }
+  .is-copy[data-copy-kind="email"] .cursor-email-icon, .is-copy[data-copy-kind="phone"] .cursor-phone-icon { display: block; }
+}
+
+/* Tablet version: preserve aligned columns and left/right captions. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root { --gutter: 32px; --cell-inset: 18px; }
+  .hero-inner { min-height: 520px; padding: 94px 42px 102px; }
+  .hero h1 { font-size: 42px; }
+  .work-heading .frame { min-height: 124px; }
+  .work-heading h2 { font-size: 32px; }
+  .project-caption { min-height: 110px; gap: 12px; padding: 17px 12px; }
+  .project-meta { max-width: 43%; }
+  .footer-frame { padding-block: 56px; }
+  .footer-top { flex-direction: column; gap: 42px; }
+  .footer-brand p { max-width: 540px; }
+  .footer-columns { grid-template-columns: 180px 250px; gap: 24px; }
+}
+
+/* Phone version: one card per row, with the same continuous frame and rules. */
+@media (max-width: 767px) {
+  :root { --gutter: 16px; --cell-inset: 16px; --header-height: 56px; }
+  .header-inner { padding-left: 12px; }
+  .menu-toggle { display: grid; place-items: center; align-self: stretch; width: 56px; padding: 0; border: 0; border-left: 1px solid var(--rule); background: #fff; }
+  .menu-toggle svg { width: 22px; height: 22px; stroke-width: 2; }
+  .menu-toggle .close-icon { display: none; }
+  .menu-toggle[aria-expanded="true"] .menu-icon { display: none; }
+  .menu-toggle[aria-expanded="true"] .close-icon { display: block; }
+  .menu-toggle:focus-visible { outline-offset: -5px; }
+  .site-header nav { display: none; position: absolute; top: 100%; left: -1px; right: -1px; background: #fff; border: 1px solid var(--rule); box-shadow: 0 12px 24px rgb(0 0 0 / 5%); }
+  .site-header.menu-open nav { display: flex; flex-direction: column; }
+  .site-header nav a { min-width: 0; min-height: 52px; padding: 16px 32px; justify-content: flex-start; border-left: 0; border-bottom: 1px solid var(--rule); color: #383838; }
+  .site-header nav a:last-child { border-bottom: 0; }
+  .hero-inner { min-height: 475px; padding: 78px 24px 84px; }
+  .hero h1 { max-width: 540px; font-size: clamp(30px, 7.2vw, 40px); line-height: 1.28; letter-spacing: -0.025em; }
+  .work-heading .frame { min-height: 108px; }
+  .work-heading h2 { font-size: 30px; }
+  .project-grid { grid-template-columns: minmax(0, 1fr); }
+  .project-card:nth-child(odd)::after { right: 0; }
+  .project-caption { gap: 14px; min-height: 98px; padding: 17px 12px; }
+  .project-description { font-size: 17px; }
+  .project-meta { font-size: 14px; max-width: 43%; }
+  .work-end .frame { height: 20px; grid-template-columns: minmax(0, 1fr); }
+  .work-end .frame::after { display: none; }
+  .footer-frame { padding-block: 44px; }
+  .footer-top { flex-direction: column; gap: 36px; }
+  .footer-brand h2 { font-size: 42px; }
+  .footer-brand p { margin-top: 18px; line-height: 1.45; font-weight: 400; }
+  .footer-columns { width: 100%; grid-template-columns: minmax(0, 1fr); gap: 26px; }
+  .footer-card { min-height: 44px; }
+}
+/* Keep names/years on the first row when a card cannot fit the full caption. */
+@container (max-width: 700px) {
+  .project-caption { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 43%); grid-template-rows: auto auto; row-gap: 6px; align-content: center; align-items: start; }
+  .project-description, .project-meta { display: contents; }
+  .project-separator { display: none; }
+  .project-name { grid-column: 1; grid-row: 1; }
+  .project-summary { grid-column: 1; grid-row: 2; }
+  .project-meta > span { grid-column: 2; grid-row: 2; }
+  .project-meta > time { grid-column: 2; grid-row: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .copy-status, .custom-cursor, .cursor-label, .footer-card { transition: none; }
+  .lighthouse-phone, .lighthouse-screen-next { animation: none; }
+  .nalu-cover.is-ready .nalu-cover-scene { animation: none; opacity: 1; transform: none; }
+  .nalu-cover.is-ready .nalu-cover-logo { animation: none; left: 91.6%; top: 91%; transform: translate(-50%, -50%) scale(.3233); }
+  .nalu-cover.is-ready .nalu-cover-logo::after { animation: none; opacity: 1; }
+}
