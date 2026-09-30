@@ -2,6 +2,10 @@
 
 Source code and assets for Blair Su's portfolio. Repository: https://github.com/Blair-Su/design.
 
+## Publishing
+
+GitHub Pages serves the static website directly from the root of the `main` branch. The `.nojekyll` file preserves the generated HTML, CSS, JavaScript and assets without Jekyll processing. The production domain is `www.blairsu.design`; its binding is recorded in `CNAME`. Push website updates to `main` to publish them. The Node.js server below is only for local preview.
+
 Start with `npm start`, then open http://127.0.0.1:4173/.
 No package installation is needed. Node.js is the only runtime requirement.
 
