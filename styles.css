@@ -256,6 +256,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
   .project-summary { grid-column: 1; grid-row: 2; }
   .project-meta > span { grid-column: 2; grid-row: 2; }
   .project-meta > time { grid-column: 2; grid-row: 1; }
+  .project-link[href="/project-2-southerncrafted/"] .project-caption { grid-template-columns: minmax(0, 1fr) max-content; }
+}
+/* Give the longer Southern Crafted description one line on wide cards. */
+@container (min-width: 560px) {
+  .project-link[href="/project-2-southerncrafted/"] .project-summary { white-space: nowrap; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
