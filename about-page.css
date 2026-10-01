@@ -3,7 +3,8 @@
 .about-intro-frame { display: grid; grid-template-columns: 1fr 1fr; }
 .about-intro-copy { padding: 72px var(--about-inset); align-self: stretch; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--rule); }
 .about-availability { display: flex; align-items: center; gap: 9px; color: #73777a; font: 400 12px/1.5 "Geist", sans-serif; letter-spacing: .08em; text-transform: uppercase; }
-.about-availability span { width: 6px; height: 6px; border-radius: 50%; background: #638564; }
+.about-availability span { display: flex; flex: 0 0 6px; flex-direction: column; gap: 3px; }
+.about-availability span::before, .about-availability span::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #638564; }
 .about-intro-heading { display: grid; grid-template-columns: minmax(0, 1fr) clamp(96px, 10.5vw, 170px); align-items: center; gap: clamp(12px, 1vw, 20px); margin: 20px 0 34px; }
 .about-intro h1 { margin: 0; font-family: "Averia Serif Libre", Georgia, serif; font-size: clamp(38px, 3.8vw, 62px); font-weight: 300; line-height: 1.12; letter-spacing: -.035em; text-wrap: balance; }
 .about-intro-art { position: relative; display: block; height: 0; pointer-events: none; }
