@@ -62,6 +62,9 @@
 .photo-open { overflow: hidden; }
 html.custom-cursor-ready .photo-lightbox, html.custom-cursor-ready .photo-lightbox * { cursor: auto !important; }
 html.custom-cursor-ready .photo-lightbox button { cursor: pointer !important; }
+@media (min-width: 1024px) {
+  .about-intro-art { transform: translateY(-16px); }
+}
 @media (min-width: 768px) and (max-width: 1023px) {
   .about-page { --about-inset: 28px; }
   .about-intro-copy { padding-block: 44px; }
