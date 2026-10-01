@@ -13,7 +13,7 @@
     .toolbar strong { font-size: 14px; font-weight: 500; }
     .page-picker { display: flex; align-items: center; gap: 8px; font-size: 12px; }
     .page-picker select { max-width: 190px; padding: 8px 10px; border: 1px solid #e5e5e5; border-radius: 4px; background: #fff; color: #242424; font: inherit; font-size: 14px; }
-    .devices { display: flex; gap: 4px; padding: 4px; border: 1px solid #e5e5e5; border-radius: 8px; }
+    .devices { display: flex; flex-wrap: wrap; justify-content: center; max-width: 100%; gap: 4px; padding: 4px; border: 1px solid #e5e5e5; border-radius: 8px; }
     button { font: inherit; padding: 7px 13px; border: 0; border-radius: 4px; color: #707070; background: transparent; cursor: pointer; }
     button[aria-pressed="true"] { background: #202020; color: #fff; }
     button span { font-size: 11px; opacity: .65; margin-left: 5px; }
@@ -29,13 +29,14 @@
   <div class="toolbar">
     <label class="page-picker">Page <select aria-label="Preview page"><option value="/">Homepage</option><option value="/about.html">About</option><option value="/project-3-hhi/">HHI Concours</option><option value="/project-1-lighthouse/">Lighthouse</option><option value="/project-2-southerncrafted/">Southern Crafted</option><option value="/project-4-nalu/">Nalu</option></select></label>
     <div class="devices" role="group" aria-label="Preview screen size">
-      <button type="button" data-width="1440" aria-pressed="true">Desktop <span>1440</span></button>
-      <button type="button" data-width="834" aria-pressed="false">Tablet <span>834</span></button>
-      <button type="button" data-width="390" aria-pressed="false">Phone <span>390</span></button>
+      <button type="button" data-device="studio" data-width="2160" data-height="1200" aria-pressed="false">Studio <span>2160</span></button>
+      <button type="button" data-device="desktop" data-width="1440" data-height="900" aria-pressed="true">Desktop <span>1440</span></button>
+      <button type="button" data-device="tablet" data-width="834" data-height="1112" aria-pressed="false">Tablet <span>834</span></button>
+      <button type="button" data-device="phone" data-width="390" data-height="844" aria-pressed="false">Phone <span>390</span></button>
     </div>
     <a class="open-page" href="./" target="_blank" rel="noopener">Open page</a>
   </div>
-  <div class="stage"><div class="canvas"><iframe title="Homepage preview" src="./" width="1440" height="2300" allow="clipboard-write"></iframe></div></div>
+  <div class="stage"><div class="canvas"><iframe title="Homepage preview" src="./" width="1440" height="900" allow="clipboard-write"></iframe></div></div>
   <script>
     const canvas = document.querySelector('.canvas');
     const frame = document.querySelector('iframe');
@@ -43,17 +44,19 @@
     const pagePicker = document.querySelector('.page-picker select');
     let contentObserver;
     let deviceWidth = 1440;
-    const isViewportPage = () => frame.contentDocument?.body?.matches('.case-page, .about-page');
+    let deviceHeight = 900;
+    const isHomePage = () => Boolean(frame.contentDocument?.querySelector('.hero'));
+    const isViewportPage = () => isHomePage() || frame.contentDocument?.body?.matches('.case-page, .about-page');
     function fit() {
       const style = getComputedStyle(stage);
       const available = stage.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
       const scale = Math.min(1, available / deviceWidth);
       frame.width = deviceWidth;
       frame.style.transform = `scale(${scale})`;
-      // Case studies and About need a real viewport for fixed navigation
-      // and the photo lightbox while scrolling inside the frame.
+      // A fixed homepage viewport keeps its svh-based Hero faithful to the
+      // selected display and avoids growing the frame with its own scrollHeight.
       const viewportHeight = innerHeight - document.querySelector('.toolbar').offsetHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
-      const height = isViewportPage() ? Math.max(320, Math.floor(viewportHeight / scale)) : frame.contentDocument?.body?.scrollHeight || 2300;
+      const height = isHomePage() ? deviceHeight : isViewportPage() ? Math.max(320, Math.floor(viewportHeight / scale)) : frame.contentDocument?.body?.scrollHeight || deviceHeight;
       frame.height = height;
       canvas.style.width = `${deviceWidth * scale}px`;
       canvas.style.height = `${height * scale}px`;
@@ -62,6 +65,7 @@
     for (const button of document.querySelectorAll('[data-width]')) {
       button.addEventListener('click', () => {
         deviceWidth = Number(button.dataset.width);
+        deviceHeight = Number(button.dataset.height);
         for (const other of document.querySelectorAll('[data-width]')) other.setAttribute('aria-pressed', String(other === button));
         fit();
         requestAnimationFrame(fit);
@@ -104,6 +108,9 @@
     window.addEventListener('resize', fit);
     const requestedPage = new URLSearchParams(location.search).get('page');
     if ([...pagePicker.options].some(option => option.value === requestedPage)) frame.src = requestedPage;
+    const requestedDevice = new URLSearchParams(location.search).get('device');
+    const requestedDeviceButton = [...document.querySelectorAll('[data-device]')].find(button => button.dataset.device === requestedDevice);
+    requestedDeviceButton?.click();
   </script>
 </body>
 </html>

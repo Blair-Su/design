@@ -8,7 +8,10 @@
   const status = root.querySelector('.vibe-tools-status');
   const hero = root.closest('.hero');
   const intro = hero?.querySelector('h1');
-  let introOffset = 0;
+  const artwork = root.querySelector('.vibe-tools-inner');
+  const captions = [...root.querySelectorAll('h2')];
+  const pairedArtwork = matchMedia('(min-width: 600px)');
+  let introOffset = 0, artworkOffset = 0;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const sources = {
     figma: 'assets/vibe-tools/figma.svg',
@@ -95,14 +98,31 @@
 
   function balanceIntroSpacing() {
     if (!intro) return;
+    if (!pairedArtwork.matches && artworkOffset) {
+      artworkOffset = 0;
+      artwork.style.removeProperty('--hero-art-offset');
+    }
+    const heroBounds = hero.getBoundingClientRect();
     const introBounds = intro.getBoundingClientRect();
     const stageBounds = surface.getBoundingClientRect();
     // Both settled illustrations start about 20% down their transparent stages.
     // Use that stable edge so the text never follows the artwork's small motions.
     const artworkTop = stageBounds.top + stageBounds.height * .2;
-    const above = introBounds.top - hero.getBoundingClientRect().top;
-    const below = artworkTop - introBounds.bottom;
-    introOffset = Math.max(0, introOffset + (below - above) / 2);
+    if (pairedArtwork.matches && artwork && captions.length) {
+      const captionsBottom = Math.max(...captions.map(caption => caption.getBoundingClientRect().bottom));
+      const textHeight = introBounds.bottom - introBounds.top;
+      const artHeight = captionsBottom - artworkTop;
+      // Share the remaining visible space equally above the text, between
+      // text and artwork, and below both captions. Translations preserve size.
+      const gap = Math.max(0, (heroBounds.bottom - heroBounds.top - textHeight - artHeight) / 3);
+      introOffset += heroBounds.top + gap - introBounds.top;
+      artworkOffset += heroBounds.bottom - gap - captionsBottom;
+      artwork.style.setProperty('--hero-art-offset', `${artworkOffset}px`);
+    } else {
+      const above = introBounds.top - heroBounds.top;
+      const below = artworkTop - introBounds.bottom;
+      introOffset = Math.max(0, introOffset + (below - above) / 2);
+    }
     intro.style.setProperty('--hero-intro-offset', `${introOffset}px`);
   }
 
@@ -188,6 +208,7 @@
     const introLayout = new ResizeObserver(balanceIntroSpacing);
     introLayout.observe(intro);
     introLayout.observe(hero);
+    captions.forEach(caption => introLayout.observe(caption));
     document.fonts?.ready.then(balanceIntroSpacing);
   }
   resize();
