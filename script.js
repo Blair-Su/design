@@ -57,7 +57,7 @@ const mouseInput = matchMedia('(hover: hover) and (pointer: fine)');
 let pointer = null;
 
 function hideCursor() {
-  cursor.classList.remove('is-visible', 'is-project', 'is-sponsored', 'is-copy');
+  cursor.classList.remove('is-visible', 'is-project', 'is-sponsored', 'is-copy', 'is-link');
   document.documentElement.classList.remove('custom-cursor-ready');
   pointer = null;
 }
@@ -67,24 +67,28 @@ function updateCursor() {
   const target = document.elementFromPoint(pointer.x, pointer.y);
   const project = target?.closest('.project-link');
   const copyButton = target?.closest('[data-copy]');
+  const labeledLink = target?.closest('a[data-cursor-label]');
   const overCopy = Boolean(copyButton);
   const overProject = Boolean(project) && !overCopy;
+  const overLink = Boolean(labeledLink) && !overCopy && !overProject;
+  const hasLabel = overProject || overCopy || overLink;
   const sponsored = overProject && project.dataset.cursor === 'sponsored';
   cursor.classList.toggle('is-project', overProject);
   cursor.classList.toggle('is-sponsored', sponsored);
   cursor.classList.toggle('is-copy', overCopy);
+  cursor.classList.toggle('is-link', overLink);
   cursor.dataset.copyKind = copyButton?.dataset.copyKind || '';
-  cursorText.textContent = overCopy ? 'COPY' : sponsored ? 'VIEW SPONSORED PROJECT' : 'VIEW CASE STUDY';
+  cursorText.textContent = overCopy ? 'COPY' : overLink ? labeledLink.dataset.cursorLabel : sponsored ? 'VIEW SPONSORED PROJECT' : 'VIEW CASE STUDY';
   // Size each label to its content with the same compact space on both sides.
   let halfWidth = 6;
-  if (overProject || overCopy) {
+  if (hasLabel) {
     const labelWidth = cursorLabel.getBoundingClientRect().width;
     const sidePadding = parseFloat(getComputedStyle(cursor).getPropertyValue('--cursor-inline-padding'));
     cursor.style.setProperty('--cursor-label-width', `${labelWidth}px`);
     halfWidth = labelWidth / 2 + sidePadding;
   }
   // Keep the entire label visible near the edges of the viewport.
-  const halfHeight = overProject || overCopy ? 22 : 6;
+  const halfHeight = hasLabel ? 22 : 6;
   const x = Math.min(innerWidth - halfWidth - 4, Math.max(halfWidth + 4, pointer.x));
   const y = Math.min(innerHeight - halfHeight - 4, Math.max(halfHeight + 4, pointer.y));
   cursor.style.left = `${x}px`;

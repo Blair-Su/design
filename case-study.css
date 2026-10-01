@@ -6,11 +6,17 @@
 .case-content .case-canvas { gap: 0; }
 .case-content .case-body { width: 100%; max-width: 100%; padding-inline: var(--cell-inset); justify-content: center; }
 .case-content .case-article { flex: 0 1 auto; width: 100%; max-width: none; }
+/* Let the medication illustration determine its height, with equal space above and below. */
+.case-page[data-project="project-1-lighthouse"] .case-content [data-layer="Medication Management Card"] { height: auto; padding-block: 20px; }
 .case-content [data-source$="PF_24jbVk"] { height: auto; aspect-ratio: 2048 / 1450; background-size: contain; background-position: center; }
+/* Match the paper's brightness to the adjacent workshop photo. */
+.case-page[data-project="project-3-hhi"] .case-content [data-source$="flz1_Fhcb"] { filter: brightness(1.10); }
 /* Full-width diagrams use the same inset as the text, without stretching their internal composition. */
 .case-content :is(.s559, .s630, .s633) { width: 100%; }
 .case-content .case-artwork-frame { width: 100%; height: auto; aspect-ratio: var(--artwork-width) / var(--artwork-height); }
 .case-artwork-canvas { position: absolute; top: 0; left: 0; width: calc(var(--artwork-width) * 1px); height: calc(var(--artwork-height) * 1px); transform-origin: top left; }
+.case-content [data-source$="CDx3dzKv7"] { top: 50%; }
+.case-content [data-source$="WyN1gOw8Y"] strong { color: #000; font-weight: 600; }
 .case-content .case-cover { padding-top: 0; }
 .case-content .case-cover > [role="img"] { height: auto; aspect-ratio: 16 / 9; border-bottom: 1px solid var(--rule); }
 .case-content .case-divider { position: relative; height: 1px; background: transparent; overflow: visible; }
@@ -51,13 +57,35 @@
 @media (hover: hover) and (pointer: fine) {
   .case-content .case-carousel-arrow:hover::after { opacity: 1; visibility: visible; }
 }
-/* Show more of the long email before opening a full, scrollable view. */
-.case-content .case-email-row { height: auto; padding-bottom: 0; }
+/* Define the old email's top edge without changing the image dimensions. */
+.case-page[data-project="project-3-hhi"] .case-content [data-source$="ch5TlDUNR"]::after { border-top: 1px solid var(--rule); }
+.case-content .case-validation-heading { font-weight: 400; }
+.case-validation-heading strong { font-weight: 600; }
+.case-content .case-prototyping-note { margin: 16px 0 24px; padding: 20px; border: 1px solid rgb(17 17 17 / 14%); background: #f5f5f5; color: #444; font-family: "Geist", sans-serif; font-weight: 400; line-height: 1.5; }
+/* Keep explanatory panels and research quotes square in every project and breakpoint. */
+.case-content :is(
+  .case-prototyping-note,
+  [data-layer="Journey Step"],
+  [data-layer="Guiding Principles"],
+  [data-layer="Validation Result"],
+  [data-layer="8 What do they really want?"],
+  [data-layer="Medication Management Card"],
+  [data-source$="ZcJre7LsI"],
+  [data-source$="yO8TY8Rsl"],
+  [data-source$="hHmQF12RQ"],
+  [data-source$="kXaWWX9fJ"],
+  [data-source$="Qqb014w6B"]
+) { border-radius: 0; }
+.case-prototyping-note strong { color: var(--ink); font-weight: 600; }
+/* End the preview after the welcome message at every screen width. */
+.case-content .case-email-row { height: auto; padding-bottom: 0; align-items: start; overflow: visible; }
 .case-content .case-email-column { height: auto; overflow: visible; }
-.case-email-preview { display: block; position: relative; width: 100%; height: clamp(560px, 48vw, 720px); padding: 0; overflow: hidden; border: 1px solid var(--rule); background: #eafff6; cursor: pointer; }
-.case-email-preview .case-ticket-email { display: block; width: 100%; height: auto; }
-.case-email-prompt { position: absolute; right: 16px; bottom: 16px; padding: 10px 14px; border: 1px solid var(--rule); background: #fff; color: var(--ink); font: 400 14px/1.2 "Geist", sans-serif; transition: color 150ms ease; }
-.case-email-preview:hover .case-email-prompt { color: #777; }
+.case-email-preview { display: block; position: relative; width: 100%; height: auto; aspect-ratio: 2432 / 2400; padding: 0; overflow: hidden; border: 1px solid var(--rule); background: #eafff6; cursor: pointer; }
+.case-email-preview .case-ticket-email { display: block; position: absolute; top: 0; left: 0; width: 100%; height: auto; }
+.case-email-prompt { position: absolute; top: 16px; right: 16px; z-index: 1; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 14px; border: 1px solid #d9d9d9; border-radius: 6px; background: #fff; color: var(--ink); box-shadow: 0 3px 12px rgb(0 0 0 / 15%); font: 500 14px/1.35 "Geist", sans-serif; pointer-events: none; }
+.case-email-prompt svg { width: 18px; height: 18px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.case-email-preview:hover .case-email-prompt { background: #f3f3f3; border-color: #999; }
+.case-email-preview:hover { border-color: #999; }
 .case-email-preview:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
 .case-email-viewer { width: min(1040px, calc(100vw - 64px)); max-width: none; height: calc(100dvh - 64px); max-height: none; margin: auto; padding: 0; border: 1px solid var(--rule); background: #fff; color: var(--ink); overflow: hidden; }
 .case-email-viewer[open] { display: flex; flex-direction: column; }
@@ -78,12 +106,14 @@ html.case-email-open .custom-cursor { visibility: hidden; }
 .case-content .case-desktop { display: block; }
 .case-content .case-tablet, .case-content .case-phone { display: none; }
 @media (min-width: 768px) {
+  .case-content [data-source$="XoSsLTrnw"] { font-size: 20px; }
   /* Equal outcome columns keep the middle metric centered and awards flush right. */
   .case-content [data-source$="mogsbW4Fk"] { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); }
   .case-content [data-source$="mogsbW4Fk"] > .case-node { width: 100%; align-items: flex-start; }
   .case-content [data-source$="rvkYZc9Qx"] { width: 100%; }
-  /* Keep the prototype introduction and both email images on one column edge. */
+  /* Mirror New Design's columns while preserving its image width. */
   .case-content .case-prototype-row { display: grid; grid-template-columns: minmax(0, 1fr) 50%; column-gap: 36px; }
+  .case-content .case-email-row { grid-template-columns: 50% minmax(0, 1fr); align-items: center; }
   .case-content .case-prototype-row > .case-node { width: 100%; }
   /* Use the Overview / Roles columns for the title and project timing too. */
   .case-content .case-article > :has(> [data-layer="Time"]) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 56px; }
@@ -91,6 +121,8 @@ html.case-email-open .custom-cursor { visibility: hidden; }
   .case-content [data-layer="Time"] > :is([data-layer="Year"], [data-layer="Duration"]) { align-items: flex-start; }
 }
 @media (min-width: 1024px) {
+  .case-content .case-desktop [data-source="p4yGpXvJe"] { width: 75%; max-width: 1000px; align-self: center; }
+  .case-content .case-desktop [data-source="vdbVq7q9s"] { width: 80%; max-width: 1100px; align-self: center; }
   .case-content .case-desktop article:has(>[data-layer="Overview and Roles"]) { --case-block-gap: 72px; --case-chapter-gap: 144px; --case-divider-gap: 48px; }
   .case-content .case-desktop [data-source="JpNHIFman"] { font-size: 20px; line-height: 1.5; text-align: center; }
 }
@@ -112,8 +144,8 @@ html.case-email-open .custom-cursor { visibility: hidden; }
   .case-related-heading h2 { font-size: 20px; }
   .case-carousel-arrow[data-prev] { left: 4px; }
   .case-carousel-arrow[data-next] { right: 4px; }
-  .case-email-preview { height: 480px; }
-  .case-email-prompt { right: 12px; bottom: 12px; }
+  .case-content .case-prototyping-note { padding: 16px; }
+  .case-email-prompt { top: 10px; right: 10px; min-height: 40px; padding: 9px 11px; font-size: 13px; }
   .case-email-viewer { width: calc(100vw - 24px); height: calc(100dvh - 32px); }
   .case-email-toolbar h2 { padding-inline: 14px; font-size: 14px; }
 }

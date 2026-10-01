@@ -11,8 +11,10 @@
     <link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="hero-hand.css">
+    <link rel="stylesheet" href="vibe-tools.css">
     <script src="script.js" defer></script>
     <script src="hero-hand.js" defer></script>
+    <script src="vibe-tools.js" defer></script>
   </head>
   <body id="top">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -39,6 +41,70 @@
               <span class="hello-emoji hello-wave" aria-hidden="true">👋</span>
               <span class="hello-emoji hello-clap" aria-hidden="true">👏</span>
             </button></span> an <span class="intro-highlight">AI Product Designer</span> who turns ambiguity into clear product direction by balancing <span class="intro-underline">user<svg viewBox="0 0 240 32" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 24C29 13 62 8 86 11C111 14 86 25 78 19C69 11 124 6 150 10C178 14 139 27 143 18C151 8 209 3 235 10"/></svg></span> and <span class="intro-underline intro-underline-business">business<svg viewBox="0 0 240 32" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 13C36 24 70 23 101 15C123 8 126 23 112 24C94 25 110 11 151 12C168 12 188 21 178 26C165 32 158 19 182 12C199 7 220 8 236 4"/></svg></span> needs.</h1>
+          <div class="vibe-tools" id="vibe-coding-partner" role="group" aria-labelledby="vibe-tools-title">
+            <div class="vibe-tools-inner">
+              <div class="vibe-tools-content">
+                <button class="vibe-tools-animation" type="button" aria-label="Replay Figma, GitHub, Codex and Framer popping out of the box" disabled>
+                  <svg class="vibe-tools-decoration vibe-tools-decoration-back" viewBox="0 0 700 610" aria-hidden="true" focusable="false">
+                    <defs>
+                      <filter id="vibe-paper-grain" x="-10%" y="-10%" width="120%" height="120%">
+                        <feTurbulence type="fractalNoise" baseFrequency=".22" numOctaves="3" seed="12" result="noise"/>
+                        <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  .25 0 0 0 .75" result="texture"/>
+                        <feComposite in="SourceGraphic" in2="texture" operator="in"/>
+                      </filter>
+                    </defs>
+                    <g class="vibe-tools-accent vibe-tools-accent-lime" filter="url(#vibe-paper-grain)">
+                      <path d="M157 299C145 269 170 232 199 225C229 211 252 216 267 241C279 263 290 264 315 255C352 237 399 239 421 266C440 288 445 316 430 347L173 350Z" fill="#c2f743"/>
+                    </g>
+                    <g class="vibe-tools-accent vibe-tools-accent-lilac" filter="url(#vibe-paper-grain)">
+                      <path d="M131 371C97 372 57 398 54 432C49 463 71 482 100 494L144 502L160 391Z" fill="#c99af5"/>
+                    </g>
+                    <g class="vibe-tools-accent vibe-tools-accent-coral" filter="url(#vibe-paper-grain)">
+                      <path d="M588 501C575 465 586 396 608 367C630 340 625 429 606 476Z" fill="#ff8b78"/>
+                      <path d="M589 501C609 458 648 416 673 417C700 421 639 488 603 508Z" fill="#ff8270"/>
+                      <path d="M588 500C620 479 665 487 684 510C702 537 642 534 598 515Z" fill="#ff7867"/>
+                    </g>
+                  </svg>
+                  <img class="vibe-tools-fallback" src="assets/vibe-tools/box-clean.webp" alt="" width="1536" height="1024" aria-hidden="true" draggable="false">
+                  <canvas aria-hidden="true"></canvas>
+                  <svg class="vibe-tools-decoration vibe-tools-decoration-front" viewBox="0 0 700 610" fill="none" stroke="#171715" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                    <g class="vibe-tools-accent vibe-tools-accent-top-left">
+                      <path d="M174 96L197 117M210 76L219 106"/>
+                    </g>
+                    <g class="vibe-tools-accent vibe-tools-accent-top-right">
+                      <path d="M523 145Q531 130 541 119M548 153L567 143"/>
+                    </g>
+                    <g class="vibe-tools-accent vibe-tools-accent-loop">
+                      <path d="M348 218C371 231 390 260 377 288C369 305 355 296 361 281C369 261 394 267 400 283C408 303 400 320 391 332"/>
+                    </g>
+                    <g class="vibe-tools-accent vibe-tools-accent-dash">
+                      <path d="M467 318Q478 293 498 282"/>
+                    </g>
+                    <g class="vibe-tools-accent vibe-tools-accent-star">
+                      <circle cx="53" cy="289" r="9"/>
+                      <path d="M52 341L47 393M26 357L68 384M24 381L68 351M22 373L77 369"/>
+                    </g>
+                    <g class="vibe-tools-accent vibe-tools-accent-lower-left">
+                      <path d="M87 506Q109 518 106 541"/>
+                      <circle cx="78" cy="553" r="10"/>
+                    </g>
+                    <g class="vibe-tools-accent vibe-tools-accent-scribble">
+                      <path d="M535 518C559 481 601 446 609 464C617 479 602 523 591 512C582 499 621 480 631 493C645 506 618 536 641 535C657 534 666 521 682 525"/>
+                    </g>
+                  </svg>
+                </button>
+                <h2 id="vibe-tools-title">Build with AI tools</h2>
+                <span class="vibe-tools-status" role="status" aria-live="polite"></span>
+              </div>
+              <div class="craft-content">
+                <picture class="craft-illustration" aria-hidden="true">
+                  <source media="(prefers-reduced-motion: reduce)" srcset="assets/craft/craft-still-yellow.webp">
+                  <img src="assets/craft/craft-loop-yellow.webp" alt="" width="720" height="720" decoding="async" draggable="false">
+                </picture>
+                <h2>Craft &amp; Taste</h2>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

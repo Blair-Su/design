@@ -79,7 +79,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
 .site-header nav a:focus-visible { outline-offset: -5px; }
 
 .hero-inner { min-height: 560px; padding: 108px 72px 116px; display: flex; justify-content: center; align-items: center; }
-.hero h1 { max-width: 980px; font-family: "Averia Serif Libre", Georgia, serif; font-size: clamp(42px, 3.65vw, 62px); font-weight: 300; line-height: 1.26; letter-spacing: -0.025em; text-align: center; text-wrap: balance; }
+.hero h1 { max-width: 920px; font-family: "Averia Serif Libre", Georgia, serif; font-size: clamp(36px, 3.05vw, 48px); font-weight: 300; line-height: 1.34; letter-spacing: -0.025em; text-align: center; text-wrap: balance; }
 .intro-greeting { display: block; }
 .intro-highlight, .intro-underline { display: inline-block; position: relative; white-space: nowrap; }
 .intro-highlight { isolation: isolate; padding-inline: 0.16em; }
@@ -106,7 +106,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
 .hhi-cover img { object-fit: contain; }
 .southern-cover { display: grid; place-items: center; background: #2b422d; overflow: hidden; }
 .southern-laptop { position: relative; width: 76%; aspect-ratio: 2048 / 1241; pointer-events: none; }
-.southern-laptop video { position: absolute; left: 10.2%; top: 6.3%; width: 79.6%; height: 82.9%; object-fit: cover; background: #fff; }
+/* Extend a black screen backing beneath the bezel to seal fractional-pixel gaps. */
+.southern-laptop::before { content: ""; position: absolute; left: calc(10% - 1px); top: calc(6% - 1px); width: calc(80% + 2px); height: calc(83.5% + 2px); background: #000; }
+.southern-laptop video { position: absolute; left: 10.2%; top: 6.3%; width: 79.6%; height: 82.9%; object-fit: cover; background: #000; }
 .southern-laptop img { position: relative; z-index: 1; object-fit: contain; }
 .nalu-cover { position: relative; overflow: hidden; background: #fcf9fc; --nalu-cycle: 12s; }
 .nalu-cover::before { content: ""; position: absolute; inset: -30% -15% -90%; background: url("assets/case-studies/KUU4zVZwe0AyAhWi26OOCIMBDl4.webp") center / contain no-repeat; opacity: 0.75; }
@@ -167,8 +169,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
 .project-meta { flex: 0 0 auto; max-width: 45%; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; font-family: "Geist", Arial, sans-serif; font-size: 15px; font-weight: 400; line-height: 1.5; text-align: right; color: var(--project-muted); }
 .project-meta > span { color: var(--project-accent); font-weight: 500; }
 .project-meta time { white-space: nowrap; }
-/* Continue each card edge through the final spacer to the footer rule. */
-.work-end .frame { height: 28px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--cell-inset); padding-inline: var(--cell-inset); }
+/* Match the inter-row spacing before the final rule, continuing the card edges. */
+.work-end .frame { height: var(--row-inset); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--cell-inset); padding-inline: var(--cell-inset); }
 .work-end .frame::before, .work-end .frame::after { content: ""; border-inline: 1px solid var(--rule); }
 
 /* Align the name and copyright with the inner edge of the project images. */
@@ -192,19 +194,20 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
   .custom-cursor { display: flex; align-items: center; justify-content: center; position: fixed; left: 0; top: 0; z-index: 100; width: 12px; height: 12px; border-radius: 999px; background: var(--accent-orange); color: #fff; pointer-events: none; opacity: 0; transform: translate(-50%, -50%); transition: width 160ms ease, height 160ms ease, opacity 100ms; }
   .custom-cursor.is-visible { opacity: 1; }
   .custom-cursor { --cursor-inline-padding: 14px; }
-  .custom-cursor.is-project, .custom-cursor.is-copy { width: calc(var(--cursor-label-width) + var(--cursor-inline-padding) * 2); height: 44px; }
+  .custom-cursor.is-project, .custom-cursor.is-copy, .custom-cursor.is-link { width: calc(var(--cursor-label-width) + var(--cursor-inline-padding) * 2); height: 44px; }
   .cursor-label { display: flex; align-items: center; gap: 11px; white-space: nowrap; opacity: 0; font: 400 17px/1 "Geist Mono", monospace; transition: opacity 100ms; }
   .cursor-label svg { width: 21px; height: 21px; stroke-width: 2; }
-  .is-project .cursor-label, .is-copy .cursor-label { opacity: 1; }
-  .cursor-label .cursor-copy-icon, .is-copy .cursor-project-icon { display: none; }
+  .is-project .cursor-label, .is-copy .cursor-label, .is-link .cursor-label { opacity: 1; }
+  .cursor-label .cursor-copy-icon, .cursor-label .cursor-link-icon, .is-copy .cursor-project-icon, .is-link .cursor-project-icon { display: none; }
   .is-copy[data-copy-kind="email"] .cursor-email-icon, .is-copy[data-copy-kind="phone"] .cursor-phone-icon { display: block; }
+  .is-link .cursor-link-icon { display: block; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 }
 
 /* Tablet version: preserve aligned columns and left/right captions. */
 @media (min-width: 768px) and (max-width: 1023px) {
   :root { --gutter: 32px; --cell-inset: 18px; }
   .hero-inner { min-height: 520px; padding: 94px 42px 102px; }
-  .hero h1 { font-size: 42px; }
+  .hero h1 { font-size: 36px; }
   .work-heading .frame { min-height: 124px; }
   .work-heading h2 { font-size: 32px; }
   .project-caption { min-height: 110px; gap: 12px; padding: 17px 12px; }
@@ -230,7 +233,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
   .site-header nav a { min-width: 0; min-height: 52px; padding: 16px 32px; justify-content: flex-start; border-left: 0; border-bottom: 1px solid var(--rule); color: #383838; }
   .site-header nav a:last-child { border-bottom: 0; }
   .hero-inner { min-height: 475px; padding: 78px 24px 84px; }
-  .hero h1 { max-width: 540px; font-size: clamp(30px, 7.2vw, 40px); line-height: 1.28; letter-spacing: -0.025em; }
+  .hero h1 { max-width: 540px; font-size: clamp(27px, 6.8vw, 32px); line-height: 1.36; letter-spacing: -0.025em; }
   .work-heading .frame { min-height: 108px; }
   .work-heading h2 { font-size: 30px; }
   .project-grid { grid-template-columns: minmax(0, 1fr); }
@@ -238,7 +241,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
   .project-caption { gap: 14px; min-height: 98px; padding: 17px 12px; }
   .project-description { font-size: 17px; }
   .project-meta { font-size: 14px; max-width: 43%; }
-  .work-end .frame { height: 20px; grid-template-columns: minmax(0, 1fr); }
+  .work-end .frame { grid-template-columns: minmax(0, 1fr); }
   .work-end .frame::after { display: none; }
   .footer-frame { padding-block: 44px; }
   .footer-top { flex-direction: column; gap: 36px; }

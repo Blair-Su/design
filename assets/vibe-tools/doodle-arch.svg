@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="40" viewBox="0 0 80 40">
+  <defs>
+    <filter id="grain" filterUnits="userSpaceOnUse" x="-8" y="-8" width="96" height="56">
+      <feTurbulence type="fractalNoise" baseFrequency=".18" numOctaves="3" seed="9" result="noise"/>
+      <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  .28 0 0 0 .7" result="texture"/>
+      <feComposite in="SourceGraphic" in2="texture" operator="in"/>
+    </filter>
+  </defs>
+  <path d="M6 31C7 8 27 5 37 29C44 8 67 9 74 31" fill="none" stroke="#80a5df" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#grain)"/>
+</svg>

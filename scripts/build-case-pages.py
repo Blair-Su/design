@@ -31,6 +31,31 @@ def append_fragment(parent, source):
     parent.append(html.fragment_fromstring(source))
 
 
+def merge_hhi_research(breakpoint):
+    """Keep the research methods and findings together in Discovery."""
+    def source_node(suffix):
+        return next(node for node in breakpoint.xpath('.//*[@data-source]')
+                    if node.get('data-source').endswith(suffix))
+
+    # Reuse the existing two-column row (stacked on Phone) for exact alignment.
+    methods = source_node('rLNbX7C_Z')
+    source_node('PBZDMa2qV').find('.//span').text = 'What the Research Revealed'
+    methods.append(source_node('cbpvcnJvw'))
+    methods.addprevious(source_node('MGBPvuQtT'))
+    source_node('iN2jVm1UP').find('.//span').text = (
+        'Younger visitors want more than car displays. They seek stories, learning, '
+        'and hands-on experiences that make car culture feel relevant to them.'
+    )
+    image = source_node('EihvBCRGP')
+    research = image.getparent()
+    image_index = research.index(image)
+    for offset, suffix in enumerate(('V3U4pLe9P', 'kKn4KG6T9')):
+        research.insert(image_index + offset, source_node(suffix))
+    research.remove(image)
+    insights = source_node('CiPB72jO8')
+    insights.getparent().remove(insights)
+
+
 HOME_CARDS = HOME.xpath(f'//*[{has_class("project-grid")}]/article')
 HOME_ORDER = [card.find('a').get('href').strip('/') for card in HOME_CARDS]
 
@@ -40,6 +65,9 @@ for slug, name in PROJECTS.items():
     title = source.find('.//title').text
     sections = source.xpath(f'//*[{has_class("case-tablet")}]//*[{has_class("case-contents-menu")}]//a[starts-with(@href,"#")]')
     menu_items = [(a.get('href')[1:], a.text_content().strip()) for a in sections]
+    if slug == 'project-3-hhi':
+        menu_items = [(anchor, 'Prototype' if anchor == 'final-prototype' else label)
+                      for anchor, label in menu_items if anchor != 'problem']
     doc = html.fromstring('<html lang="en"><head></head><body></body></html>')
     head, body = doc.find('head'), doc.find('body')
     body.set('id', 'top')
@@ -70,6 +98,8 @@ for slug, name in PROJECTS.items():
     content = etree.SubElement(main, 'div', **{'class': 'frame case-content'})
     for original in source.xpath(f'//*[{has_class("case-breakpoint")}]'):
         breakpoint = deepcopy(original)
+        if slug == 'project-3-hhi':
+            merge_hhi_research(breakpoint)
         for old in breakpoint.xpath('.//nav[@aria-label="Case study sections"] | .//*[contains(concat(" ",@class," ")," case-bottom ")]'):
             if 'case-bottom' in old.get('class', '').split():
                 while old.getparent() is not breakpoint and len(old.getparent()) == 1:
@@ -107,15 +137,67 @@ for slug, name in PROJECTS.items():
         for article in breakpoint.xpath('.//article'):
             add_class(article, 'case-article')
             add_class(article.getparent(), 'case-body')
+        if slug == 'project-1-lighthouse':
+            for old, new in {
+                'What we learned': 'From what we learned',
+                'The research findings indicate that:': 'Therefore, the findings indicate that:',
+            }.items():
+                for label in breakpoint.xpath('.//span[text()=$text]', text=old):
+                    label.text = new
         if slug == 'project-3-hhi':
+            for label in breakpoint.xpath('.//span[text()="Final Prototype"]'):
+                label.text = 'Prototype'
             for row in breakpoint.xpath('.//*[@data-source]'):
+                if row.get('data-source', '').endswith('udG1E1PVN'):
+                    heading = row.find('p')
+                    heading[0].text = 'Trip Planning & Purchase Team’s Priority Opportunity'
+                    for extra in list(heading)[1:]:
+                        heading.remove(extra)
+                if row.get('data-source', '').endswith('svhstBpCN'):
+                    add_class(row, 'case-validation-heading')
+                    heading = row.find('p')
+                    heading.text = 'From our usability testing, '
+                    heading[0].tag = 'strong'
+                if row.get('data-source', '').endswith('LJIeROXE3'):
+                    description = row.find('p')
+                    description[0].text = 'The original email confirmed the purchase, but '
+                    emphasis = etree.SubElement(description, 'strong', **{'class': 's85'})
+                    emphasis.text = 'the experience stopped there'
+                    emphasis.tail = ', leaving a gap between buying a ticket and arriving at the event.'
+                if row.get('data-source', '').endswith('RNWtIxjXw'):
+                    prototype_link = row.xpath('./p[a[contains(@href,"figma.com/make/")]]')[0]
+                    prototype_link.find('a').set('data-cursor-label', 'View Figma prototype')
+                    note = etree.Element('p', **{'class': 'case-prototyping-note'})
+                    note.text = 'I designed and iterated on the ticket confirmation experience using '
+                    emphasis = etree.SubElement(note, 'strong')
+                    emphasis.text = 'AI-assisted prototyping in Figma Make'
+                    emphasis.tail = ', aligning the design with HHI’s visual identity and accessibility needs.'
+                    prototype_link.addprevious(note)
                 if row.get('data-source', '').endswith(('M1dt5hREI', 'GrwoZJ6D8', 'l3aF0lFbh')):
                     add_class(row, 'case-prototype-row')
+        if slug == 'project-4-nalu':
+            for row in breakpoint.xpath('.//*[@data-source]'):
+                if row.get('data-source', '').endswith('WyN1gOw8Y'):
+                    phrase = row.find('.//span')
+                    before, emphasis_text, after = phrase.text.partition('prototyping is valuable at every stage')
+                    phrase.text = before
+                    emphasis = etree.SubElement(phrase, 'strong')
+                    emphasis.text = emphasis_text
+                    emphasis.tail = after
+        if slug == 'project-2-southerncrafted':
+            for row in breakpoint.xpath('.//*[@data-source]'):
+                if row.get('data-source', '').endswith('cqGmzFA4S'):
+                    phrase = row.find('.//span')
+                    phrase.text = phrase.text.replace('We tested', 'We also tested', 1)
         if slug == 'project-2-southerncrafted' and 'case-desktop' in breakpoint.get('class', '').split():
+            for quote in breakpoint.xpath('.//*[@data-source="IwNJHK_uq"]'):
+                phrase = quote.find('.//span')
+                phrase.text = phrase.text.replace('important things', 'important thing').replace('price. ”', 'price.”')
+                quote.set('data-layer', phrase.text)
             for phrase in breakpoint.xpath('.//*[@data-source="JpNHIFman"]//span[text()="easily navigate, find relevant information, and better engage"]'):
                 phrase.text = 'easily navigate, find relevant information,'
                 etree.SubElement(phrase, 'br').tail = 'and better engage'
-        # A taller, clickable email crop opens the complete design on this page.
+        # A cropped email preview opens the complete design on this page.
         for email in breakpoint.xpath(f'.//img[{has_class("case-ticket-email")}]'):
             crop = email.getparent()
             column = crop.getparent()
@@ -131,8 +213,14 @@ for slug, name in PROJECTS.items():
                 'aria-controls': 'ticket-email-viewer',
             })
             preview.append(email)
-            etree.SubElement(preview, 'span', **{'class': 'case-email-prompt', 'aria-hidden': 'true'}).text = 'click to view'
+            prompt = etree.SubElement(preview, 'span', **{
+                'class': 'case-email-prompt',
+                'aria-hidden': 'true',
+            })
+            prompt.append(etree.fromstring('<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5M10.5 7.5v6M7.5 10.5h6"/></svg>'))
+            etree.SubElement(prompt, 'span').text = 'Click to view'
             column.replace(crop, preview)
+            column.getparent().insert(0, column)
         # Put navigation beside the artwork and retain a screen-reader slide status.
         for carousel in breakpoint.xpath('.//*[@data-carousel]'):
             slides = carousel.xpath(f'./*[{has_class("case-carousel-slides")}]')[0]
@@ -169,6 +257,8 @@ for slug, name in PROJECTS.items():
     for selector in ['custom-cursor', 'copy-status']:
         body.append(deepcopy(HOME.xpath(f'//*[{has_class(selector)}]')[0]))
     if slug == 'project-3-hhi':
+        cursor_label = body.xpath(f'.//*[{has_class("cursor-label")}]')[0]
+        cursor_label.append(etree.fromstring('<svg class="cursor-link-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg>'))
         append_fragment(body, '''<dialog class="case-email-viewer" id="ticket-email-viewer" aria-labelledby="ticket-email-title">
           <div class="case-email-toolbar">
             <h2 id="ticket-email-title">Ticket confirmation email</h2>
