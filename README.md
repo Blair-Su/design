@@ -39,6 +39,8 @@ All four homepage project cards and the related-project cards link to local case
 
 ## About
 
+The transparent typing illustration sits to the right of “Hi, I’m Blair Su!” in the intro. Its chair and laptop retain their violet colors and the curly line is black. The optimized 420px WebP plays a four-second loop; reduced-motion visitors receive the matching still through a picture source. The artwork occupies its own responsive column beside the title and uses the existing space above and below the heading.
+
 `/about.html` preserves the original About introduction, all five work experiences, both education entries, and the fourteen-photo “What I’ve been diving into” gallery after Education. The intro pairs left-hand text with three photos: the supplied selfie above an original SCAD SERVE team photograph and a mountain photograph. The page shares the home navigation, footer, fonts and continuous ruled frame; phone layouts stack the intro and resume columns.
 
 `about-page.css` styles the page, and `about-page.js` runs a seamless horizontal photo strip at 28px per second, with Pause/Resume control and manual horizontal scrolling. All fourteen photographs keep their proportions at 320px high on Desktop, 270px on Tablet and 230px on Phone. Reduced motion starts paused. Hover continues playback; direct scrolling, keyboard browsing and opening a photo take priority. The lightbox retains previous/next controls, arrow-key navigation and Escape dismissal. `scripts/build-about-page.py` rebuilds the page from `reference/about.html`, the local media in `assets/about/`, and the homepage shell. The builder requires Python, lxml and Pillow. No source photos are modified.
