@@ -6,6 +6,9 @@
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
   const status = root.querySelector('.vibe-tools-status');
+  const hero = root.closest('.hero');
+  const intro = hero?.querySelector('h1');
+  let introOffset = 0;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const sources = {
     figma: 'assets/vibe-tools/figma.svg',
@@ -90,6 +93,19 @@
     ctx.restore();
   }
 
+  function balanceIntroSpacing() {
+    if (!intro) return;
+    const introBounds = intro.getBoundingClientRect();
+    const stageBounds = surface.getBoundingClientRect();
+    // Both settled illustrations start about 20% down their transparent stages.
+    // Use that stable edge so the text never follows the artwork's small motions.
+    const artworkTop = stageBounds.top + stageBounds.height * .2;
+    const above = introBounds.top - hero.getBoundingClientRect().top;
+    const below = artworkTop - introBounds.bottom;
+    introOffset = Math.max(0, introOffset + (below - above) / 2);
+    intro.style.setProperty('--hero-intro-offset', `${introOffset}px`);
+  }
+
   function resize() {
     width = surface.clientWidth;
     height = surface.clientHeight;
@@ -98,6 +114,7 @@
     canvas.width = Math.round(width * dpr);
     canvas.height = Math.round(height * dpr);
     draw();
+    balanceIntroSpacing();
   }
 
   function animate(duration, update) {
@@ -167,6 +184,12 @@
 
   surface.addEventListener('click', () => replay(true));
   new ResizeObserver(resize).observe(surface);
+  if (intro) {
+    const introLayout = new ResizeObserver(balanceIntroSpacing);
+    introLayout.observe(intro);
+    introLayout.observe(hero);
+    document.fonts?.ready.then(balanceIntroSpacing);
+  }
   resize();
 
   if ('IntersectionObserver' in window) {

@@ -4,6 +4,12 @@
   padding-top: 56px;
   padding-bottom: 40px;
 }
+.hero h1 {
+  position: relative;
+  z-index: 1;
+  /* Balance against the visible artwork, including its transparent top margin. */
+  transform: translateY(var(--hero-intro-offset, 0px));
+}
 .hero .vibe-tools { align-self: stretch; min-width: 0; }
 .vibe-tools-inner {
   display: grid;
