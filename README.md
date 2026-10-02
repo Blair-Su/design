@@ -51,6 +51,8 @@ The transparent typing illustration sits to the right of “Hi, I’m Blair Su!�
 
 Each project introduction includes a rounded capsule type tag below its project subtitle on Desktop, Tablet and Phone. The builder reads the wording from the homepage label beneath the year. Each tag uses regular-weight text, comfortable padding, and a pale tinted background. Text and border share the homepage accent color: HHI brown, Southern Crafted sage green, Lighthouse gold and Nalu plum; the background mixes 12% of that project's accent with white.
 
+Lighthouse's case-study tag uses its brand yellow (`#ffb803`, mixed 24% with white) for a clearer yellow tint, with matching deep-gold text and border (`#856000`). Text contrast is approximately 5:1; homepage label colors are unchanged.
+
 - `/project-3-hhi/`: HHI Concours, seven chapters. Discovery includes the research-methods description beside “What the Research Revealed” and the four findings in place of the research image; Key Insights is no longer a separate chapter or Contents entry.
 - `/project-1-lighthouse/`: Lighthouse, seven chapters.
 - Lighthouse's cover and three Final Solution presentation boards use responsive 960/1920/3840px WebP exports (quality 95). The cover comes from the 4800 × 2700 original `72@4x.png`; the boards come directly from the 16000 × 9000 originals `2(done).png`, `3(done).png`, and `4(done).png`. The desktop, tablet and phone copies share these assets through `srcset`, preserving sharp UI text on high-density displays without sending the largest files to every phone. The cover loads immediately; boards load lazily.

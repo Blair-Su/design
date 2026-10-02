@@ -7,6 +7,7 @@
 .case-content .case-body { width: 100%; max-width: 100%; padding-inline: var(--cell-inset); justify-content: center; }
 .case-content .case-article { flex: 0 1 auto; width: 100%; max-width: none; }
 .case-content .case-project-tag { display: inline-block; align-self: flex-start; flex-shrink: 0; max-width: 100%; margin-top: 12px; padding: 8px 16px; border: 1.25px solid currentColor; border-radius: 999px; background: color-mix(in srgb, var(--project-accent) 12%, white); color: var(--project-accent); font: 400 16px/1.4 "Geist", Arial, sans-serif; overflow-wrap: anywhere; }
+.case-page[data-project="project-1-lighthouse"] .case-project-tag { background: color-mix(in srgb, #ffb803 24%, white); color: #856000; }
 .case-content .case-responsive-artwork { display: block; width: 100%; height: auto; background-image: none; object-fit: contain; }
 /* Let the medication illustration determine its height, with equal space above and below. */
 .case-page[data-project="project-1-lighthouse"] .case-content [data-layer="Medication Management Card"] { height: auto; padding-block: 20px; }
