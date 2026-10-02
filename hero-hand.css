@@ -12,6 +12,10 @@
 .hello-confetti-dot { width: 5px; height: 5px; border-radius: 50%; }
 .hello-confetti-ribbon { width: 12px; height: 3px; }
 .hello-confetti-star { width: 11px; height: 11px; clip-path: polygon(50% 0%, 61% 36%, 100% 50%, 63% 61%, 50% 100%, 38% 63%, 0% 50%, 36% 38%); }
+@media (max-width: 767px) {
+  .intro-greeting { display: flex; align-items: center; justify-content: center; gap: .07em; }
+  .hello-hand { flex: 0 0 auto; margin: 0; vertical-align: initial; }
+}
 @keyframes hello-wave {
   0%, 10%, 38%, 100% { transform: rotate(-8deg); }
   17%, 29% { transform: rotate(9deg); }
