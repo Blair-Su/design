@@ -49,7 +49,7 @@ The transparent typing illustration sits to the right of “Hi, I’m Blair Su!�
 
 ## Case studies
 
-Each project introduction includes an outlined type tag below its project subtitle on Desktop, Tablet and Phone. The builder reads the wording from the homepage label beneath the year. Text and border share the homepage accent color: HHI brown, Southern Crafted sage green, Lighthouse gold and Nalu plum.
+Each project introduction includes a rounded capsule type tag below its project subtitle on Desktop, Tablet and Phone. The builder reads the wording from the homepage label beneath the year. Each tag uses regular-weight text, comfortable padding, and a pale tinted background. Text and border share the homepage accent color: HHI brown, Southern Crafted sage green, Lighthouse gold and Nalu plum; the background mixes 12% of that project's accent with white.
 
 - `/project-3-hhi/`: HHI Concours, seven chapters. Discovery includes the research-methods description beside “What the Research Revealed” and the four findings in place of the research image; Key Insights is no longer a separate chapter or Contents entry.
 - `/project-1-lighthouse/`: Lighthouse, seven chapters.
