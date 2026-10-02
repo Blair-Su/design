@@ -31,6 +31,33 @@ def append_fragment(parent, source):
     parent.append(html.fragment_fromstring(source))
 
 
+def responsive_artwork(breakpoint, artwork, cover_source):
+    """Serve wide artwork exported from original files at the screen's resolution."""
+    for visual in breakpoint.xpath('.//*[@role="img"]'):
+        for suffix, (asset, description) in artwork.items():
+            if not visual.get('data-source', '').endswith(suffix):
+                continue
+            visual.tag = 'img'
+            visual.attrib.pop('role')
+            visual.attrib.pop('aria-label', None)
+            add_class(visual, 'case-responsive-artwork')
+            visual.set('src', f'/assets/case-studies/{asset}-1920.webp')
+            visual.set('srcset', ', '.join(
+                f'/assets/case-studies/{asset}-{width}.webp {width}w'
+                for width in (960, 1920, 3840)
+            ))
+            is_cover = suffix == cover_source
+            visual.set('sizes',
+                       '(max-width: 767px) calc(100vw - 34px), (max-width: 1023px) calc(100vw - 66px), (max-width: 1840px) calc(91.4vw - 2px), 1678px'
+                       if is_cover else
+                       '(max-width: 767px) calc(100vw - 66px), (max-width: 1023px) calc(100vw - 102px), (max-width: 1840px) calc(91.4vw - 50px), 1630px')
+            visual.set('width', '3840')
+            visual.set('height', '2160')
+            visual.set('alt', description)
+            visual.set('loading', 'eager' if is_cover else 'lazy')
+            visual.set('decoding', 'async')
+
+
 def merge_hhi_research(breakpoint):
     """Keep the research methods and findings together in Discovery."""
     def source_node(suffix):
@@ -154,29 +181,7 @@ for slug, name in PROJECTS.items():
                 'SVUg4fsHX': ('lighthouse-navigation', 'Lighthouse diabetes-friendly restaurant and injection-space navigation screens'),
                 'EE4mwbPP4': ('lighthouse-glucose-reminders', 'Lighthouse blood glucose test reminders and timer screens'),
             }
-            for visual in breakpoint.xpath('.//*[@role="img"]'):
-                for suffix, (asset, description) in lighthouse_artwork.items():
-                    if not visual.get('data-source', '').endswith(suffix):
-                        continue
-                    visual.tag = 'img'
-                    visual.attrib.pop('role')
-                    visual.attrib.pop('aria-label', None)
-                    add_class(visual, 'case-responsive-artwork')
-                    visual.set('src', f'/assets/case-studies/{asset}-1920.webp')
-                    visual.set('srcset', ', '.join(
-                        f'/assets/case-studies/{asset}-{width}.webp {width}w'
-                        for width in (960, 1920, 3840)
-                    ))
-                    is_cover = suffix == 'X5a2FZDSW'
-                    visual.set('sizes',
-                               '(max-width: 767px) calc(100vw - 34px), (max-width: 1023px) calc(100vw - 66px), (max-width: 1840px) calc(91.4vw - 2px), 1678px'
-                               if is_cover else
-                               '(max-width: 767px) calc(100vw - 66px), (max-width: 1023px) calc(100vw - 102px), (max-width: 1840px) calc(91.4vw - 50px), 1630px')
-                    visual.set('width', '3840')
-                    visual.set('height', '2160')
-                    visual.set('alt', description)
-                    visual.set('loading', 'eager' if is_cover else 'lazy')
-                    visual.set('decoding', 'async')
+            responsive_artwork(breakpoint, lighthouse_artwork, 'X5a2FZDSW')
             for old, new in {
                 'What we learned': 'From what we learned',
                 'The research findings indicate that:': 'Therefore, the findings indicate that:',
@@ -222,6 +227,15 @@ for slug, name in PROJECTS.items():
                 if row.get('data-source', '').endswith(('M1dt5hREI', 'GrwoZJ6D8', 'l3aF0lFbh')):
                     add_class(row, 'case-prototype-row')
         if slug == 'project-4-nalu':
+            responsive_artwork(breakpoint, {
+                'AioD3QCSI': ('nalu-cover', 'Nalu fitness concept with daily workout and cycle tracking screens'),
+                'p4yGpXvJe': ('nalu-cycle-rhythm', 'Diagram of the menstrual cycle phases and associated hormone changes'),
+                'w6zJY8k0s': ('nalu-hormone-comparison', 'Comparison of daily and monthly hormone patterns'),
+                'CBpaSxdZM': ('nalu-daily-check-in', 'Nalu daily check-in screens for energy and motivation'),
+                'DQTV3dZep': ('nalu-workout-overview', 'Nalu workout plan, wellness log and menstrual cycle overview screens'),
+                'vlm62Eq1G': ('nalu-workout-guidance', 'Nalu workout selection and exercise guidance screens'),
+                'oq61zDCvx': ('nalu-workout-progress', 'Nalu workout completion, feedback and progress screens'),
+            }, 'AioD3QCSI')
             for row in breakpoint.xpath('.//*[@data-source]'):
                 if row.get('data-source', '').endswith('WyN1gOw8Y'):
                     phrase = row.find('.//span')
