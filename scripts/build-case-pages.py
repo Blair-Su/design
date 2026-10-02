@@ -157,6 +157,13 @@ for slug, name in PROJECTS.items():
             for label in breakpoint.xpath('.//span[text()="Final Prototype"]'):
                 label.text = 'Prototype'
             for row in breakpoint.xpath('.//*[@data-source]'):
+                if row.get('data-source', '').endswith('ySehltyG_'):
+                    role = row.find('p')
+                    role[0].text = 'AI Product Designer:'
+                    role[1].text = (
+                        ' I defined the features and functionality of the ticket confirmation email '
+                        'and translated them into high-fidelity prototypes assisted by AI tools.'
+                    )
                 if row.get('data-source', '').endswith('udG1E1PVN'):
                     heading = row.find('p')
                     heading[0].text = 'Trip Planning & Purchase Team’s Priority Opportunity'
