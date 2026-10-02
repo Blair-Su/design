@@ -7,6 +7,7 @@
 .case-content .case-body { width: 100%; max-width: 100%; padding-inline: var(--cell-inset); justify-content: center; }
 .case-content .case-article { flex: 0 1 auto; width: 100%; max-width: none; }
 .case-content .case-project-tag { display: inline-block; align-self: flex-start; flex-shrink: 0; max-width: 100%; margin-top: 12px; padding: 8px 16px; border: 1.25px solid currentColor; border-radius: 999px; background: color-mix(in srgb, var(--project-accent) 12%, white); color: var(--project-accent); font: 400 16px/1.4 "Geist", Arial, sans-serif; overflow-wrap: anywhere; }
+.case-content .case-responsive-artwork { display: block; width: 100%; height: auto; background-image: none; object-fit: contain; }
 /* Let the medication illustration determine its height, with equal space above and below. */
 .case-page[data-project="project-1-lighthouse"] .case-content [data-layer="Medication Management Card"] { height: auto; padding-block: 20px; }
 .case-content [data-source$="PF_24jbVk"] { height: auto; aspect-ratio: 2048 / 1450; background-size: contain; background-position: center; }
@@ -19,7 +20,7 @@
 .case-content [data-source$="CDx3dzKv7"] { top: 50%; }
 .case-content [data-source$="WyN1gOw8Y"] strong { color: #000; font-weight: 600; }
 .case-content .case-cover { padding-top: 0; }
-.case-content .case-cover > [role="img"] { height: auto; aspect-ratio: 16 / 9; border-bottom: 1px solid var(--rule); }
+.case-content .case-cover > :is([role="img"], .case-responsive-artwork) { height: auto; aspect-ratio: 16 / 9; border-bottom: 1px solid var(--rule); }
 .case-content .case-divider { position: relative; height: 1px; background: transparent; overflow: visible; }
 .case-content .case-divider::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100vw; height: 1px; background: var(--rule); pointer-events: none; }
 .case-content .case-divider::after { display: none; }

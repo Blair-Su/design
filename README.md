@@ -53,6 +53,7 @@ Each project introduction includes a rounded capsule type tag below its project 
 
 - `/project-3-hhi/`: HHI Concours, seven chapters. Discovery includes the research-methods description beside “What the Research Revealed” and the four findings in place of the research image; Key Insights is no longer a separate chapter or Contents entry.
 - `/project-1-lighthouse/`: Lighthouse, seven chapters.
+- Lighthouse's cover and three Final Solution presentation boards use responsive 960/1920/3840px WebP exports (quality 95). The cover comes from the 4800 × 2700 original `72@4x.png`; the boards come directly from the 16000 × 9000 originals `2(done).png`, `3(done).png`, and `4(done).png`. The desktop, tablet and phone copies share these assets through `srcset`, preserving sharp UI text on high-density displays without sending the largest files to every phone. The cover loads immediately; boards load lazily.
 - `/project-2-southerncrafted/`: Southern Crafted, eight chapters.
 - `/project-4-nalu/`: Nalu, five chapters.
 

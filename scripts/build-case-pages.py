@@ -147,6 +147,36 @@ for slug, name in PROJECTS.items():
         intro_title = breakpoint.find('.//article').xpath('./*/*[@data-layer="Title"]')[0]
         etree.SubElement(intro_title, 'span', **{'class': 'case-project-tag'}).text = HOME_TYPES[slug]
         if slug == 'project-1-lighthouse':
+            # Use original-resolution exports for the cover and UI presentation boards.
+            lighthouse_artwork = {
+                'X5a2FZDSW': ('lighthouse-cover', 'Lighthouse diabetes care app and service concept'),
+                'fBY1IYBxK': ('lighthouse-onboarding', 'Lighthouse onboarding and personalized medication schedule screens'),
+                'SVUg4fsHX': ('lighthouse-navigation', 'Lighthouse diabetes-friendly restaurant and injection-space navigation screens'),
+                'EE4mwbPP4': ('lighthouse-glucose-reminders', 'Lighthouse blood glucose test reminders and timer screens'),
+            }
+            for visual in breakpoint.xpath('.//*[@role="img"]'):
+                for suffix, (asset, description) in lighthouse_artwork.items():
+                    if not visual.get('data-source', '').endswith(suffix):
+                        continue
+                    visual.tag = 'img'
+                    visual.attrib.pop('role')
+                    visual.attrib.pop('aria-label', None)
+                    add_class(visual, 'case-responsive-artwork')
+                    visual.set('src', f'/assets/case-studies/{asset}-1920.webp')
+                    visual.set('srcset', ', '.join(
+                        f'/assets/case-studies/{asset}-{width}.webp {width}w'
+                        for width in (960, 1920, 3840)
+                    ))
+                    is_cover = suffix == 'X5a2FZDSW'
+                    visual.set('sizes',
+                               '(max-width: 767px) calc(100vw - 34px), (max-width: 1023px) calc(100vw - 66px), (max-width: 1840px) calc(91.4vw - 2px), 1678px'
+                               if is_cover else
+                               '(max-width: 767px) calc(100vw - 66px), (max-width: 1023px) calc(100vw - 102px), (max-width: 1840px) calc(91.4vw - 50px), 1630px')
+                    visual.set('width', '3840')
+                    visual.set('height', '2160')
+                    visual.set('alt', description)
+                    visual.set('loading', 'eager' if is_cover else 'lazy')
+                    visual.set('decoding', 'async')
             for old, new in {
                 'What we learned': 'From what we learned',
                 'The research findings indicate that:': 'Therefore, the findings indicate that:',
