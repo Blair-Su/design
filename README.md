@@ -39,7 +39,7 @@ All four homepage project cards and the related-project cards link to local case
 
 ## About
 
-Hovering over the three intro photos shows the existing orange cursor pill with a text-only label: “that's me!” on the portrait, “with the team :)” on the team photo, and “weekend mode” on the mountain photo. Labels preserve their lowercase wording and use the shared cursor sizing and viewport-edge handling; touch input keeps the normal photo behavior.
+Hovering over the three intro photos shows the existing orange cursor pill with a text-only label: “that's me!” on the portrait, “with the team :)” on the team photo, and “weekend mode ✨” on the mountain photo. Labels preserve their lowercase wording and use the shared cursor sizing and viewport-edge handling; touch input keeps the normal photo behavior.
 
 The transparent typing illustration sits to the right of “Hi, I’m Blair Su!” in the intro. Its face, ear, neck and hands use a soft light warm skin tone. Its chair and laptop retain their violet colors and the curly line is black. The optimized 420px WebP plays a four-second loop; reduced-motion visitors receive the matching still through a picture source. The artwork occupies its own responsive column beside the title and uses the existing space above and below the heading.
 

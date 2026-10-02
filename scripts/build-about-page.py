@@ -115,7 +115,7 @@ page = f'''<!doctype html>
         <div class="about-intro-photos" aria-label="A little about Blair">
           <figure class="about-portrait" data-cursor-label="that's me!">{photo('assets/about/blair-selfie.jpg', 'Blair Su outdoors in the afternoon sunlight', lazy=False)}</figure>
           <figure class="about-team-photo" data-cursor-label="with the team :)">{photo('assets/about/diving-scad-serve-team.jpg', 'Blair with the SCAD SERVE team', lazy=False)}</figure>
-          <figure class="about-outdoors-photo" data-cursor-label="weekend mode">{photo('assets/about/diving-mountain-view.jpg', 'Blair taking in a snowy mountain view', lazy=False)}</figure>
+          <figure class="about-outdoors-photo" data-cursor-label="weekend mode ✨">{photo('assets/about/diving-mountain-view.jpg', 'Blair taking in a snowy mountain view', lazy=False)}</figure>
         </div>
       </div>
     </section>
