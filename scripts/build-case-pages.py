@@ -197,6 +197,8 @@ for slug, name in PROJECTS.items():
             for label in breakpoint.xpath('.//span[text()="Final Prototype"]'):
                 label.text = 'Prototype'
             for row in breakpoint.xpath('.//*[@data-source]'):
+                if row.get('data-source', '').endswith('yHV2VgdKU'):
+                    row.getparent().remove(row)
                 if row.get('data-source', '').endswith('ySehltyG_'):
                     role = row.find('p')
                     role[0].text = 'AI Product Designer:'
