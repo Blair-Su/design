@@ -85,7 +85,7 @@ page = f'''<!doctype html>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="Get to know Blair Su, an AI product designer with a background in UX and service design. Experience, education, and life beyond design.">
+  <meta name="description" content="Get to know Blair Su, a product designer with a background in UX and service design. Experience, education, and life beyond design.">
   <title>About — Blair Su</title>
   {render(home.find('.//link[@rel="icon"]'))}
   <link rel="preload" href="assets/fonts/averia-serif-libre.woff2" as="font" type="font/woff2" crossorigin>
@@ -112,7 +112,7 @@ page = f'''<!doctype html>
             </picture>
           </div>
           <div class="about-intro-prose">
-            <p>I’m an AI product designer with a strong background in <strong>UX &amp; service design.</strong> I love crafting impactful solutions, seamless system flows and thoughtful products around a clear value proposition for both users and stakeholders.</p>
+            <p>I’m a product designer with a strong background in <strong>UX &amp; service design.</strong> I love crafting impactful solutions, seamless system flows and thoughtful products around a clear value proposition for both users and stakeholders.</p>
             <p>Previously worked on projects with <strong>Hilton Head Island Concours, BMW, FINRA and Deloitte.</strong> Reach me on <a href="https://www.linkedin.com/in/blair-xun-su-1263921a9" target="_blank" rel="noopener noreferrer">LinkedIn</a> or <a href="mailto:suxun70@gmail.com">email</a>.</p>
           </div>
         </div>

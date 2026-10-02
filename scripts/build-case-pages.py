@@ -174,6 +174,11 @@ for slug, name in PROJECTS.items():
         intro_title = breakpoint.find('.//article').xpath('./*/*[@data-layer="Title"]')[0]
         etree.SubElement(intro_title, 'span', **{'class': 'case-project-tag'}).text = HOME_TYPES[slug]
         if slug == 'project-1-lighthouse':
+            for row in breakpoint.xpath('.//*[@data-source]'):
+                if row.get('data-source', '').endswith('r9Mp50xbA'):
+                    row.find('./p/span').text = 'Product Designer:'
+                if row.get('data-source', '').endswith('ey8ecHYoI'):
+                    row.getparent().remove(row)
             # Use original-resolution exports for the cover and UI presentation boards.
             lighthouse_artwork = {
                 'X5a2FZDSW': ('lighthouse-cover', 'Lighthouse diabetes care app and service concept'),
