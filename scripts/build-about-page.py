@@ -43,6 +43,10 @@ def resume_entry(row):
     role = ROLE_UPDATES.get(title, info.find('p').text_content().strip())
     dates = info.find('div').text_content().strip()
     description = row.xpath('./p')[0].text_content().strip()
+    if title == 'HHI Concours x SCAD SERVE':
+        description = description.replace(
+            ' and attract Gen Z audiences, drawing on journey insights and client co-creation', ''
+        )
     logos = ''.join(
         f'<img src="{local_image(image)}" alt="{escape(image.get("alt", ""))}" loading="lazy" decoding="async">'
         for image in row.xpath('.//img')
