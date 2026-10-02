@@ -57,7 +57,7 @@ const mouseInput = matchMedia('(hover: hover) and (pointer: fine)');
 let pointer = null;
 
 function hideCursor() {
-  cursor.classList.remove('is-visible', 'is-project', 'is-sponsored', 'is-copy', 'is-link');
+  cursor.classList.remove('is-visible', 'is-project', 'is-sponsored', 'is-copy', 'is-link', 'is-caption');
   document.documentElement.classList.remove('custom-cursor-ready');
   pointer = null;
 }
@@ -67,18 +67,20 @@ function updateCursor() {
   const target = document.elementFromPoint(pointer.x, pointer.y);
   const project = target?.closest('.project-link');
   const copyButton = target?.closest('[data-copy]');
-  const labeledLink = target?.closest('a[data-cursor-label]');
+  const labeledTarget = target?.closest('[data-cursor-label]');
   const overCopy = Boolean(copyButton);
   const overProject = Boolean(project) && !overCopy;
-  const overLink = Boolean(labeledLink) && !overCopy && !overProject;
-  const hasLabel = overProject || overCopy || overLink;
+  const overLabel = Boolean(labeledTarget) && !overCopy && !overProject;
+  const overLink = overLabel && labeledTarget.matches('a');
+  const hasLabel = overProject || overCopy || overLabel;
   const sponsored = overProject && project.dataset.cursor === 'sponsored';
   cursor.classList.toggle('is-project', overProject);
   cursor.classList.toggle('is-sponsored', sponsored);
   cursor.classList.toggle('is-copy', overCopy);
   cursor.classList.toggle('is-link', overLink);
+  cursor.classList.toggle('is-caption', overLabel && !overLink);
   cursor.dataset.copyKind = copyButton?.dataset.copyKind || '';
-  cursorText.textContent = overCopy ? 'COPY' : overLink ? labeledLink.dataset.cursorLabel : sponsored ? 'VIEW SPONSORED PROJECT' : 'VIEW CASE STUDY';
+  cursorText.textContent = overCopy ? 'COPY' : overLabel ? labeledTarget.dataset.cursorLabel : sponsored ? 'VIEW SPONSORED PROJECT' : 'VIEW CASE STUDY';
   // Size each label to its content with the same compact space on both sides.
   let halfWidth = 6;
   if (hasLabel) {

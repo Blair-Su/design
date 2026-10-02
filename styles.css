@@ -194,13 +194,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
   .custom-cursor { display: flex; align-items: center; justify-content: center; position: fixed; left: 0; top: 0; z-index: 100; width: 12px; height: 12px; border-radius: 999px; background: var(--accent-orange); color: #fff; pointer-events: none; opacity: 0; transform: translate(-50%, -50%); transition: width 160ms ease, height 160ms ease, opacity 100ms; }
   .custom-cursor.is-visible { opacity: 1; }
   .custom-cursor { --cursor-inline-padding: 14px; }
-  .custom-cursor.is-project, .custom-cursor.is-copy, .custom-cursor.is-link { width: calc(var(--cursor-label-width) + var(--cursor-inline-padding) * 2); height: 44px; }
+  .custom-cursor.is-project, .custom-cursor.is-copy, .custom-cursor.is-link, .custom-cursor.is-caption { width: calc(var(--cursor-label-width) + var(--cursor-inline-padding) * 2); height: 44px; }
   .cursor-label { display: flex; align-items: center; gap: 11px; white-space: nowrap; opacity: 0; font: 400 17px/1 "Geist Mono", monospace; transition: opacity 100ms; }
   .cursor-label svg { width: 21px; height: 21px; stroke-width: 2; }
-  .is-project .cursor-label, .is-copy .cursor-label, .is-link .cursor-label { opacity: 1; }
+  .is-project .cursor-label, .is-copy .cursor-label, .is-link .cursor-label, .is-caption .cursor-label { opacity: 1; }
   .cursor-label .cursor-copy-icon, .cursor-label .cursor-link-icon, .is-copy .cursor-project-icon, .is-link .cursor-project-icon { display: none; }
   .is-copy[data-copy-kind="email"] .cursor-email-icon, .is-copy[data-copy-kind="phone"] .cursor-phone-icon { display: block; }
   .is-link .cursor-link-icon { display: block; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .is-caption .cursor-label svg { display: none; }
 }
 
 /* Tablet version: preserve aligned columns and left/right captions. */
