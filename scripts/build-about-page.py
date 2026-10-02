@@ -44,6 +44,7 @@ def resume_entry(row):
     dates = info.find('div').text_content().strip()
     description = row.xpath('./p')[0].text_content().strip()
     if title == 'HHI Concours x SCAD SERVE':
+        title = 'HHI Concours | SCAD SERVE'
         description = description.replace(
             ' and attract Gen Z audiences, drawing on journey insights and client co-creation', ''
         )
