@@ -162,10 +162,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
 .project-caption { border-top: 1px solid var(--rule); padding: 18px 20px; min-height: 80px; display: flex; flex: 1; justify-content: space-between; align-items: center; gap: 18px; position: relative; }
 .project-description { font-family: "Source Serif 4", Georgia, serif; font-weight: 400; font-size: 17px; line-height: 1.5; color: var(--project-ink); text-wrap: pretty; }
 .project-name, .project-separator { color: var(--project-muted); }
-.project-link[href="/project-3-hhi/"] { --project-accent: #8a5c3b; }
-.project-link[href="/project-2-southerncrafted/"] { --project-accent: #60784b; }
-.project-link[href="/project-1-lighthouse/"] { --project-accent: #a3760d; }
-.project-link[href="/project-4-nalu/"] { --project-accent: #870e59; }
+.project-link[href="/project-3-hhi/"], .case-page[data-project="project-3-hhi"] { --project-accent: #8a5c3b; }
+.project-link[href="/project-2-southerncrafted/"], .case-page[data-project="project-2-southerncrafted"] { --project-accent: #60784b; }
+.project-link[href="/project-1-lighthouse/"], .case-page[data-project="project-1-lighthouse"] { --project-accent: #a3760d; }
+.project-link[href="/project-4-nalu/"], .case-page[data-project="project-4-nalu"] { --project-accent: #870e59; }
 .project-meta { flex: 0 0 auto; max-width: 45%; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; font-family: "Geist", Arial, sans-serif; font-size: 15px; font-weight: 400; line-height: 1.5; text-align: right; color: var(--project-muted); }
 .project-meta > span { color: var(--project-accent); font-weight: 500; }
 .project-meta time { white-space: nowrap; }

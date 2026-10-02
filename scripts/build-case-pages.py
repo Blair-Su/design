@@ -58,6 +58,12 @@ def merge_hhi_research(breakpoint):
 
 HOME_CARDS = HOME.xpath(f'//*[{has_class("project-grid")}]/article')
 HOME_ORDER = [card.find('a').get('href').strip('/') for card in HOME_CARDS]
+HOME_TYPES = {
+    card.find('a').get('href').strip('/'): card.xpath(
+        f'.//*[{has_class("project-meta")}]/span'
+    )[0].text_content().strip()
+    for card in HOME_CARDS
+}
 
 
 for slug, name in PROJECTS.items():
@@ -137,6 +143,9 @@ for slug, name in PROJECTS.items():
         for article in breakpoint.xpath('.//article'):
             add_class(article, 'case-article')
             add_class(article.getparent(), 'case-body')
+        # Keep each intro tag's wording in sync with its homepage type label.
+        intro_title = breakpoint.find('.//article').xpath('./*/*[@data-layer="Title"]')[0]
+        etree.SubElement(intro_title, 'span', **{'class': 'case-project-tag'}).text = HOME_TYPES[slug]
         if slug == 'project-1-lighthouse':
             for old, new in {
                 'What we learned': 'From what we learned',
