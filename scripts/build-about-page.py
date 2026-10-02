@@ -86,7 +86,7 @@ page = f'''<!doctype html>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="Get to know Blair Su, a product designer with a background in business and service design. Experience, education, and life beyond design.">
+  <meta name="description" content="Get to know Blair Su, a product designer with a background in UX and service design. Experience, education, and life beyond design.">
   <title>About — Blair Su</title>
   {render(home.find('.//link[@rel="icon"]'))}
   <link rel="preload" href="assets/fonts/averia-serif-libre.woff2" as="font" type="font/woff2" crossorigin>
@@ -113,8 +113,8 @@ page = f'''<!doctype html>
             </picture>
           </div>
           <div class="about-intro-prose">
-            <p>I’m a product designer with a background in <strong>business and service design.</strong> I enjoy turning ambiguous problems into clear product experiences by connecting user needs, stakeholder priorities, and the systems around them.</p>
-            <p>I’m naturally curious about how things work, how people make decisions, and where a small design choice can make an experience feel noticeably better. I use AI throughout my process to explore ideas, prototype quickly, and turn early thinking into something tangible.</p>
+            <p>I’m a product designer with a background in <strong>UX and service design.</strong> I turn ambiguous problems into clear product experiences by connecting user needs, stakeholder priorities, and the systems around them.</p>
+            <p>I’m curious about how things work and how small design decisions can make an experience feel noticeably better. I use AI to explore ideas, prototype quickly, and turn early thinking into something tangible.</p>
             <p>Previously worked on projects with <strong>Hilton Head Island Concours, BMW, FINRA and Deloitte.</strong> Reach me on <a href="https://www.linkedin.com/in/blair-xun-su-1263921a9" target="_blank" rel="noopener noreferrer">LinkedIn</a> or <a href="mailto:suxun70@gmail.com">email</a>.</p>
           </div>
         </div>
