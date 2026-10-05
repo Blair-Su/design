@@ -54,26 +54,37 @@ const cursor = document.querySelector('.custom-cursor');
 const cursorLabel = cursor.querySelector('.cursor-label');
 const cursorText = cursor.querySelector('.cursor-label > span');
 const mouseInput = matchMedia('(hover: hover) and (pointer: fine)');
+const cursorHome = cursor.parentElement;
+const cursorDialogs = [...document.querySelectorAll('dialog')];
+const cursorButtonSelector = 'button, [role="button"], input[type="button"], input[type="submit"], input[type="reset"], summary, .about-gallery-photo[data-photo]';
 let pointer = null;
 
 function hideCursor() {
-  cursor.classList.remove('is-visible', 'is-project', 'is-sponsored', 'is-copy', 'is-link', 'is-caption');
+  cursor.classList.remove('is-visible', 'is-button', 'is-project', 'is-sponsored', 'is-copy', 'is-link', 'is-caption');
   document.documentElement.classList.remove('custom-cursor-ready');
   pointer = null;
 }
 
 function updateCursor() {
+  // A modal lives above the page; keep the cursor in its top layer too.
+  const cursorLayer = cursorDialogs.filter(dialog => dialog.open).at(-1) || cursorHome;
+  if (cursor.parentElement !== cursorLayer) cursorLayer.append(cursor);
   if (!pointer || !mouseInput.matches) return;
   const target = document.elementFromPoint(pointer.x, pointer.y);
-  const project = target?.closest('.project-link');
-  const copyButton = target?.closest('[data-copy]');
-  const labeledTarget = target?.closest('[data-cursor-label]');
+  const disabled = Boolean(target?.closest(':disabled, [aria-disabled="true"], [inert]'));
+  const clickable = !disabled && target?.closest(`${cursorButtonSelector}, a[href]`);
+  const overButton = Boolean(clickable && clickable.matches(cursorButtonSelector));
+  const project = disabled || overButton ? null : target?.closest('.project-link');
+  const copyButton = disabled || overButton ? null : target?.closest('[data-copy]');
+  const labeledTarget = disabled || overButton ? null : target?.closest('[data-cursor-label]');
   const overCopy = Boolean(copyButton);
   const overProject = Boolean(project) && !overCopy;
   const overLabel = Boolean(labeledTarget) && !overCopy && !overProject;
   const overLink = overLabel && labeledTarget.matches('a');
   const hasLabel = overProject || overCopy || overLabel;
+  const overAction = Boolean(clickable) && !hasLabel;
   const sponsored = overProject && project.dataset.cursor === 'sponsored';
+  cursor.classList.toggle('is-button', overAction);
   cursor.classList.toggle('is-project', overProject);
   cursor.classList.toggle('is-sponsored', sponsored);
   cursor.classList.toggle('is-copy', overCopy);
@@ -82,7 +93,7 @@ function updateCursor() {
   cursor.dataset.copyKind = copyButton?.dataset.copyKind || '';
   cursorText.textContent = overCopy ? 'COPY' : overLabel ? labeledTarget.dataset.cursorLabel : sponsored ? 'VIEW SPONSORED PROJECT' : 'VIEW CASE STUDY';
   // Size each label to its content with the same compact space on both sides.
-  let halfWidth = 6;
+  let halfWidth = overAction ? 12 : 6;
   if (hasLabel) {
     const labelWidth = cursorLabel.getBoundingClientRect().width;
     const sidePadding = parseFloat(getComputedStyle(cursor).getPropertyValue('--cursor-inline-padding'));
@@ -90,7 +101,7 @@ function updateCursor() {
     halfWidth = labelWidth / 2 + sidePadding;
   }
   // Keep the entire label visible near the edges of the viewport.
-  const halfHeight = hasLabel ? 22 : 6;
+  const halfHeight = hasLabel ? 22 : overAction ? 12 : 6;
   const x = Math.min(innerWidth - halfWidth - 4, Math.max(halfWidth + 4, pointer.x));
   const y = Math.min(innerHeight - halfHeight - 4, Math.max(halfHeight + 4, pointer.y));
   cursor.style.left = `${x}px`;
@@ -104,7 +115,11 @@ document.addEventListener('pointermove', event => {
   pointer = { x: event.clientX, y: event.clientY };
   updateCursor();
 });
-document.addEventListener('scroll', updateCursor, { passive: true });
+document.addEventListener('scroll', updateCursor, { passive: true, capture: true });
+document.addEventListener('click', () => requestAnimationFrame(updateCursor));
+window.addEventListener('resize', updateCursor);
+const cursorDialogObserver = new MutationObserver(updateCursor);
+cursorDialogs.forEach(dialog => cursorDialogObserver.observe(dialog, { attributes: true, attributeFilter: ['open'] }));
 document.documentElement.addEventListener('pointerleave', hideCursor);
 window.addEventListener('blur', hideCursor);
 document.addEventListener('keydown', event => { if (event.key === 'Tab') hideCursor(); });

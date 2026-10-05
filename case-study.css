@@ -102,9 +102,6 @@
 .case-email-full img { display: block; width: 100%; height: auto; }
 .case-email-close:focus-visible, .case-email-full:focus-visible { outline: 2px solid var(--ink); outline-offset: -4px; }
 html.case-email-open { overflow: hidden; }
-html.custom-cursor-ready .case-email-viewer, html.custom-cursor-ready .case-email-viewer * { cursor: auto !important; }
-html.custom-cursor-ready .case-email-close { cursor: pointer !important; }
-html.case-email-open .custom-cursor { visibility: hidden; }
 /* Use the exact same Desktop / Tablet / Phone breakpoints as the homepage. */
 .case-content .case-desktop { display: block; }
 .case-content .case-tablet, .case-content .case-phone { display: none; }

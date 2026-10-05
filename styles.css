@@ -191,9 +191,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
 .custom-cursor { display: none; }
 @media (hover: hover) and (pointer: fine) {
   html.custom-cursor-ready, .custom-cursor-ready * { cursor: none !important; }
+  html.custom-cursor-ready dialog::backdrop { cursor: none; }
   .custom-cursor { display: flex; align-items: center; justify-content: center; position: fixed; left: 0; top: 0; z-index: 100; width: 12px; height: 12px; border-radius: 999px; background: var(--accent-orange); color: #fff; pointer-events: none; opacity: 0; transform: translate(-50%, -50%); transition: width 160ms ease, height 160ms ease, opacity 100ms; }
   .custom-cursor.is-visible { opacity: 1; }
   .custom-cursor { --cursor-inline-padding: 14px; }
+  .custom-cursor.is-button { width: 16px; height: 16px; box-shadow: 0 0 0 4px rgb(237 97 43 / 20%); transition: opacity 100ms; }
   .custom-cursor.is-project, .custom-cursor.is-copy, .custom-cursor.is-link, .custom-cursor.is-caption { width: calc(var(--cursor-label-width) + var(--cursor-inline-padding) * 2); height: 44px; }
   .cursor-label { display: flex; align-items: center; gap: 11px; white-space: nowrap; opacity: 0; font: 400 17px/1 "Geist Mono", monospace; transition: opacity 100ms; }
   .cursor-label svg { width: 21px; height: 21px; stroke-width: 2; }

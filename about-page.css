@@ -63,8 +63,6 @@
 .photo-lightbox-navigation button { padding: 10px 0; border: 0; background: none; font-size: 14px; }
 .photo-count { color: #929292; font-size: 12px; }
 .photo-open { overflow: hidden; }
-html.custom-cursor-ready .photo-lightbox, html.custom-cursor-ready .photo-lightbox * { cursor: auto !important; }
-html.custom-cursor-ready .photo-lightbox button { cursor: pointer !important; }
 @media (min-width: 1024px) {
   .about-intro-art { transform: translateY(-16px); }
 }
