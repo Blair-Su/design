@@ -47,10 +47,7 @@
   --cell-inset: 24px;
   --row-inset: 20px;
   --header-height: 56px;
-  --hero-highlight-hue: 24;
-  --hero-highlight-saturation: 95%;
-  --hero-highlight-lightness: 54%;
-  --hero-highlight-opacity: 0.34;
+  --hero-highlight: #e8ff7e;
   font-family: "Geist", Arial, sans-serif;
   font-synthesis: none;
 }
@@ -83,7 +80,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
 .intro-greeting { display: block; }
 .intro-highlight, .intro-underline { display: inline-block; position: relative; white-space: nowrap; }
 .intro-highlight { isolation: isolate; padding-inline: 0.16em; }
-.intro-highlight::after { content: ""; position: absolute; z-index: -1; inset: 0.04em 0; border-radius: 0.2em; background: hsl(var(--hero-highlight-hue) var(--hero-highlight-saturation) var(--hero-highlight-lightness) / var(--hero-highlight-opacity)); }
+.intro-highlight::after { content: ""; position: absolute; z-index: -1; inset: 0.04em 0; border-radius: 0.2em; background: var(--hero-highlight); }
 .intro-underline { margin: 0; padding: 0; }
 .intro-underline svg { position: absolute; left: 0; bottom: -0.025em; width: 100%; height: 0.3em; overflow: visible; color: inherit; fill: none; stroke: currentColor; pointer-events: none; }
 .intro-underline svg path { stroke-width: 1.5; vector-effect: non-scaling-stroke; }
