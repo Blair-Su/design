@@ -31,9 +31,9 @@
 .hhi-section#design { scroll-margin-top: 0; }
 .hhi-section:last-child { padding-bottom: 80px; }
 .hhi-section-heading { margin-bottom: 20px; }
-.hhi-section-heading h2 { font: 400 17px/1.5 "Source Serif 4", Georgia, serif; color: var(--hhi-muted); letter-spacing: normal; text-transform: none; }
-.hhi-section h3 { margin: 0; font: 300 30px/1.22 "Averia Serif Libre", Georgia, serif; letter-spacing: -.02em; text-wrap: pretty; }
-.hhi-section h4 { margin: 0; font: 300 23px/1.25 "Averia Serif Libre", Georgia, serif; letter-spacing: -.015em; }
+.hhi-section-heading h2 { font: 400 17px/1.5 "Geist", Arial, sans-serif; color: var(--hhi-muted); letter-spacing: normal; text-transform: none; }
+.hhi-section h3 { margin: 0; font: 300 30px/1.22 "Geist", Arial, sans-serif; letter-spacing: -.02em; text-wrap: pretty; }
+.hhi-section h4 { margin: 0; font: 300 23px/1.25 "Geist", Arial, sans-serif; letter-spacing: -.015em; }
 .hhi-copy { max-width: 68ch; }
 .hhi-copy p { margin-top: 18px; color: var(--project-ink); font: 400 16px/1.75 "Geist", Arial, sans-serif; text-wrap: pretty; }
 .hhi-copy > p:first-child { margin-top: 0; }
