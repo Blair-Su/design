@@ -16,7 +16,11 @@
   <link rel="stylesheet" href="/about-page.css">
   <link rel="stylesheet" href="/workspace-layout.css?v=project-connect-95">
   <script type="module" src="/workspace-layout.js?v=about-photos-92"></script>
-  <link rel="stylesheet" href="/home-about.css?v=compact-gallery-button-96">
+  <link rel="preload" href="/assets/about/blair-selfie-intro.jpg" as="image">
+  <link rel="preload" href="/assets/about/scad-team-intro.jpg" as="image">
+  <link rel="preload" href="/assets/about/weekend-intro.jpg" as="image">
+  <link rel="preload" href="/assets/about/skiing-intro.jpg" as="image">
+  <link rel="stylesheet" href="/home-about.css?v=about-photo-loading-100">
   <script src="/home-about.js?v=about-text-reveal-79" defer></script>
   <script src="/about-page.js?v=gallery-button-93" defer></script>
   <script type="module" src="/portrait-hover.js?v=portrait-tilt-19"></script>
@@ -198,9 +202,10 @@
                 </div>
               </div>
               <div class="about-intro-photos" aria-label="A little about Blair" data-scroll-reveal="off">
-                <figure class="about-portrait" data-cursor-label="that's me!"><img src="assets/about/blair-selfie.jpg" alt="Blair Su outdoors in the afternoon sunlight" width="3024" height="4032" decoding="async" loading="lazy"></figure>
-                <figure class="about-team-photo" data-cursor-label="with the team :)"><img src="assets/about/diving-scad-serve-team.jpg" alt="Blair with the SCAD SERVE team" width="1600" height="1067" decoding="async" loading="lazy"></figure>
-                <figure class="about-outdoors-photo" data-cursor-label="weekend mode ✨"><img src="assets/about/diving-mountain-view.jpg" alt="Blair taking in a snowy mountain view" width="1200" height="1600" decoding="async" loading="lazy"></figure>
+                <figure class="about-portrait" data-cursor-label="that's me!"><img src="assets/about/blair-selfie-intro.jpg" alt="Blair Su outdoors in the afternoon sunlight" width="720" height="960" decoding="async" loading="eager"></figure>
+                <figure class="about-team-photo" data-cursor-label="with the team :)"><img src="assets/about/scad-team-intro.jpg" alt="Blair with the SCAD SERVE team" width="960" height="640" decoding="async" loading="eager"></figure>
+                <figure class="about-outdoors-photo" data-cursor-label="weekend mode ✨"><img src="assets/about/weekend-intro.jpg" alt="Blair taking in a snowy mountain view" width="720" height="960" decoding="async" loading="eager"></figure>
+                <figure class="about-ski-photo" data-cursor-label="Love skiing 🎿"><img src="assets/about/skiing-intro.jpg" alt="Blair skiing on a snowy mountain" width="720" height="960" decoding="async" loading="eager"></figure>
               </div>
             </div>
           </section>
