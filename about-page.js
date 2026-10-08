@@ -95,7 +95,7 @@ requestAnimationFrame(scrollGallery);
 function showPhoto(index) {
   activePhoto = (index + photos.length) % photos.length;
   const image = photos[activePhoto].querySelector('img');
-  lightboxImage.src = image.src;
+  lightboxImage.src = image.dataset.fullSrc || image.src;
   lightboxImage.alt = image.alt;
   caption.textContent = image.alt;
   count.textContent = `${activePhoto + 1} / ${photos.length}`;

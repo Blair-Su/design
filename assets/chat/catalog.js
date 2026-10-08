@@ -9,9 +9,9 @@ export const photos = {
   lighthouse: { src: '/assets/case-studies/lighthouse-cover-960.webp', title: 'Lighthouse', alt: 'Lighthouse travel support concept', href: '/project-1-lighthouse/' },
   southern: { src: '/assets/case-studies/fTNwgzhihUwdXBxzkZoPmY715s.webp', title: 'Southern Crafted', alt: 'Southern Crafted e-commerce design', href: '/project-2-southerncrafted/' },
   nalu: { src: '/assets/selected-projects/nalu-project-scene.svg', title: 'Nalu', alt: 'Nalu cycle-aware wellness concept', href: '/project-4-nalu/' },
-  blair: { src: '/assets/about/blair-selfie.jpg', title: 'Meet Blair', alt: 'Blair outdoors in the afternoon sunlight', href: '/about.html' },
-  team: { src: '/assets/about/diving-scad-serve-team.jpg', title: 'With the team', alt: 'Blair with the SCAD SERVE team', href: '/about.html' },
-  mountains: { src: '/assets/about/diving-mountain-view.jpg', title: 'Beyond the screen', alt: 'Blair taking in a snowy mountain view', href: '/about.html' },
+  blair: { src: '/assets/about/blair-selfie.webp', title: 'Meet Blair', alt: 'Blair outdoors in the afternoon sunlight', href: '/about.html' },
+  team: { src: '/assets/about/diving-scad-serve-team.webp', title: 'With the team', alt: 'Blair with the SCAD SERVE team', href: '/about.html' },
+  mountains: { src: '/assets/about/diving-mountain-view.webp', title: 'Beyond the screen', alt: 'Blair taking in a snowy mountain view', href: '/about.html' },
 };
 export function pageContext(pathname, projectSlug) {
   const aliases = { '/hhi-preview/': 'project-3-hhi', '/lighthouse-preview/': 'project-1-lighthouse' };
