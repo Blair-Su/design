@@ -130,5 +130,3 @@ Local review screenshots, reports and intermediate exports stay in ignored `qa/`
 Project placement: HHI Concours (2026) at top left, Lighthouse (2023) at top right, Southern Crafted (2024) below HHI Concours, and Nalu (2025) at bottom right. Short descriptions retain the existing homepage wording; years are verified against the existing public Blair Su pages.
 
 Card project names use the muted text color. Type labels use medium weight (500) and each project's accent: HHI brown, Southern Crafted sage green, Lighthouse gold, and Nalu plum. The shared styles apply to both Home and related-project cards; names, descriptions and years retain regular weight, and years stay muted.
-
-Source references: https://www.eemonroy.com/ · https://www.rachelchen.tech/ · https://www.blairsu.design/project-1-lighthouse/
