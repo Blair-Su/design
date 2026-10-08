@@ -4,9 +4,9 @@ void import('/scroll-reveal.js').then(({ initScrollReveal }) => initScrollReveal
 });
 const foxStyle = document.createElement('link');
 foxStyle.rel = 'stylesheet';
-foxStyle.href = '/assets/chat/pet.css?v=send-hover-74';
+foxStyle.href = '/assets/chat/pet.css?v=home-invitation-128';
 document.head.append(foxStyle);
-void import('/assets/chat/pet.js');
+void import('/assets/chat/pet.js?v=home-invitation-128');
 
 const header = document.querySelector('.site-header');
 const menuToggle = document.querySelector('.menu-toggle');

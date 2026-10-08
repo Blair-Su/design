@@ -26,11 +26,14 @@
    The source artwork still supplies the same square pixel silhouette. */
 .fox-avatar .fox-tail image { image-rendering: auto; }
 .fox-pet-label { display: flex; align-items: center; pointer-events: none; position: relative; margin-bottom: 5px; visibility: hidden; opacity: 0; }
+.fox-companion.is-introducing .fox-pet-label,
+.fox-pet-dock:has(.fox-pet:focus-visible) .fox-pet-label { visibility: visible; opacity: 1; }
 @media (hover: hover) and (pointer: fine) {
   .fox-pet-dock:has(.fox-pet:hover) .fox-pet-label { visibility: visible; opacity: 1; }
 }
 .fox-invite { position: relative; white-space: nowrap; background: var(--fox-paper); color: var(--fox-ink) !important; border: 1px solid var(--fox-rule); border-radius: 12px; padding: 8px 12px; font: 11px/1.5 "Geist Mono", monospace !important; letter-spacing: .015em; box-shadow: 0 5px 13px #0000000a; }
 .fox-invite::after { content: ""; position: absolute; right: 43px; bottom: -6px; width: 10px; height: 10px; background: var(--fox-paper); border-right: 1px solid var(--fox-rule); border-bottom: 1px solid var(--fox-rule); transform: rotate(45deg); }
+.fox-companion.has-home-invite .fox-invite { width: max-content; max-width: min(240px, calc(100vw - 80px)); white-space: normal; }
 .fox-panel { position: fixed; right: max(var(--fox-right), env(safe-area-inset-right)); bottom: calc(122px + var(--fox-bottom) + var(--fox-keyboard)); width: 390px; height: min(640px, calc(var(--fox-view-height) - 160px)); display: flex; flex-direction: column; overflow: hidden; background: var(--fox-paper); border: 1px solid var(--fox-rule); border-radius: var(--fox-radius); box-shadow: inset 0 1px 1px rgb(255 255 255 / 90%), inset 1px 0 1px rgb(255 255 255 / 46%), 0 10px 30px rgb(23 78 111 / 10%), 0 2px 5px rgb(23 78 111 / 6%); isolation: isolate; }
 .fox-header { display: flex; align-items: center; gap: 8px; min-height: 62px; padding: 12px 16px 12px 22px; border-bottom: 1px solid var(--fox-rule); flex: 0 0 auto; }
 .fox-header h2 { font: 400 12px/1.5 "Departure Mono", "Geist Mono", monospace; letter-spacing: .06em; margin: 0; color: var(--fox-ink); }

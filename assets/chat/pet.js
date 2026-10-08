@@ -4,6 +4,7 @@ import { CHAT_ENDPOINT } from './config.js';
 import { mountFoxMotion } from './pet-motion.js';
 import { foxAvatar } from './fox-avatar.js';
 import { fallbackAnswer, faqSuggestions } from './faq.js';
+import { createPetInvitation } from './pet-invitation.js';
 
 if (!document.querySelector('.fox-companion')) mount();
 function mount() {
@@ -51,6 +52,25 @@ function mount() {
   document.body.append(root);
   const $ = selector => root.querySelector(selector);
   const panel = $('.fox-panel'), pet = $('.fox-pet'), field = $('textarea'), send = $('.fox-send');
+  const homeInvitation = context.page === 'home' && document.body.classList.contains('home-page');
+  root.classList.toggle('has-home-invite', homeInvitation);
+  const invitation = createPetInvitation({
+    enabled: homeInvitation,
+    inviteText,
+    onChange({ text, introducing }) {
+      $('.fox-invite').textContent = text;
+      root.classList.toggle('is-introducing', introducing);
+    },
+  });
+  const hoverPointer = matchMedia('(hover: hover) and (pointer: fine)');
+  pet.addEventListener('pointerenter', () => invitation.update({ hovered: hoverPointer.matches }));
+  pet.addEventListener('pointerleave', () => invitation.update({ hovered: false }));
+  pet.addEventListener('focus', () => invitation.update({ focused: pet.matches(':focus-visible') }));
+  pet.addEventListener('blur', () => invitation.update({ focused: false }));
+  document.addEventListener('visibilitychange', () => invitation.update({ hidden: document.hidden }));
+  window.addEventListener('pagehide', () => invitation.update({ hidden: true }));
+  window.addEventListener('pageshow', () => invitation.update({ hidden: document.hidden }));
+  invitation.update({ hidden: document.hidden });
   mountFoxMotion({ pet, reduced });
   const resume = [...document.querySelectorAll('.site-header nav a')].find(link => link.textContent.trim().toLowerCase() === 'resume');
   function alignPet() {
@@ -86,12 +106,14 @@ function mount() {
     returnFocus = document.activeElement;
     panel.hidden = false;
     root.classList.add('is-open'); pet.setAttribute('aria-expanded', 'true');
+    invitation.update({ open: true });
     pet.setAttribute('aria-label', 'Close chat with Blair’s little fox');
     field.focus({ preventScroll: true });
   }
   function close() {
     setInfoOpen(false);
     panel.hidden = true; root.classList.remove('is-open'); pet.setAttribute('aria-expanded', 'false');
+    invitation.update({ open: false });
     pet.setAttribute('aria-label', 'Open chat with Blair’s little fox');
     (returnFocus?.isConnected ? returnFocus : pet).focus({ preventScroll: true });
   }

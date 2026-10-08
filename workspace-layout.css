@@ -339,6 +339,7 @@ html:has(.home-page.platform-ready:not([data-stage="workspace"])) { overflow-y: 
     transform: translateX(50%);
     align-items: center;
   }
+  .home-page .fox-companion .fox-invite::after { right: calc(50% - 5px); }
 }
 @media (min-width: 1200px) {
   .home-page {
@@ -364,7 +365,6 @@ html:has(.home-page.platform-ready:not([data-stage="workspace"])) { overflow-y: 
     max-height: 760px;
     background: #fff;
   }
-  .home-page.workspace-mode .fox-companion .fox-pet-label { display: none; }
 }
 
 @container (max-width: 560px) {
