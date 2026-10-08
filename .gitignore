@@ -1,5 +1,13 @@
 # Local review screenshots and reports
 /qa/
+/tmp/
+/output/
+/*-preview/review.html
+/public-dist/
+/.vercel/
+/.wrangler/
+.dev.vars
+.dev.vars.*
 
 # Dependencies, caches and operating-system files
 node_modules/

@@ -7,10 +7,8 @@
 .about-availability span::before, .about-availability span::after { content: ""; position: absolute; top: 50%; left: 50%; border-radius: 50%; background: #638564; transform: translate(-50%, -50%); }
 .about-availability span::before { width: 12px; height: 12px; opacity: .24; }
 .about-availability span::after { width: 6px; height: 6px; }
-.about-intro-heading { display: grid; grid-template-columns: minmax(0, 1fr) clamp(96px, 10.5vw, 170px); align-items: center; gap: clamp(12px, 1vw, 20px); margin: 20px 0 34px; }
+.about-intro-heading { margin: 20px 0 34px; }
 .about-intro h1 { margin: 0; font-family: "Averia Serif Libre", Georgia, serif; font-size: clamp(38px, 3.8vw, 62px); font-weight: 300; line-height: 1.12; letter-spacing: -.035em; text-wrap: balance; }
-.about-intro-art { position: relative; display: block; height: 0; pointer-events: none; }
-.about-intro-art img { position: absolute; top: 50%; left: 0; display: block; width: 100%; height: auto; transform: translateY(-50%); }
 .about-intro-prose { font-family: "Source Serif 4", Georgia, serif; font-size: clamp(18px, 1.48vw, 22px); line-height: 1.65; color: var(--project-ink); }
 .about-intro-prose p + p { margin-top: 28px; }
 .about-intro-prose strong { font-weight: 400; color: var(--ink); }
@@ -63,13 +61,9 @@
 .photo-lightbox-navigation button { padding: 10px 0; border: 0; background: none; font-size: 14px; }
 .photo-count { color: #929292; font-size: 12px; }
 .photo-open { overflow: hidden; }
-@media (min-width: 1024px) {
-  .about-intro-art { transform: translateY(-16px); }
-}
 @media (min-width: 768px) and (max-width: 1023px) {
   .about-page { --about-inset: 28px; }
   .about-intro-copy { padding-block: 44px; }
-  .about-intro-heading { grid-template-columns: minmax(0, 1fr) 84px; gap: 12px; }
   .about-intro h1 { font-size: 34px; }
   .about-intro-prose { font-size: 18px; }
   .about-intro-photos { padding: 36px 24px; gap: 14px; }
@@ -89,7 +83,7 @@
   .about-spacer .frame { height: 20px; }
   .about-intro-frame { display: flex; flex-direction: column; }
   .about-intro-copy { border-right: 0; padding: 40px var(--about-inset) 32px; }
-  .about-intro-heading { grid-template-columns: minmax(0, 1fr) clamp(76px, 22vw, 110px); gap: 10px; margin: 18px 0 26px; }
+  .about-intro-heading { margin: 18px 0 26px; }
   .about-intro h1 { font-size: clamp(34px, 8vw, 42px); }
   .about-intro-prose { font-size: 18px; line-height: 1.6; }
   .about-intro-prose p + p { margin-top: 22px; }

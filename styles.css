@@ -53,6 +53,18 @@
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: var(--header-height); }
+/* Enabled only for offscreen content after the observer is ready. No layout shifts. */
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-reveal-pending { opacity: 0; }
+  .scroll-reveal-enter { animation: portfolio-reveal 560ms cubic-bezier(.22, 1, .36, 1) var(--reveal-delay, 0ms) both; }
+}
+@keyframes portfolio-reveal {
+  from { opacity: 0; translate: 0 18px; }
+  to { opacity: 1; translate: 0 0; }
+}
+@media print {
+  .scroll-reveal-pending, .scroll-reveal-enter { opacity: 1 !important; translate: none !important; animation: none !important; }
+}
 body { margin: 0; background: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; }
 h1, h2, h3, p { margin: 0; }
 a { color: inherit; text-decoration: none; }
@@ -114,7 +126,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
 .nalu-cover-logo img { width: 100%; height: auto; object-fit: contain; }
 /* Recolor only the wordmark over the dark scene; the supplied icon stays intact. */
 .nalu-cover-logo::after { content: ""; position: absolute; inset: 0; background: #fcf8f3; -webkit-mask: url("assets/nalu-logo.png") center / 100% 100% no-repeat; mask: url("assets/nalu-logo.png") center / 100% 100% no-repeat; clip-path: inset(0 30% 0 0); opacity: 0; }
-/* One persistent logo travels from center to the scene's bottom-right mark. */
+/* The opening logo travels and fades into the wordmark included in the artwork. */
 .nalu-cover.is-ready .nalu-cover-scene { animation: nalu-scene-reveal var(--nalu-cycle) cubic-bezier(.4, 0, .2, 1) infinite both; }
 .nalu-cover.is-ready .nalu-cover-logo { animation: nalu-logo-travel var(--nalu-cycle) cubic-bezier(.4, 0, .2, 1) infinite both; }
 .nalu-cover.is-ready .nalu-cover-logo::after { animation: nalu-logo-contrast var(--nalu-cycle) ease-in-out infinite both; }
@@ -123,8 +135,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
   36%, 80% { opacity: 1; transform: scale(1); }
 }
 @keyframes nalu-logo-travel {
-  0%, 20%, 96%, 100% { left: 50%; top: 50%; transform: translate(-50%, -50%) scale(1); }
-  36%, 80% { left: 91.6%; top: 91%; transform: translate(-50%, -50%) scale(.3233); }
+  0%, 20%, 96%, 100% { left: 50%; top: 50%; transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  36%, 80% { left: 91.6%; top: 91%; transform: translate(-50%, -50%) scale(.3233); opacity: 0; }
 }
 @keyframes nalu-logo-contrast {
   0%, 23%, 94%, 100% { opacity: 0; }
@@ -189,18 +201,22 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
 @media (hover: hover) and (pointer: fine) {
   html.custom-cursor-ready, .custom-cursor-ready * { cursor: none !important; }
   html.custom-cursor-ready dialog::backdrop { cursor: none; }
-  .custom-cursor { display: flex; align-items: center; justify-content: center; position: fixed; left: 0; top: 0; z-index: 100; width: 12px; height: 12px; border-radius: 999px; background: var(--accent-orange); color: #fff; pointer-events: none; opacity: 0; transform: translate(-50%, -50%); transition: width 160ms ease, height 160ms ease, opacity 100ms; }
+  .custom-cursor { display: flex; align-items: center; justify-content: center; position: fixed; left: 0; top: 0; z-index: 100; width: 12px; height: 12px; border-radius: 999px; overflow: hidden; background: var(--accent-orange); color: #fff; pointer-events: none; opacity: 0; transform: translate(-50%, -50%); transition: width 260ms cubic-bezier(.4, 0, .2, 1), height 260ms cubic-bezier(.4, 0, .2, 1), box-shadow 160ms ease, opacity 100ms; }
   .custom-cursor.is-visible { opacity: 1; }
-  .custom-cursor { --cursor-inline-padding: 14px; }
-  .custom-cursor.is-button { width: 16px; height: 16px; box-shadow: 0 0 0 4px rgb(237 97 43 / 20%); transition: opacity 100ms; }
-  .custom-cursor.is-project, .custom-cursor.is-copy, .custom-cursor.is-link, .custom-cursor.is-caption { width: calc(var(--cursor-label-width) + var(--cursor-inline-padding) * 2); height: 44px; }
-  .cursor-label { display: flex; align-items: center; gap: 11px; white-space: nowrap; opacity: 0; font: 400 17px/1 "Geist Mono", monospace; transition: opacity 100ms; }
+  .custom-cursor { --cursor-inline-padding: 14px; --cursor-label-height: 44px; }
+  .custom-cursor.is-button { width: 16px; height: 16px; box-shadow: 0 0 0 4px rgb(237 97 43 / 20%); }
+  .custom-cursor.is-project, .custom-cursor.is-copy, .custom-cursor.is-link, .custom-cursor.is-caption { width: calc(var(--cursor-label-width) + var(--cursor-inline-padding) * 2); height: var(--cursor-label-height); }
+  .cursor-label { display: flex; flex-shrink: 0; align-items: center; gap: 11px; white-space: nowrap; opacity: 0; font: 400 17px/1 "Geist Mono", monospace; transition: opacity 80ms ease; }
   .cursor-label svg { width: 21px; height: 21px; stroke-width: 2; }
-  .is-project .cursor-label, .is-copy .cursor-label, .is-link .cursor-label, .is-caption .cursor-label { opacity: 1; }
-  .cursor-label .cursor-copy-icon, .cursor-label .cursor-link-icon, .is-copy .cursor-project-icon, .is-link .cursor-project-icon { display: none; }
-  .is-copy[data-copy-kind="email"] .cursor-email-icon, .is-copy[data-copy-kind="phone"] .cursor-phone-icon { display: block; }
-  .is-link .cursor-link-icon { display: block; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-  .is-caption .cursor-label svg { display: none; }
+  .is-project .cursor-label, .is-copy .cursor-label, .is-link .cursor-label, .is-caption .cursor-label { opacity: 1; transition-duration: 120ms; transition-delay: 60ms; }
+  .cursor-label .cursor-copy-icon, .cursor-label .cursor-link-icon, [data-label-kind="copy"] .cursor-project-icon, [data-label-kind="link"] .cursor-project-icon { display: none; }
+  [data-label-kind="copy"][data-copy-kind="email"] .cursor-email-icon, [data-label-kind="copy"][data-copy-kind="phone"] .cursor-phone-icon { display: block; }
+  [data-label-kind="link"] .cursor-link-icon { display: block; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  [data-label-kind="caption"] .cursor-label svg { display: none; }
+  /* Keep the compact label size while it fades back into a dot. */
+  body:not(.case-page):not(.about-page) .custom-cursor[data-label-kind="project"] { --cursor-inline-padding: 10px; --cursor-label-height: 30px; }
+  body:not(.case-page):not(.about-page) [data-label-kind="project"] .cursor-label { gap: 8px; font-size: 14px; }
+  body:not(.case-page):not(.about-page) [data-label-kind="project"] .cursor-label svg { width: 16px; height: 16px; stroke-width: 1.7; }
 }
 
 /* Tablet version: preserve aligned columns and left/right captions. */
@@ -267,9 +283,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .copy-status, .custom-cursor, .cursor-label, .footer-card { transition: none; }
+  .copy-status, .custom-cursor, .custom-cursor .cursor-label, .footer-card { transition: none; }
   .lighthouse-phone, .lighthouse-screen-next { animation: none; }
   .nalu-cover.is-ready .nalu-cover-scene { animation: none; opacity: 1; transform: none; }
-  .nalu-cover.is-ready .nalu-cover-logo { animation: none; left: 91.6%; top: 91%; transform: translate(-50%, -50%) scale(.3233); }
+  .nalu-cover.is-ready .nalu-cover-logo { animation: none; opacity: 0; }
   .nalu-cover.is-ready .nalu-cover-logo::after { animation: none; opacity: 1; }
 }

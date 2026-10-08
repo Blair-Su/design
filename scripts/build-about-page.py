@@ -12,7 +12,6 @@ ROOT = Path(__file__).resolve().parents[1]
 original = html.parse(str(ROOT / 'reference/about.html'))
 home = html.parse(str(ROOT / 'index.html'))
 ROLE_UPDATES = {
-    'International Cultural Exchange Center': 'Web Experience Designer',
     'HHI Concours x SCAD SERVE': 'Product & Service Designer',
     'FINRA x SCAD Pro': 'Product Designer',
     'BMW x SCAD Pro': 'Product Designer',
@@ -40,6 +39,8 @@ def resume_entry(row):
     if info is None:
         info = row.find('.//div[@class="resume-row-content education-row-content"]')
     title = ' '.join(info.find('h3').text_content().split())
+    if title == 'International Cultural Exchange Center':
+        return ''
     role = ROLE_UPDATES.get(title, info.find('p').text_content().strip())
     dates = info.find('div').text_content().strip()
     description = row.xpath('./p')[0].text_content().strip()
@@ -106,10 +107,6 @@ page = f'''<!doctype html>
           <p class="about-availability"><span aria-hidden="true"></span>Open to work</p>
           <div class="about-intro-heading">
             <h1 id="about-title">Hi, I’m Blair Su!</h1>
-            <picture class="about-intro-art" aria-hidden="true">
-              <source media="(prefers-reduced-motion: reduce)" srcset="assets/about/typing-still-warm-light.webp">
-              <img src="assets/about/typing-loop-warm-light.webp" alt="" width="420" height="420" decoding="async">
-            </picture>
           </div>
           <div class="about-intro-prose">
             <p>I’m a product designer with a background in <strong>business and service design.</strong> I turn ambiguous problems into clear product experiences by connecting user needs, stakeholder priorities, and the systems around them.</p>
@@ -164,4 +161,4 @@ page = f'''<!doctype html>
 </html>
 '''
 (ROOT / 'about.html').write_text(page)
-print(f'Built about.html: 5 experience entries, 2 education entries, {len(gallery_images)} gallery photos.')
+print(f'Built about.html: {experience.count("<article")} experience entries, {education.count("<article")} education entries, {len(gallery_images)} gallery photos.')

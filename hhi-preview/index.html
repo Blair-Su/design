@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#ffffff">
+  <title>Turning a ticket receipt into a pre-arrival guide — HHI Concours · Blair Su</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/blair-photo-icon-rounded.svg">
+  <link rel="preload" href="../assets/fonts/averia-serif-libre.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="./hhi.css">
+  <script src="../script.js" defer></script>
+  <script src="./hhi.js" defer></script>
+</head>
+<body id="top" class="case-page hhi-local-page" data-project="project-3-hhi" data-project-title="Hilton Head Island Concours d’Elegance &amp; Motoring Festival">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header band">
+    <div class="frame header-inner">
+      <a class="brand" href="../" aria-label="Blair Su — Home">Blair Su</a>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-navigation">
+        <svg class="menu-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+        <svg class="close-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 5 14 14M5 19 19 5"/></svg>
+      </button>
+      <nav id="primary-navigation" aria-label="Primary navigation">
+        <a href="../#work">Work</a>
+        <a href="../about.html">About</a>
+        <a href="https://docs.google.com/document/d/1EQt0uCxezmY4o4NZ14qj3Sk8BYZWphJlj4wIumuw6OQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Resume</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="frame hhi-layout">
+    <aside class="hhi-sidebar">
+      <nav class="hhi-toc" aria-label="Table of contents">
+        <a class="hhi-back" href="../#work"><span aria-hidden="true">←</span> Back</a>
+        <p class="hhi-toc-title">Table of Contents</p>
+        <button class="hhi-toc-toggle" type="button" aria-expanded="false" aria-controls="hhi-toc-list"><span>Contents</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button>
+        <p class="hhi-directory-project">Hilton Head Island Concours d’Elegance &amp; Motoring Festival</p>
+        <ol id="hhi-toc-list">
+          <li><a href="#overview" aria-current="location">Overview</a></li>
+          <li><a href="#problem">The problem</a></li>
+          <li><a href="#why-this-touchpoint">Why this touchpoint</a></li>
+          <li><a href="#design">The design</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#reflection">Reflection</a></li>
+        </ol>
+      </nav>
+    </aside>
+
+    <article class="hhi-article" aria-labelledby="case-title">
+      <div class="hhi-intro hhi-inset">
+        <figure class="hhi-cover">
+          <img src="./assets/hhi-hero-01.png" alt="Hilton Head Island Concours d’Elegance &amp; Motoring Festival, with a vintage convertible beside the water at sunset" width="8400" height="2400" fetchpriority="high" decoding="async">
+        </figure>
+        <section id="overview" class="hhi-overview" data-case-section aria-label="Overview">
+          <p class="hhi-eyebrow">Hilton Head Island Concours d’Elegance · Client-sponsored project</p>
+          <h1 id="case-title">Turning a ticket receipt into a pre-arrival guide</h1>
+          <div class="hhi-overview-copy hhi-copy">
+            <p>Over 10 weeks, our team partnered with the HHI Concours to improve its visitor journey. I led research with target audience and stakeholders, then designed and prototyped the ticket confirmation email, the one message every guest receives between buying a ticket and arriving.</p>
+          </div>
+          <div class="hhi-project-meta">
+            <dl>
+              <div><dt>My role</dt><dd>Research Lead &amp;<br>Product Designer</dd></div>
+              <div><dt>Team</dt><dd>2 PMs<br>6 Product Designers<br>2 Visual Designers</dd></div>
+              <div><dt>Timeline</dt><dd>Jan 2026 – Mar 2026<br>(10 weeks)</dd></div>
+              <div><dt>Tools</dt><dd>Claude, Figma, Figma Make<br>(AI-assisted prototyping)</dd></div>
+            </dl>
+          </div>
+          <dl class="hhi-summary">
+            <dt>Problem</dt><dd>After buying tickets, guests were left to figure out parking and arrival on their own.</dd>
+            <dt>Solution</dt><dd>A confirmation email that works as a pre-arrival guide.</dd>
+            <dt>Result</dt><dd><strong>87% of usability participants (26 of 30)</strong> preferred it over the original.</dd>
+          </dl>
+          <a class="hhi-jump-design" href="#design">Jump to the design <span aria-hidden="true">↓</span></a>
+        </section>
+      </div>
+
+      <section id="problem" class="hhi-section hhi-inset" data-case-section aria-labelledby="problem-title">
+        <header class="hhi-section-heading"><h2 id="problem-title">The problem</h2></header>
+        <div class="hhi-copy">
+          <h3>The experience stopped at checkout.</h3>
+          <blockquote class="hhi-guest-quote">
+            <p>“Biggest challenge was finding parking… Ultimately I had to pull up to the golf course itself and ask the cop who stopped me from entering where we actually need to park.”</p>
+            <cite>Survey respondent</cite>
+          </blockquote>
+          <p>The HHI Concours asked us to reimagine its end-to-end guest experience. As research lead, I interviewed guests and stakeholders, including the operations manager, and helped synthesize our findings into a mental model map. Together with 447 survey responses, a clear pattern emerged:</p>
+          <ul class="hhi-touchpoint-reasons">
+            <li><strong>When planning their visit, guests looked for two things most:</strong> the event schedule (84%) and parking &amp; transportation (54%).</li>
+            <li><strong>On event day, getting there was the hardest part.</strong> Parking and transportation was the most-cited challenge.</li>
+          </ul>
+          <p>Yet the one message every ticket holder receives, the confirmation email, only confirmed the purchase. It said nothing about the schedule, where to park, or how to get in.</p>
+        </div>
+      </section>
+
+      <section id="why-this-touchpoint" class="hhi-section hhi-inset" data-case-section aria-labelledby="touchpoint-title">
+        <header class="hhi-section-heading"><h2 id="touchpoint-title">Why this touchpoint</h2></header>
+        <div class="hhi-copy">
+          <p>After a prioritization workshop with the client, the team split up across the visitor journey. While teammates redesigned the ticket purchase site, I took on the post-purchase experience as product designer.</p>
+          <p>Guests needed arrival information <em>before</em> event day, and the confirmation email was the one place guaranteed to reach them then:</p>
+          <ul class="hhi-touchpoint-reasons">
+            <li><strong>Every ticketed guest receives it</strong>, right when they start planning their trip.</li>
+            <li><strong>It already gets opened.</strong> No new app or new behavior is needed.</li>
+            <li><strong>It is low-cost for a non-profit events team</strong> to adopt.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="design" class="hhi-section hhi-inset" data-case-section aria-labelledby="design-title">
+        <header class="hhi-section-heading"><h2 id="design-title">The design</h2></header>
+        <div class="hhi-before">
+          <div class="hhi-copy">
+            <h3>Before</h3>
+            <p>The original email confirmed the transaction. It left guests with little guidance for the next part of their journey: getting to the event.</p>
+          </div>
+          <button class="hhi-email-preview hhi-email-before" type="button" data-email-src="../assets/case-studies/i0bILXMryNoQxPtNjIekwYT3BV0.webp" data-email-title="Original ticket confirmation" aria-label="View the original ticket confirmation email" aria-haspopup="dialog" aria-controls="hhi-email-viewer">
+            <img src="../assets/case-studies/i0bILXMryNoQxPtNjIekwYT3BV0.webp" alt="Original purchase confirmation showing the order and payment details" width="2048" height="1928" loading="lazy" decoding="async">
+            <span class="hhi-enlarge" aria-hidden="true">View original <svg viewBox="0 0 24 24" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span>
+          </button>
+        </div>
+
+        <div class="hhi-copy hhi-final-intro">
+          <h3>After</h3>
+          <p>The final experience connects a clear confirmation with the practical details of getting there. HHI’s visual identity carries through from the welcome to the arrival guide.</p>
+        </div>
+        <div class="hhi-final-grid">
+          <figure class="hhi-final-panel">
+            <figcaption><h4>Ticket status first.</h4></figcaption>
+            <button class="hhi-email-preview hhi-email-final hhi-email-ticket" type="button" data-email-src="../assets/case-studies/hhi-ticket-confirmation-email.png" data-email-title="Redesigned ticket confirmation" aria-label="Explore the complete redesigned ticket confirmation email" aria-haspopup="dialog" aria-controls="hhi-email-viewer">
+              <img src="../assets/case-studies/hhi-ticket-confirmation-email.png" alt="Redesigned confirmation, ticket QR code, event schedule and calendar actions" width="2432" height="16083" loading="lazy" decoding="async">
+              <span class="hhi-enlarge" aria-hidden="true">Explore full email <svg viewBox="0 0 24 24" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span>
+            </button>
+          </figure>
+          <figure class="hhi-final-panel">
+            <figcaption><h4>Event Venue &amp; Parking</h4></figcaption>
+            <button class="hhi-email-preview hhi-email-final hhi-email-arrival" type="button" data-email-src="../assets/case-studies/hhi-ticket-confirmation-email.png" data-email-title="Redesigned ticket confirmation" data-email-start="5700" aria-label="Explore venue, parking and pre-arrival information in the complete email" aria-haspopup="dialog" aria-controls="hhi-email-viewer">
+              <img src="../assets/case-studies/hhi-ticket-confirmation-email.png" alt="Venue and parking details, map links, a trip planning action and arrival guidance" width="2432" height="16083" loading="lazy" decoding="async">
+              <span class="hhi-enlarge" aria-hidden="true">Explore full email <svg viewBox="0 0 24 24" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span>
+            </button>
+          </figure>
+        </div>
+
+        <ol class="hhi-design-notes">
+          <li><strong>Ticket status first.</strong> The QR code and ticket details sit at the top, so guests can confirm their purchase at a glance.</li>
+          <li><strong>Built for action, not just reading.</strong> <em>Add to Calendar</em> and <em>Plan Your Trip</em> turn information into next steps.</li>
+          <li><strong>Schedule and parking, front and center.</strong> Experience planning and venue &amp; parking information are all in one email, no searching required.</li>
+          <li><strong>On-brand and accessible.</strong> It follows HHI’s visual identity, with readable contrast and clear hierarchy.</li>
+        </ol>
+
+        <div class="hhi-iteration" id="key-iteration">
+          <div class="hhi-copy">
+            <h3>One key iteration</h3>
+            <p>In an early version, both the venue and the parking lot were shown as Google Maps thumbnails. In testing, the two looked so similar that participants stopped to ask how they were different. I replaced them with two clearly labeled cards, Event Venue and Parking, each with its own map link, so guests know which map they need at a glance.</p>
+          </div>
+          <div class="hhi-iteration-compare">
+            <figure>
+              <figcaption><h4>First version</h4></figcaption>
+              <button class="hhi-email-preview" type="button" data-email-view="detail" data-email-src="./assets/hhi-email-first-version.png" data-email-title="First version — venue and parking maps" aria-label="Enlarge the first version's venue and parking maps" aria-haspopup="dialog" aria-controls="hhi-email-viewer">
+                <img src="./assets/hhi-email-first-version.png" alt="First version: two similar Google Maps thumbnails above the event location and free parking information" width="1048" height="380" loading="lazy" decoding="async">
+              </button>
+            </figure>
+            <figure>
+              <figcaption><h4>After version</h4></figcaption>
+              <button class="hhi-email-preview hhi-iteration-after" type="button" data-email-view="detail" data-email-src="../assets/case-studies/hhi-ticket-confirmation-email.png" data-email-title="After version — Event Venue and Parking cards" aria-label="Enlarge the Event Venue and Parking cards" aria-haspopup="dialog" aria-controls="hhi-email-viewer">
+                <span class="hhi-iteration-cards">
+                  <span class="hhi-iteration-card hhi-iteration-venue">
+                    <img src="../assets/case-studies/hhi-ticket-confirmation-email.png" alt="After version: Event Venue and Parking cards with distinct labels, location details and individual map links" width="2432" height="16083" loading="lazy" decoding="async">
+                  </span>
+                  <span class="hhi-iteration-card hhi-iteration-parking" aria-hidden="true">
+                    <img src="../assets/case-studies/hhi-ticket-confirmation-email.png" alt="" width="2432" height="16083" loading="lazy" decoding="async">
+                  </span>
+                </span>
+              </button>
+            </figure>
+          </div>
+        </div>
+        <div class="hhi-copy hhi-prototype-outro">
+          <p>I built the email as a working prototype with <strong>AI-assisted coding in Figma Make</strong>. That let us test a realistic, clickable email within days rather than handing off static mockups.</p>
+          <a class="hhi-prototype-link" href="https://www.figma.com/make/p851zkspBNU7AvYL0GZt0T/FINAL-Ticket-Confirmation-Email--Copy-?fullscreen=1&amp;t=hdssio1skej3b4pV-1&amp;code-node-id=0-9" target="_blank" rel="noopener noreferrer">View Figma Prototype <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+        </div>
+      </section>
+
+      <section id="results" class="hhi-section hhi-inset" data-case-section aria-labelledby="results-title">
+        <header class="hhi-section-heading"><h2 id="results-title">Results</h2></header>
+        <div class="hhi-impact">
+          <p class="hhi-small-label">Usability testing</p>
+          <p class="hhi-impact-number">87<span>%</span></p>
+          <p class="hhi-impact-conclusion">of participants preferred the redesigned email.</p>
+          <p class="hhi-impact-detail"><strong>26 of 30 participants</strong> in task-based usability testing.</p>
+        </div>
+        <div class="hhi-copy hhi-results-copy">
+          <p>Participants described it as especially clear, and singled out <strong>Add to Calendar</strong>, <strong>the parking location</strong>, and <strong>Plan Your Trip</strong> as the most useful additions.</p>
+        </div>
+      </section>
+
+      <section id="reflection" class="hhi-section hhi-inset" data-case-section aria-labelledby="reflection-title">
+        <header class="hhi-section-heading"><h2 id="reflection-title">Reflection</h2></header>
+        <div class="hhi-copy hhi-reflection-copy">
+          <div class="hhi-reflection-grid">
+            <div class="hhi-reflection-card">
+              <h3>Using AI to speed up team decisions.</h3>
+              <p>Using AI to synthesize hundreds of survey responses and prototype in days helped our team move quickly from findings to a testable idea. Having something real to react to made team discussions more concrete than debating static sketches. Speed only helped because I still checked every AI summary against the raw data and kept every design choice grounded in what users told us.</p>
+            </div>
+            <div class="hhi-reflection-card">
+              <h3>Small touchpoints, big leverage.</h3>
+              <p>We found far more problems than we could solve. Picking one message every guest already receives taught me to weigh reach and feasibility, not just how severe a problem is.</p>
+            </div>
+          </div>
+          <p class="hhi-research-note"><em>Full research and design process available on request.</em></p>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="frame footer-frame">
+      <div class="footer-content"><div class="footer-top">
+        <div class="footer-brand"><h2>Blair Su</h2><p>© 2026 Blair Su. All Rights Reserved.<br>Designed with Codex.</p></div>
+        <div class="footer-columns">
+          <div class="footer-column footer-about"><h3>About</h3><a class="footer-card" href="../about.html">About Me</a><a class="footer-card" href="https://docs.google.com/document/d/1EQt0uCxezmY4o4NZ14qj3Sk8BYZWphJlj4wIumuw6OQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Resume</a></div>
+          <div class="footer-column footer-connect"><h3>Connect</h3><button class="footer-card copy-button" type="button" data-copy="suxun70@gmail.com" data-copy-kind="email" aria-label="Copy suxun70@gmail.com">suxun70@gmail.com</button><button class="footer-card copy-button" type="button" data-copy="+1 912 272 0423" data-copy-kind="phone" aria-label="Copy +1 912 272 0423">+1 912 272 0423</button><a class="footer-card" href="https://www.linkedin.com/in/blair-xun-su-1263921a9" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
+        </div>
+      </div></div>
+    </div>
+  </footer>
+
+  <dialog class="hhi-email-viewer" id="hhi-email-viewer" aria-labelledby="hhi-email-title">
+    <div class="hhi-viewer-toolbar"><h2 id="hhi-email-title">Ticket confirmation</h2><button class="hhi-viewer-close" type="button" aria-label="Close email preview" autofocus>Close <span aria-hidden="true">×</span></button></div>
+    <div class="hhi-email-scroll"><img alt="" width="2432" height="16083"></div>
+  </dialog>
+  <div class="custom-cursor" aria-hidden="true"><span class="cursor-label"><svg class="cursor-link-icon" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg><span></span></span></div>
+  <div class="copy-status" role="status" aria-live="polite"></div>
+</body>
+</html>

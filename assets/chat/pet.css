@@ -1,0 +1,116 @@
+.fox-companion {
+  --fox-ink: var(--ink, #191919);
+  --fox-paper: var(--paper, #fff);
+  --fox-rule: var(--rule, #e5e5e5);
+  --fox-muted: #737373;
+  --fox-bottom: 14px;
+  --fox-right: max(calc(var(--gutter, 24px) + 8px), calc((100vw - var(--rail-width, 1680px)) / 2 + 8px));
+  --fox-keyboard: 0px;
+  --fox-view-height: 100dvh;
+  position: relative; z-index: 80; color: var(--fox-ink);
+  font: 14px/1.5 "Geist", Arial, sans-serif;
+}
+.fox-companion *, .fox-selection { box-sizing: border-box; }
+.fox-companion [hidden], .fox-selection[hidden] { display: none !important; }
+.fox-companion button { color: inherit; font: inherit; cursor: pointer; }
+.fox-companion button:focus-visible, .fox-selection:focus-visible { outline: 2px solid var(--ink, #191919); outline-offset: 3px; }
+.fox-companion button:disabled { cursor: wait; }
+.fox-companion svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.fox-pet-dock { position: fixed; right: max(var(--fox-pet-right, var(--fox-right)), env(safe-area-inset-right)); bottom: calc(var(--fox-bottom) + env(safe-area-inset-bottom) + var(--fox-keyboard)); display: flex; flex-direction: column; align-items: flex-end; width: 160px; pointer-events: none; }
+.fox-pet { --fox-size: 96px; pointer-events: auto; display: block; width: var(--fox-size); height: var(--fox-size); border: 0; padding: 0; margin: 0; background: transparent; position: relative; overflow: visible; -webkit-touch-callout: none; }
+.fox-pet .fox-avatar { display: block; width: 100%; height: 100%; overflow: visible; fill: none; stroke: none; stroke-width: 0; pointer-events: none; user-select: none; }
+.fox-avatar image { image-rendering: pixelated; }
+/* Interpolate the rotating tail between device pixels to avoid edge shimmer.
+   The source artwork still supplies the same square pixel silhouette. */
+.fox-avatar .fox-tail image { image-rendering: auto; }
+.fox-pet-label { display: flex; align-items: center; pointer-events: none; position: relative; margin-bottom: 5px; visibility: hidden; opacity: 0; }
+@media (hover: hover) and (pointer: fine) {
+  .fox-pet-dock:has(.fox-pet:hover) .fox-pet-label { visibility: visible; opacity: 1; }
+}
+.fox-invite { position: relative; white-space: nowrap; background: var(--fox-paper); color: var(--fox-ink) !important; border: 1px solid var(--fox-rule); border-radius: 12px; padding: 8px 12px; font: 11px/1.5 "Geist Mono", monospace !important; letter-spacing: .015em; box-shadow: 0 5px 13px #0000000a; }
+.fox-invite::after { content: ""; position: absolute; right: 43px; bottom: -6px; width: 10px; height: 10px; background: var(--fox-paper); border-right: 1px solid var(--fox-rule); border-bottom: 1px solid var(--fox-rule); transform: rotate(45deg); }
+.fox-panel { position: fixed; right: max(var(--fox-right), env(safe-area-inset-right)); bottom: calc(122px + var(--fox-bottom) + var(--fox-keyboard)); width: 390px; height: min(640px, calc(var(--fox-view-height) - 160px)); display: flex; flex-direction: column; overflow: hidden; background: var(--fox-paper); border: 1px solid var(--fox-rule); border-radius: 0; box-shadow: 0 8px 32px #00000008; isolation: isolate; }
+.fox-header { display: flex; align-items: center; gap: 8px; min-height: 62px; padding: 12px 16px 12px 22px; border-bottom: 1px solid var(--fox-rule); flex: 0 0 auto; }
+.fox-header h2 { font: 400 15px/1.4 "Geist", Arial, sans-serif; letter-spacing: .015em; margin: 0; color: var(--fox-ink); }
+.fox-header-space { flex: 1; }
+.fox-icon { border: 0; background: transparent; min-width: 28px; height: 32px; padding: 5px; display: grid; place-items: center; }
+.fox-privacy-toggle { color: #939393 !important; margin-left: -3px; }
+.fox-icon:hover { color: #777; }
+.fox-scroll { display: flex; flex-direction: column; flex: 1; overflow-y: auto; overscroll-behavior: contain; min-height: 50px; padding: 22px 22px 18px; scrollbar-width: thin; scrollbar-color: var(--fox-rule) transparent; }
+.fox-welcome { margin-top: auto; flex: 0 0 auto; padding: 28px 0 22px; }
+.fox-welcome h3 { font: 400 30px/1.2 "Averia Serif Libre", Georgia, serif; letter-spacing: -.5px; margin: 0; }
+.fox-messages { flex: 0 0 auto; }
+.fox-suggestions { display: grid; gap: 13px; flex: 0 0 auto; }
+.fox-suggestions:empty { display: none; }
+.fox-suggestions button { display: block; text-align: left; padding: 3px 0; background: transparent; border: 0; color: #666; font-size: 13px; line-height: 1.6; }
+.fox-suggestions button:hover { color: var(--fox-ink); text-decoration: underline; text-underline-offset: 4px; }
+.fox-message { margin-bottom: 24px; overflow-wrap: anywhere; font-size: 13px; }
+.fox-author { display: block; font: 10px/1.4 "Geist", Arial, sans-serif; color: #888; margin-bottom: 8px; }
+.fox-user { background: #f6f6f6; padding: 12px 14px; margin-left: 26px; }
+.fox-answer p { margin: 0 0 11px; line-height: 1.7; white-space: pre-wrap; }
+.fox-answer p:last-child { margin-bottom: 0; }
+.fox-answer ul { padding-left: 18px; margin: 8px 0; }
+.fox-answer li { margin: 5px 0; }
+.fox-answer a { color: var(--fox-ink); text-decoration: underline; text-underline-offset: 3px; }
+.fox-answer code { font: 12px "Geist Mono", monospace; background: #f5f5f5; padding: 1px 3px; }
+.fox-message blockquote { font-size: 11px; color: var(--fox-muted); padding-left: 10px; border-left: 1px solid #bdbdbd; margin: 0 0 10px; max-height: 80px; overflow: auto; }
+.fox-thinking, .fox-interrupted { color: var(--fox-muted); font-size: 11px; }
+.fox-faq-note { margin: 0 0 10px; font-size: 11px; line-height: 1.5; color: var(--fox-muted); }
+.fox-interrupted { display: block; margin-top: 10px; }
+.fox-photo { margin: 14px 0 5px; border: 1px solid var(--fox-rule); overflow: hidden; background: #fff; }
+.fox-photo a { text-decoration: none; }
+.fox-photo img { display: block; width: 100%; height: 150px; object-fit: cover; }
+.fox-photo figcaption { padding: 9px 12px 4px; font-size: 12px; }
+.fox-photo button { background: none; border: 0; padding: 4px 12px 10px; font-size: 10px; color: var(--fox-muted); text-decoration: underline; }
+.fox-form { padding: 18px 20px 20px; flex: 0 0 auto; background: var(--fox-paper); }
+.fox-input-row { display: flex; align-items: flex-end; gap: 8px; background: #fff; border: 1px solid var(--fox-rule); padding: 11px; }
+.fox-input-row:focus-within { border-color: #aaa; }
+.fox-input-row textarea { min-width: 0; flex: 1; resize: none; max-height: 104px; min-height: 30px; padding: 5px 2px; color: var(--fox-ink); background: transparent; border: 0; outline: none; font: 14px/1.5 "Geist", Arial, sans-serif; }
+.fox-input-row textarea::placeholder { color: #999; }
+.fox-input-row textarea:focus-visible { outline: none; }
+.fox-send { display: grid; place-items: center; flex: 0 0 36px; height: 30px; border: 0; padding: 4px 0; background: transparent; color: #777 !important; }
+.fox-send:hover { color: var(--fox-ink) !important; }
+.fox-privacy { position: absolute; z-index: 5; top: 54px; left: 16px; right: 16px; font-size: 13px; line-height: 1.65; font-weight: 400; color: #858b93; padding: 14px 16px; margin: 0; background: var(--fox-paper); border: 1px solid var(--fox-rule); }
+.fox-privacy::before { content: ""; position: absolute; top: -6px; left: var(--fox-info-tip, 96px); width: 10px; height: 10px; background: var(--fox-paper); border-top: 1px solid var(--fox-rule); border-left: 1px solid var(--fox-rule); transform: translateX(-50%) rotate(45deg); }
+.fox-privacy p { margin: 0; max-height: var(--fox-info-text-height, 240px); overflow-y: auto; overscroll-behavior: contain; }
+.fox-quote { display: flex; align-items: center; gap: 8px; background: #f5f5f5; padding: 7px 9px; margin-bottom: 8px; }
+.fox-quote span { font-size: 11px; flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.fox-quote button { border: 0; background: none; padding: 0 4px; }
+.fox-error { flex: 0 0 auto; padding: 10px 22px; background: #f7f7f7; color: var(--fox-ink); font-size: 11px; max-height: 110px; overflow: auto; }
+.fox-error span { display: block; }
+.fox-retry { background: none; border: 0; text-decoration: underline; padding: 4px 0 0; font-size: 11px !important; }
+.fox-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.fox-selection { position: fixed; z-index: 90; padding: 8px 12px; background: #191919; color: #fff; border: 0; box-shadow: 0 4px 16px #0002; font: 12px/1.4 "Geist", sans-serif; }
+body:has(.case-directory) .fox-companion { --fox-bottom: 65px; }
+@media (max-width: 600px) {
+  .fox-companion { --fox-bottom: 8px; }
+  .fox-pet-dock { width: 145px; }
+  .fox-pet { --fox-size: 80px; }
+  .fox-invite { font-size: 10px !important; padding: 7px 10px; }
+  .fox-invite::after { right: 35px; }
+  .fox-panel { right: var(--fox-right); left: var(--fox-right); width: auto; bottom: calc(109px + var(--fox-bottom) + env(safe-area-inset-bottom) + var(--fox-keyboard)); height: min(590px, calc(var(--fox-view-height) - 138px - var(--fox-bottom))); }
+  .fox-header { padding: 10px 12px 10px 18px; min-height: 58px; }
+  .fox-scroll { padding: 18px; }
+  .fox-form { padding: 14px 17px 17px; }
+  .fox-input-row textarea { font-size: 16px; line-height: 1.4; }
+  .fox-input-row textarea::placeholder { font-size: 14px; }
+}
+@media (max-height: 580px) {
+  .fox-companion { --fox-bottom: 5px !important; }
+  .fox-panel { bottom: calc(80px + var(--fox-keyboard)); height: calc(var(--fox-view-height) - 90px); }
+  .fox-pet { --fox-size: 64px; }
+  .fox-pet-label { position: absolute; bottom: 12px; right: 68px; }
+  .fox-invite::after { display: none; }
+  .fox-header { min-height: 44px; padding-block: 5px; }
+  .fox-welcome { padding-block: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fox-pet *, .fox-pet-dock { animation: none !important; transition: none !important; }
+}
+.fox-companion.is-keyboard { --fox-bottom: 4px !important; }
+.fox-companion.is-keyboard .fox-panel { bottom: calc(74px + var(--fox-keyboard)); height: calc(var(--fox-view-height) - 84px); }
+.fox-companion.is-keyboard .fox-pet { --fox-size: 64px; }
+.fox-companion.is-keyboard .fox-pet-label { position: absolute; bottom: 12px; right: 68px; }
+.fox-companion.is-keyboard .fox-invite::after { display: none; }
+.fox-companion.is-keyboard .fox-header { min-height: 42px; padding-block: 5px; }
+.fox-companion.is-keyboard .fox-scroll { min-height: 0; }

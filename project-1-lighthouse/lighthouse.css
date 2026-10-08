@@ -1,0 +1,183 @@
+.lh-local-page { --lh-muted: #6b6b6b; --lh-tint: #f5f5f5; --lh-accent: #ffb803; }
+.lh-layout { display: grid; grid-template-columns: 180px minmax(0, 1fr); column-gap: 32px; padding-inline: 24px 0; border-bottom: 1px solid var(--rule); }
+.lh-sidebar { min-width: 0; padding-top: 56px; }
+.lh-toc { position: sticky; top: calc(var(--header-height) + 32px); padding: 0 0 32px; }
+.lh-toc-title { margin: 38px 0 14px; color: var(--lh-muted); font: 400 16px/1.5 "Geist", sans-serif; letter-spacing: .05em; text-transform: none; }
+.lh-toc-toggle, .lh-directory-project { display: none; }
+.lh-toc ol { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.lh-toc ol a { display: block; padding: 9px 10px; margin-left: -10px; border-radius: 6px; color: var(--lh-muted); font: 400 16px/1.5 "Geist", sans-serif; }
+.lh-toc ol a:hover { color: var(--ink); background: #f5f5f5; }
+.lh-toc ol a[aria-current="location"] { color: var(--ink); background: #ededed; }
+.lh-back { position: relative; top: -20px; display: inline-flex; align-items: center; gap: 9px; min-height: 24px; color: var(--lh-muted); font: 400 16px/1.5 "Geist", sans-serif; }
+.lh-back:hover { color: var(--ink); }
+.lh-article { --project-ink: #505050; min-width: 0; border-inline-start: 1px solid var(--rule); }
+.lh-inset { padding-inline: 32px; }
+.lh-intro { padding-top: 56px; padding-bottom: 48px; }
+.lh-intro { scroll-margin-top: 24px; }
+.lh-overview-copy.lh-copy { max-width: none; margin-top: 24px; }
+.lh-eyebrow { margin: 0 0 16px; color: var(--lh-muted); font: 500 12px/1.6 "Geist", Arial, sans-serif; letter-spacing: .045em; text-transform: uppercase; }
+.lh-intro h1 { margin-top: 0; font: 300 clamp(32px, 2.6vw, 38px)/1.2 "Averia Serif Libre", Georgia, serif; letter-spacing: -.025em; text-wrap: balance; }
+.lh-project-meta { margin-top: 24px; }
+.lh-project-meta dl { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin: 0; border-block: 1px solid var(--rule); }
+.lh-project-meta dl > div { min-width: 0; padding: 22px 18px; }
+.lh-project-meta dl > div + div { border-left: 1px solid var(--rule); }
+.lh-project-meta dt { margin-bottom: 10px; color: var(--ink); font: 500 14px/1.5 "Geist", Arial, sans-serif; }
+.lh-project-meta dd { margin: 0; color: var(--lh-muted); font: 400 14px/1.5 "Geist", sans-serif; }
+.lh-cover { position: relative; width: 100%; aspect-ratio: 16 / 9; margin: 0 0 40px; overflow: hidden; border: 1px solid var(--rule); border-radius: 24px; background: var(--lh-tint); }
+.lh-cover img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; }
+.lh-section { padding-block: 48px; border-top: 1px solid var(--rule); scroll-margin-top: 24px; }
+.lh-section#design { scroll-margin-top: 0; }
+.lh-section:last-child { padding-bottom: 80px; }
+.lh-section-heading { margin-bottom: 20px; }
+.lh-section-heading h2 { font: 400 17px/1.5 "Source Serif 4", Georgia, serif; color: var(--lh-muted); letter-spacing: normal; text-transform: none; }
+.lh-section h3 { margin: 0; font: 300 30px/1.22 "Averia Serif Libre", Georgia, serif; letter-spacing: -.02em; text-wrap: pretty; }
+.lh-section h4 { margin: 0; font: 300 23px/1.25 "Averia Serif Libre", Georgia, serif; letter-spacing: -.015em; }
+.lh-copy { max-width: 68ch; }
+.lh-copy p { margin-top: 18px; color: var(--project-ink); font: 400 16px/1.75 "Geist", Arial, sans-serif; text-wrap: pretty; }
+.lh-copy > p:first-child { margin-top: 0; }
+.lh-copy p + p { margin-top: 16px; }
+.lh-copy strong { font-weight: 500; color: var(--ink); }
+.lh-impact { display: grid; grid-template-columns: .65fr 1.35fr; column-gap: 40px; align-items: center; padding: 36px; border: 1px solid var(--rule); background: #f7f7f7; }
+.lh-impact > .lh-small-label { grid-column: 1 / -1; margin-bottom: 18px; }
+.lh-impact-number { grid-column: 1; grid-row: 2 / 4; margin: 0; font: 300 clamp(80px, 7vw, 110px)/1 "Averia Serif Libre", Georgia, serif; letter-spacing: -.05em; }
+.lh-impact-number span { font-size: .6em; letter-spacing: -.04em; }
+.lh-impact-conclusion { max-width: 25ch; font: 300 28px/1.25 "Averia Serif Libre", Georgia, serif; }
+.lh-impact-detail { grid-column: 2; margin-top: 16px; color: var(--project-ink); font: 400 15px/1.7 "Geist", Arial, sans-serif; }
+@media (max-width: 1279px) {
+  .lh-project-meta dl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lh-project-meta dl > div:nth-child(2n + 1) { border-left: 0; }
+  .lh-project-meta dl > div:nth-child(n + 3) { border-top: 1px solid var(--rule); }
+}
+@media (max-width: 1279px) and (min-width: 1024px) {
+  .lh-layout { grid-template-columns: 180px minmax(0, 1fr); column-gap: 32px; }
+  .lh-impact { padding: 28px; gap: 18px 28px; }
+  .lh-impact-number { font-size: 80px; }
+}
+@media (max-width: 1023px) {
+  .lh-local-page { --lh-directory-height: 56px; padding-bottom: calc(var(--lh-directory-height) + 1px + env(safe-area-inset-bottom)); }
+  .lh-local-page .copy-status { bottom: calc(var(--lh-directory-height) + env(safe-area-inset-bottom) + 16px); }
+  .lh-layout { display: block; padding-inline: 0; }
+  .lh-article { border-inline: 0; }
+  .lh-inset { padding-inline: 36px; }
+  .lh-sidebar { position: fixed; top: auto; bottom: 0; left: 0; right: 0; z-index: 25; padding: 0 0 env(safe-area-inset-bottom); margin: 0; border-top: 1px solid var(--rule); background: #fff; }
+  .lh-toc { position: relative; top: auto; display: flex; align-items: stretch; justify-content: space-between; width: calc(100% - var(--gutter) * 2); max-width: var(--rail-width); min-height: var(--lh-directory-height); margin-inline: auto; padding: 0; border-inline: 1px solid var(--rule); background: #fff; }
+  .lh-toc-title, .lh-back { display: none; }
+  .lh-toc-toggle { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-shrink: 0; min-width: 170px; min-height: var(--lh-directory-height); padding: 0 24px; border: 0; border-right: 1px solid var(--rule); background: #fff; text-align: left; font: 400 14px/1.4 "Geist", sans-serif; }
+  .lh-toc-toggle:hover, .lh-toc-toggle[aria-expanded="true"] { background: #f5f5f5; }
+  .lh-toc-toggle:focus-visible { outline-offset: -4px; }
+  .lh-directory-project { display: flex; align-items: center; justify-content: flex-end; flex: 1; min-width: 0; padding: 8px 24px; font: 300 18px/1.3 "Averia Serif Libre", Georgia, serif; text-align: right; text-wrap: pretty; }
+  .lh-toc-toggle svg { width: 17px; height: 17px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.5; }
+  .lh-toc-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+  .lh-toc ol { position: absolute; bottom: 100%; left: -1px; display: none; width: min(340px, calc(100% + 2px)); max-height: min(65dvh, calc(100dvh - var(--header-height) - var(--lh-directory-height) - env(safe-area-inset-bottom) - 24px)); overflow-y: auto; overscroll-behavior: contain; padding: 8px 12px; border: 1px solid var(--rule); background: #fff; box-shadow: 0 -10px 18px rgb(0 0 0 / 5%); }
+  .lh-toc.is-open ol { display: grid; }
+  .lh-toc ol a { min-height: 44px; margin-left: 0; padding: 11px 12px; font-size: 14px; }
+  .lh-intro { padding-top: 44px; }
+  .lh-section { padding-block: 36px; }
+}
+@media (max-width: 767px) {
+  .lh-local-page { --lh-directory-height: 56px; }
+  .lh-inset { padding-inline: 22px; }
+  .lh-toc-toggle { min-width: 112px; gap: 8px; padding-inline: 12px; }
+  .lh-directory-project { padding: 6px 12px; font-size: 13px; }
+  .lh-intro { padding-top: 36px; }
+  .lh-intro h1 { font-size: clamp(28px, 6.8vw, 32px); }
+  .lh-eyebrow { font-size: 11px; }
+  .lh-project-meta { margin-top: 24px; }
+  .lh-project-meta dl > div { padding: 18px 12px; }
+  .lh-project-meta dd { font-size: 13px; }
+  .lh-project-meta dt { font-size: 13px; }
+  .lh-cover { margin-bottom: 32px; border-radius: 16px; }
+  .lh-section { padding-block: 28px; }
+  .lh-section:last-child { padding-bottom: 56px; }
+  .lh-section-heading { margin-bottom: 18px; }
+  .lh-section-heading h2 { font-size: 16px; }
+  .lh-copy p { font-size: 16px; line-height: 1.7; }
+  .lh-impact { display: block; padding: 26px; }
+  .lh-impact-number { margin-top: 24px; font-size: 88px; }
+  .lh-impact-conclusion { margin-top: 18px; font-size: 27px; }
+  .lh-impact-detail { font-size: 15px; }
+}
+
+/* Storytelling content uses the same typography and borders as HHI. */
+.lh-small-label { color: var(--lh-muted); font: 400 11px/1.5 "Geist Mono", monospace; text-transform: uppercase; letter-spacing: .035em; }
+.lh-summary { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 12px 20px; margin: 28px 0 0; padding: 24px; background: var(--lh-tint); font: 400 15px/1.65 "Geist", Arial, sans-serif; }
+.lh-summary dt, .lh-summary strong { color: var(--ink); font-weight: 500; }
+.lh-summary dd { margin: 0; color: var(--project-ink); }
+.lh-jump-design { position: relative; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 16px; padding: 8px 0; border: 0; background: transparent; color: var(--ink); font: 400 14px/1.5 "Geist", Arial, sans-serif; }
+.lh-jump-design::after { content: ""; position: absolute; left: 0; right: 0; bottom: 8px; height: 1px; background: currentColor; opacity: 0; }
+.lh-jump-design:hover::after { opacity: 1; }
+.lh-article figure { min-width: 0; }
+.lh-research-visual { width: min(100%, 800px); margin: 24px 0 28px; border-radius: 16px; overflow: hidden; }
+.lh-findings-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto auto; margin: 22px 0 0; padding: 0; border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; list-style: none; }
+.lh-finding { display: grid; grid-template-rows: subgrid; grid-row: span 2; min-width: 0; }
+.lh-finding + .lh-finding { border-left: 1px solid var(--rule); }
+.lh-section .lh-finding h4 { margin: 0; padding: 18px 20px; border-bottom: 1px solid var(--rule); background: var(--lh-tint); color: var(--ink); font: 500 16px/1.5 "Geist", Arial, sans-serif; letter-spacing: normal; }
+.lh-section .lh-solutions-grid h4 { background: #fff6cc; }
+.lh-finding p { margin: 0; padding: 18px 20px; color: var(--project-ink); font: 400 16px/1.7 "Geist", Arial, sans-serif; }
+.lh-direction-copy { margin-top: 32px; scroll-margin-top: 24px; }
+.lh-station-visual { max-width: 800px; margin: 24px 0 18px; border-radius: 16px; overflow: hidden; }
+.lh-art.lh-station-models { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; overflow: hidden; background: var(--lh-tint); }
+.lh-station-models img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+.lh-copy .lh-contribution-note { font-size: 14px; color: var(--lh-muted); }
+.lh-scenario { margin: 0; }
+.lh-scenario + .lh-scenario { margin-top: 48px; }
+.lh-scenario figcaption { margin: 0 0 20px; }
+.lh-section .lh-scenario-title { margin: 0; color: var(--ink); font: 500 16px/1.5 "Geist", Arial, sans-serif; letter-spacing: normal; }
+.lh-scenario figcaption p { margin-top: 8px; }
+.lh-scenario > .lh-art { border-radius: 16px; }
+.lh-art-button { display: block; position: relative; width: 100%; padding: 0; border: 0; border-radius: 16px; background: transparent; text-align: left; }
+.lh-art { display: block; width: 100%; height: auto; border-radius: inherit; }
+.lh-enlarge { position: absolute; right: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid var(--rule); border-radius: 999px; background: #fff; color: var(--ink); font: 400 12px/1.4 "Geist", sans-serif; }
+.lh-enlarge svg { width: 16px; height: 16px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.lh-art-button:hover .lh-enlarge { border-color: var(--ink); }
+.lh-prototype-outro { margin-top: 32px; }
+.lh-awards { margin-top: 24px; }
+.lh-awards > div { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 16px; color: var(--lh-muted); font: 400 14px/1.7 "Geist", sans-serif; }
+.lh-awards a, .lh-summary a { text-decoration: underline; text-underline-offset: 4px; }
+.lh-awards a:hover, .lh-summary a:hover { color: var(--ink); }
+.lh-reflection-copy { max-width: none; }
+.lh-reflection-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.lh-reflection-card { min-width: 0; padding: 24px; border: 1px solid var(--rule); background: var(--lh-tint); }
+.lh-section .lh-reflection-card h3 { font-size: 24px; line-height: 1.3; }
+.lh-copy .lh-research-note { margin-top: 32px; color: var(--lh-muted); font-size: 13px; }
+
+/* Open the existing artwork at a readable size without leaving the case. */
+.lh-viewer { width: min(1440px, calc(100vw - 40px)); max-width: none; height: calc(100dvh - 40px); max-height: none; margin: auto; padding: 0; border: 1px solid var(--rule); background: #fff; color: var(--ink); overflow: hidden; }
+.lh-viewer[open] { display: flex; flex-direction: column; }
+.lh-viewer::backdrop { background: rgb(20 20 20 / 65%); }
+.lh-viewer-toolbar { display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; min-height: 58px; gap: 16px; border-bottom: 1px solid var(--rule); }
+.lh-viewer-toolbar h2 { padding: 12px 20px; font: 400 15px/1.4 "Geist", sans-serif; }
+.lh-viewer-actions { display: flex; align-self: stretch; flex-shrink: 0; }
+.lh-viewer-actions button { padding: 12px 20px; border: 0; border-left: 1px solid var(--rule); background: #fff; font-size: 14px; }
+.lh-viewer-actions button:hover { background: var(--lh-tint); }
+.lh-viewer-close span { margin-left: 10px; font-size: 20px; }
+.lh-viewer-scroll { min-height: 0; overflow: auto; overscroll-behavior: contain; padding: 24px; }
+.lh-viewer-media { width: 100%; margin-inline: auto; }
+.lh-viewer-media.is-portrait { width: min(100%, 440px); }
+.lh-viewer-media.is-zoomed { width: max(180%, 1200px); }
+.lh-viewer-media.is-portrait.is-zoomed { width: max(100%, 700px); }
+.lh-viewer-media .lh-art { border-radius: 0; }
+.lh-local-page.lh-viewer-open { overflow: hidden; }
+@media (max-width: 767px) {
+  .lh-directory-project { font-size: 16px; }
+  .lh-section h3 { font-size: 27px; }
+  .lh-summary { grid-template-columns: 1fr; gap: 6px; padding: 20px; font-size: 14px; }
+  .lh-summary dd + dt { margin-top: 12px; }
+  .lh-findings-grid { grid-template-columns: 1fr; grid-template-rows: none; }
+  .lh-finding { grid-template-rows: auto auto; grid-row: auto; }
+  .lh-finding + .lh-finding { border-left: 0; border-top: 1px solid var(--rule); }
+  .lh-section .lh-finding h4, .lh-finding p { padding: 16px; }
+  .lh-art.lh-station-models { gap: 8px; }
+  .lh-scenario + .lh-scenario { margin-top: 32px; }
+  .lh-scenario figcaption { margin-bottom: 18px; }
+  .lh-enlarge { right: 8px; bottom: 8px; padding: 5px 8px; font-size: 10px; }
+  .lh-art-button, .lh-research-visual, .lh-station-visual, .lh-scenario > .lh-art { border-radius: 12px; }
+  .lh-awards > div { gap: 10px; flex-direction: column; }
+  .lh-reflection-grid { grid-template-columns: 1fr; gap: 20px; }
+  .lh-reflection-card { padding: 20px; }
+  .lh-viewer { width: calc(100vw - 16px); height: calc(100dvh - 16px); }
+  .lh-viewer-toolbar { gap: 4px; flex-wrap: wrap; }
+  .lh-viewer-toolbar h2 { font-size: 13px; padding: 12px; flex: 1 1 130px; }
+  .lh-viewer-actions button { padding: 12px; font-size: 12px; }
+  .lh-viewer-scroll { padding: 12px; }
+}

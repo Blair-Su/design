@@ -74,7 +74,13 @@
     }
     frame.addEventListener('load', () => {
       fit();
-      pagePicker.value = frame.contentWindow.location.pathname;
+      const currentPath = frame.contentWindow.location.pathname;
+      const localPreviewSources = {
+        '/hhi-preview/': '/project-3-hhi/',
+        '/lighthouse-preview/': '/project-1-lighthouse/',
+        '/southern-preview/': '/project-2-southerncrafted/',
+      };
+      pagePicker.value = localPreviewSources[currentPath] || currentPath;
       document.querySelector('.open-page').href = frame.contentWindow.location.pathname;
       frame.title = `${frame.contentDocument.body.dataset.pageTitle || frame.contentDocument.body.dataset.projectTitle || 'Homepage'} preview`;
       frame.contentDocument.fonts.ready.then(fit);
