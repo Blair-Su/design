@@ -52,7 +52,7 @@
 .nl-survey-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin: 28px 0 36px; border: 1px solid var(--rule); border-radius: 16px; overflow: hidden; background: #faf6f9; }
 .nl-survey-stats > div { min-width: 0; padding: 26px 22px; }
 .nl-survey-stats > div + div { border-left: 1px solid var(--rule); }
-.nl-survey-stats dt { margin: 0 0 16px; color: var(--nl-accent); font: 300 clamp(34px, 3.4vw, 48px)/1.1 "Averia Serif Libre", Georgia, serif; letter-spacing: -.03em; }
+.nl-survey-stats dt { margin: 0 0 16px; color: var(--nl-accent); font: 300 clamp(34px, 3.4vw, 48px)/1.1 "Geist", Arial, sans-serif; letter-spacing: -.03em; }
 .nl-survey-stats dd { margin: 0; color: var(--project-ink); font: 400 16px/1.6 "Geist", sans-serif; }
 .nl-visual figcaption a { text-decoration: underline; text-underline-offset: 3px; }
 .nl-testing-photos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; width: min(100%, 1000px); margin: 28px 0; }
