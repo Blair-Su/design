@@ -232,7 +232,8 @@ html:has(.home-page.platform-ready:not([data-stage="workspace"])) { overflow-y: 
   }
   .profile-nav { gap: 6px; margin-top: 14px; }
   .profile-nav a {
-    min-height: 56px;
+    min-height: 42px;
+    padding-block: 0;
     border-radius: 14px;
   }
   .profile-nav a[data-workspace-view="work"] {
