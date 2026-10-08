@@ -123,7 +123,7 @@
 .lh-scenario figcaption { margin: 0 0 20px; }
 .lh-section .lh-scenario-title { margin: 0; color: var(--ink); font: 500 16px/1.5 "Geist", Arial, sans-serif; letter-spacing: normal; }
 .lh-scenario figcaption p { margin-top: 8px; }
-.lh-scenario > .lh-art { border-radius: 16px; }
+.lh-scenario > .lh-art { max-width: 800px; border-radius: 16px; }
 .lh-art-button { display: block; position: relative; width: 100%; padding: 0; border: 0; border-radius: 16px; background: transparent; text-align: left; }
 .lh-art { display: block; width: 100%; height: auto; border-radius: inherit; }
 .lh-enlarge { position: absolute; right: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid var(--rule); border-radius: 999px; background: #fff; color: var(--ink); font: 400 12px/1.4 "Geist", sans-serif; }
