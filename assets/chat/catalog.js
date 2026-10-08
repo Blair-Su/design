@@ -5,7 +5,7 @@ export const projects = {
   'project-4-nalu': { title: 'Nalu', keywords: /nalu|wellness|fitness|cycle/i, questions: ['What is Nalu?', 'What did Nalu’s prototyping reveal?', 'What was Blair’s role in Nalu?'] },
 };
 export const photos = {
-  hhi: { src: '/assets/selected-projects/hhi-project-cover.png', title: 'HHI Concours', alt: 'HHI Concours visitor journey project', href: '/project-3-hhi/' },
+  hhi: { src: '/assets/selected-projects/hhi-project-cover-1280.webp', title: 'HHI Concours', alt: 'HHI Concours visitor journey project', href: '/project-3-hhi/' },
   lighthouse: { src: '/assets/case-studies/lighthouse-cover-960.webp', title: 'Lighthouse', alt: 'Lighthouse travel support concept', href: '/project-1-lighthouse/' },
   southern: { src: '/assets/case-studies/fTNwgzhihUwdXBxzkZoPmY715s.webp', title: 'Southern Crafted', alt: 'Southern Crafted e-commerce design', href: '/project-2-southerncrafted/' },
   nalu: { src: '/assets/selected-projects/nalu-project-scene.svg', title: 'Nalu', alt: 'Nalu cycle-aware wellness concept', href: '/project-4-nalu/' },
