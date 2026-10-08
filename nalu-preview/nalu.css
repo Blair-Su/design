@@ -28,8 +28,8 @@
 .nl-summary dt, .nl-summary strong { color: var(--ink); font-weight: 500; }
 .nl-summary dd { margin: 0; color: var(--project-ink); }
 .nl-jump-design { position: relative; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 16px; padding: 8px 0; color: var(--ink); font: 400 14px/1.5 "Geist", Arial, sans-serif; }
-.nl-jump-design::after { content: ""; position: absolute; left: 0; right: 0; bottom: 8px; height: 1px; background: currentColor; opacity: 0; }
-.nl-jump-design:hover::after { opacity: 1; }
+.nl-jump-design::after { content: ""; position: absolute; left: 0; right: 0; bottom: 8px; height: 1px; background: currentColor; opacity: 1; }
+.nl-jump-design:hover { opacity: .65; }
 .nl-section { padding-block: 48px; border-top: 1px solid var(--rule); scroll-margin-top: 24px; }
 .nl-section#final-prototype { scroll-margin-top: 0; }
 .nl-section:last-child { padding-bottom: 80px; }

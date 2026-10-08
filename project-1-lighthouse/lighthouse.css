@@ -104,8 +104,8 @@
 .lh-summary dt, .lh-summary strong { color: var(--ink); font-weight: 500; }
 .lh-summary dd { margin: 0; color: var(--project-ink); }
 .lh-jump-design { position: relative; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 16px; padding: 8px 0; border: 0; background: transparent; color: var(--ink); font: 400 14px/1.5 "Geist", Arial, sans-serif; }
-.lh-jump-design::after { content: ""; position: absolute; left: 0; right: 0; bottom: 8px; height: 1px; background: currentColor; opacity: 0; }
-.lh-jump-design:hover::after { opacity: 1; }
+.lh-jump-design::after { content: ""; position: absolute; left: 0; right: 0; bottom: 8px; height: 1px; background: currentColor; opacity: 1; }
+.lh-jump-design:hover { opacity: .65; }
 .lh-article figure { min-width: 0; }
 .lh-research-visual { width: min(100%, 800px); margin: 24px 0 28px; border-radius: 16px; overflow: hidden; }
 .lh-findings-grid { --rule: #e5e5e5; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto auto; margin: 22px 0 0; padding: 0; border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; list-style: none; }

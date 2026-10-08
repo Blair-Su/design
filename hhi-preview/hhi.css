@@ -43,8 +43,8 @@
 .hhi-summary dt, .hhi-summary strong { color: var(--ink); font-weight: 500; }
 .hhi-summary dd { margin: 0; color: var(--project-ink); }
 .hhi-jump-design { position: relative; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 16px; padding: 8px 0; border: 0; background: transparent; color: var(--ink); font: 400 14px/1.5 "Geist", Arial, sans-serif; }
-.hhi-jump-design::after { content: ""; position: absolute; left: 0; right: 0; bottom: 8px; height: 1px; background: currentColor; opacity: 0; }
-.hhi-jump-design:hover::after { opacity: 1; }
+.hhi-jump-design::after { content: ""; position: absolute; left: 0; right: 0; bottom: 8px; height: 1px; background: currentColor; opacity: 1; }
+.hhi-jump-design:hover { opacity: .65; }
 .hhi-guest-quote { margin: 24px 0; padding: 4px 0 4px 24px; border-left: 2px solid #d6d6d6; }
 .hhi-copy .hhi-guest-quote p { margin: 0; color: var(--project-ink); font: 400 21px/1.55 "Source Serif 4", Georgia, serif; }
 .hhi-guest-quote cite { display: block; margin-top: 14px; color: var(--hhi-muted); font: 400 12px/1.5 "Geist", Arial, sans-serif; }
