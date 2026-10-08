@@ -239,6 +239,10 @@ html:has(.home-page.platform-ready:not([data-stage="workspace"])) { overflow-y: 
     min-height: 56px;
     border-radius: 14px;
   }
+  .profile-nav a[data-workspace-view="work"] {
+    font-size: 16px;
+    line-height: 24px;
+  }
   .profile-connect {
     margin-top: auto;
     padding-top: 22px;
