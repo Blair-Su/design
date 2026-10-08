@@ -41,7 +41,7 @@
 .workspace-about-card .about-intro-copy { padding: 0; border: 0; }
 .workspace-about-card .about-intro-heading { margin: 0 0 24px; }
 .workspace-about-card #about-title {
-  font: 300 clamp(30px, 6cqi, 42px)/1.15 "Averia Serif Libre", Georgia, serif;
+  font: 300 32px/1.15 "Averia Serif Libre", Georgia, serif;
   letter-spacing: -.035em;
 }
 .workspace-about-card .about-intro-prose { color: #36576a; font: 400 15px/1.8 "Geist", Arial, sans-serif; }
