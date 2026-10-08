@@ -45,6 +45,16 @@
 .sc-copy a { text-decoration: underline; text-underline-offset: 4px; }
 .sc-visual { width: min(100%, 800px); margin: 28px 0; }
 .sc-art { display: block; width: 100%; height: auto; border-radius: 16px; }
+/* Remove only the exported white gutter (48/20/86/26px). The image's
+   natural ratio determines the taller frame as its artwork fills the width. */
+.sc-design-system { overflow: hidden; border-radius: 16px; }
+.sc-design-system .sc-art {
+  width: calc(100% * 2242 / 2108);
+  max-width: none;
+  height: auto;
+  margin: calc(-100% * 20 / 2108) 0 calc(-100% * 26 / 2108) calc(-100% * 48 / 2108);
+  border-radius: 0;
+}
 .sc-hero-demo .southern-laptop { width: 100%; }
 .sc-hero-demo .southern-laptop img { display: block; width: 100%; height: auto; pointer-events: none; }
 .sc-visual figcaption { margin-top: 12px; color: var(--sc-muted); font: 400 14px/1.5 "Geist", sans-serif; }
@@ -125,6 +135,7 @@
   .sc-navigation-comparison { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .sc-comparison-arrow { justify-self: center; margin-bottom: 0; transform: rotate(90deg); }
   .sc-art, .sc-original-crop, .sc-categories-crop { border-radius: 12px; }
+  .sc-design-system { border-radius: 12px; }
   .sc-research-board { padding: 20px; border-radius: 12px; }
   .sc-quotes { grid-template-columns: 1fr; gap: 16px; }
   .sc-quotes blockquote { padding: 16px; }
