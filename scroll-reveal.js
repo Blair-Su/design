@@ -1,7 +1,7 @@
 // Animate content, while section anchors, dividers and sticky navigation stay put.
 export const REVEAL_SELECTORS = [
   '.hero h1', '.work-heading h2', '.project-card > .project-link',
-  '.about-intro-heading', '.about-intro-prose > p', '.about-intro-photos > figure',
+  '.about-intro-heading', '.about-intro-prose > p',
   '.about-section-heading > h2', '.about-resume-identity > div', '.about-resume-description > p',
   '.about-gallery', '.footer-brand', '.footer-column',
   ...['hhi', 'lh', 'sc', 'nl'].flatMap(prefix => [
