@@ -35,7 +35,7 @@
 .sc-design-subsection { margin-top: 48px; scroll-margin-top: 24px; }
 .sc-section:last-child { padding-bottom: 80px; }
 .sc-section-heading { margin-bottom: 20px; }
-.sc-section-heading h2 { font: 400 17px/1.5 "Source Serif 4", Georgia, serif; color: var(--sc-muted); }
+.sc-section-heading h2 { font: 400 17px/1.5 "Geist", Arial, sans-serif; color: var(--sc-muted); }
 .sc-section h3 { margin: 0; font: 700 30px/1.22 "Geist", Arial, sans-serif; letter-spacing: -.02em; text-wrap: pretty; }
 .sc-copy { max-width: 68ch; }
 .sc-copy p { margin-top: 18px; color: var(--project-ink); font: 400 16px/1.75 "Geist", Arial, sans-serif; text-wrap: pretty; }
