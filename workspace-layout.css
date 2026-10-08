@@ -205,7 +205,6 @@ html:has(.home-page.platform-ready:not([data-stage="workspace"])) { overflow-y: 
   border-radius: 12px;
   font: 400 .9375rem/1.5 "Geist", Arial, sans-serif;
 }
-.profile-nav a span { color: #52788e; font-size: .8125rem; }
 .profile-nav a[aria-current], .profile-nav a:not([aria-disabled]):hover { background: rgb(255 255 255 / 45%); }
 .profile-nav-pending { cursor: default; }
 .profile-nav-pending small { display: block; color: #52788e; font: 400 .6875rem/1.5 "Geist", Arial, sans-serif; }
@@ -233,9 +232,6 @@ html:has(.home-page.platform-ready:not([data-stage="workspace"])) { overflow-y: 
   }
   .profile-nav { gap: 6px; margin-top: 14px; }
   .profile-nav a {
-    display: grid;
-    grid-template-columns: 24px minmax(0, 1fr) 16px;
-    column-gap: 12px;
     min-height: 56px;
     border-radius: 14px;
   }
@@ -393,7 +389,6 @@ html:has(.home-page.platform-ready:not([data-stage="workspace"])) { overflow-y: 
   .profile-connect .profile-contact { flex-basis: auto; }
   .profile-nav { flex-direction: row; gap: 6px; margin-top: 6px; }
   .profile-nav a { min-height: 44px; padding: 8px; font-size: .875rem; }
-  .profile-nav a span { display: none; }
   .home-page .portfolio-workspace #work { scroll-margin-top: calc(var(--profile-height, 130px) + 28px); }
 }
 @media (max-width: 767px) {
