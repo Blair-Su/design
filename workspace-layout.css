@@ -206,8 +206,22 @@ html:has(.home-page.platform-ready:not([data-stage="workspace"])) { overflow-y: 
   font: 400 .9375rem/1.5 "Geist", Arial, sans-serif;
 }
 .profile-nav a[aria-current], .profile-nav a:not([aria-disabled]):hover { background: rgb(255 255 255 / 45%); }
-.profile-nav-pending { cursor: default; }
-.profile-nav-pending small { display: block; color: #52788e; font: 400 .6875rem/1.5 "Geist", Arial, sans-serif; }
+.profile-nav-pending { position: relative; cursor: default; }
+.profile-nav-tooltip {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 12px;
+  z-index: 1;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: #123244;
+  color: #fff;
+  font: 400 12px/1.5 "Geist", Arial, sans-serif;
+  white-space: nowrap;
+  visibility: hidden;
+  pointer-events: none;
+}
+.profile-nav-pending:is(:hover, :focus-visible) .profile-nav-tooltip { visibility: visible; }
 .profile-connect { display: flex; flex-wrap: wrap; gap: 10px 16px; margin-top: 30px; }
 .profile-availability-row { flex-basis: 100%; text-align: left; }
 .profile-section-title { width: 100%; color: #52788e; font: 400 .8125rem/1.5 "Departure Mono", "Geist Mono", monospace; text-transform: uppercase; letter-spacing: .06em; }
@@ -235,8 +249,6 @@ html:has(.home-page.platform-ready:not([data-stage="workspace"])) { overflow-y: 
     min-height: 42px;
     padding-block: 0;
     border-radius: 14px;
-  }
-  .profile-nav a[data-workspace-view="work"] {
     font-size: 16px;
     line-height: 24px;
   }
