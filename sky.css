@@ -170,8 +170,9 @@ body.case-page, .case-page .site-header nav { background: var(--paper); }
     gap: 8px;
     min-height: 28px;
     color: inherit;
-    font: inherit;
-    letter-spacing: inherit;
+    font: 400 16px/1.5 "Geist", sans-serif;
+    letter-spacing: normal;
+    text-transform: none;
   }
   .case-page .case-sidebar-label a:hover { color: var(--ink); }
   .case-page :is(.lh-intro, .sc-intro, .hhi-intro, .nl-intro) { padding-top: 32px; }
