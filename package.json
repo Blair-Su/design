@@ -11,7 +11,7 @@
     "dev": "node server.mjs",
     "site:sync": "node scripts/sync-case-previews.mjs",
     "build": "node scripts/build-public.mjs",
-    "test": "node --test tests/*.test.js",
+    "test": "node --test tests/*.test.js tests/*.test.cjs",
     "chat:knowledge": "python3 scripts/build-chat-knowledge.py",
     "chat:login": "wrangler login",
     "chat:check": "wrangler deploy --dry-run --outdir qa/cloudflare-build",

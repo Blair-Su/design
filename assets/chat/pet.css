@@ -1,8 +1,10 @@
 .fox-companion {
   --fox-ink: var(--ink, #191919);
-  --fox-paper: var(--paper, #fff);
-  --fox-rule: var(--rule, #e5e5e5);
-  --fox-muted: #737373;
+  /* Keep chat surfaces opaque even when the portfolio theme is transparent. */
+  --fox-paper: #fff;
+  --fox-rule: rgb(61 102 124 / 20%);
+  --fox-radius: 28px;
+  --fox-muted: #526a7b;
   --fox-bottom: 14px;
   --fox-right: max(calc(var(--gutter, 24px) + 8px), calc((100vw - var(--rail-width, 1680px)) / 2 + 8px));
   --fox-keyboard: 0px;
@@ -29,24 +31,25 @@
 }
 .fox-invite { position: relative; white-space: nowrap; background: var(--fox-paper); color: var(--fox-ink) !important; border: 1px solid var(--fox-rule); border-radius: 12px; padding: 8px 12px; font: 11px/1.5 "Geist Mono", monospace !important; letter-spacing: .015em; box-shadow: 0 5px 13px #0000000a; }
 .fox-invite::after { content: ""; position: absolute; right: 43px; bottom: -6px; width: 10px; height: 10px; background: var(--fox-paper); border-right: 1px solid var(--fox-rule); border-bottom: 1px solid var(--fox-rule); transform: rotate(45deg); }
-.fox-panel { position: fixed; right: max(var(--fox-right), env(safe-area-inset-right)); bottom: calc(122px + var(--fox-bottom) + var(--fox-keyboard)); width: 390px; height: min(640px, calc(var(--fox-view-height) - 160px)); display: flex; flex-direction: column; overflow: hidden; background: var(--fox-paper); border: 1px solid var(--fox-rule); border-radius: 0; box-shadow: 0 8px 32px #00000008; isolation: isolate; }
+.fox-panel { position: fixed; right: max(var(--fox-right), env(safe-area-inset-right)); bottom: calc(122px + var(--fox-bottom) + var(--fox-keyboard)); width: 390px; height: min(640px, calc(var(--fox-view-height) - 160px)); display: flex; flex-direction: column; overflow: hidden; background: var(--fox-paper); border: 1px solid var(--fox-rule); border-radius: var(--fox-radius); box-shadow: inset 0 1px 1px rgb(255 255 255 / 90%), inset 1px 0 1px rgb(255 255 255 / 46%), 0 10px 30px rgb(23 78 111 / 10%), 0 2px 5px rgb(23 78 111 / 6%); isolation: isolate; }
 .fox-header { display: flex; align-items: center; gap: 8px; min-height: 62px; padding: 12px 16px 12px 22px; border-bottom: 1px solid var(--fox-rule); flex: 0 0 auto; }
-.fox-header h2 { font: 400 15px/1.4 "Geist", Arial, sans-serif; letter-spacing: .015em; margin: 0; color: var(--fox-ink); }
+.fox-header h2 { font: 400 12px/1.5 "Departure Mono", "Geist Mono", monospace; letter-spacing: .06em; margin: 0; color: var(--fox-ink); }
 .fox-header-space { flex: 1; }
-.fox-icon { border: 0; background: transparent; min-width: 28px; height: 32px; padding: 5px; display: grid; place-items: center; }
-.fox-privacy-toggle { color: #939393 !important; margin-left: -3px; }
-.fox-icon:hover { color: #777; }
+.fox-icon { border: 0; background: transparent; min-width: 28px; height: 32px; padding: 5px; border-radius: 10px; display: grid; place-items: center; }
+.fox-privacy-toggle { color: var(--fox-muted) !important; margin-left: -3px; }
+.fox-icon:hover { color: var(--fox-ink); background: #f5f5f5; }
+.fox-icon:active { color: var(--fox-ink); background: #efefef; }
 .fox-scroll { display: flex; flex-direction: column; flex: 1; overflow-y: auto; overscroll-behavior: contain; min-height: 50px; padding: 22px 22px 18px; scrollbar-width: thin; scrollbar-color: var(--fox-rule) transparent; }
 .fox-welcome { margin-top: auto; flex: 0 0 auto; padding: 28px 0 22px; }
-.fox-welcome h3 { font: 400 30px/1.2 "Averia Serif Libre", Georgia, serif; letter-spacing: -.5px; margin: 0; }
+.fox-welcome h3 { font: 300 30px/1.2 "Averia Serif Libre", Georgia, serif; letter-spacing: -.5px; margin: 0; }
 .fox-messages { flex: 0 0 auto; }
-.fox-suggestions { display: grid; gap: 13px; flex: 0 0 auto; }
+.fox-suggestions { display: grid; gap: 8px; flex: 0 0 auto; }
 .fox-suggestions:empty { display: none; }
-.fox-suggestions button { display: block; text-align: left; padding: 3px 0; background: transparent; border: 0; color: #666; font-size: 13px; line-height: 1.6; }
+.fox-suggestions button { display: block; text-align: left; padding: 8px 0; background: transparent; border: 0; border-radius: 0; color: var(--fox-muted); font-size: 13px; line-height: 1.6; }
 .fox-suggestions button:hover { color: var(--fox-ink); text-decoration: underline; text-underline-offset: 4px; }
 .fox-message { margin-bottom: 24px; overflow-wrap: anywhere; font-size: 13px; }
-.fox-author { display: block; font: 10px/1.4 "Geist", Arial, sans-serif; color: #888; margin-bottom: 8px; }
-.fox-user { background: #f6f6f6; padding: 12px 14px; margin-left: 26px; }
+.fox-author { display: block; font: 10px/1.4 "Geist", Arial, sans-serif; color: var(--fox-muted); margin-bottom: 8px; }
+.fox-user { background: #eef6fa; border-radius: 16px; padding: 12px 14px; margin-left: 26px; }
 .fox-answer p { margin: 0 0 11px; line-height: 1.7; white-space: pre-wrap; }
 .fox-answer p:last-child { margin-bottom: 0; }
 .fox-answer ul { padding-left: 18px; margin: 8px 0; }
@@ -57,30 +60,30 @@
 .fox-thinking, .fox-interrupted { color: var(--fox-muted); font-size: 11px; }
 .fox-faq-note { margin: 0 0 10px; font-size: 11px; line-height: 1.5; color: var(--fox-muted); }
 .fox-interrupted { display: block; margin-top: 10px; }
-.fox-photo { margin: 14px 0 5px; border: 1px solid var(--fox-rule); overflow: hidden; background: #fff; }
+.fox-photo { margin: 14px 0 5px; border: 1px solid var(--fox-rule); border-radius: 16px; overflow: hidden; background: #fff; }
 .fox-photo a { text-decoration: none; }
 .fox-photo img { display: block; width: 100%; height: 150px; object-fit: cover; }
 .fox-photo figcaption { padding: 9px 12px 4px; font-size: 12px; }
 .fox-photo button { background: none; border: 0; padding: 4px 12px 10px; font-size: 10px; color: var(--fox-muted); text-decoration: underline; }
 .fox-form { padding: 18px 20px 20px; flex: 0 0 auto; background: var(--fox-paper); }
-.fox-input-row { display: flex; align-items: flex-end; gap: 8px; background: #fff; border: 1px solid var(--fox-rule); padding: 11px; }
-.fox-input-row:focus-within { border-color: #aaa; }
+.fox-input-row { display: flex; align-items: flex-end; gap: 8px; background: #f5f5f5; border: 0; border-radius: 16px; padding: 12px; }
+.fox-input-row:focus-within { background: #efefef; }
 .fox-input-row textarea { min-width: 0; flex: 1; resize: none; max-height: 104px; min-height: 30px; padding: 5px 2px; color: var(--fox-ink); background: transparent; border: 0; outline: none; font: 14px/1.5 "Geist", Arial, sans-serif; }
-.fox-input-row textarea::placeholder { color: #999; }
+.fox-input-row textarea::placeholder { color: #687f8e; }
 .fox-input-row textarea:focus-visible { outline: none; }
-.fox-send { display: grid; place-items: center; flex: 0 0 36px; height: 30px; border: 0; padding: 4px 0; background: transparent; color: #777 !important; }
-.fox-send:hover { color: var(--fox-ink) !important; }
-.fox-privacy { position: absolute; z-index: 5; top: 54px; left: 16px; right: 16px; font-size: 13px; line-height: 1.65; font-weight: 400; color: #858b93; padding: 14px 16px; margin: 0; background: var(--fox-paper); border: 1px solid var(--fox-rule); }
+.fox-send { display: grid; place-items: center; flex: 0 0 36px; height: 30px; border: 0; border-radius: 10px; padding: 4px 0; background: transparent; color: var(--fox-ink) !important; transition: opacity 160ms ease; }
+.fox-send:hover { background: transparent; opacity: .55; }
+.fox-privacy { position: absolute; z-index: 5; top: 54px; left: 16px; right: 16px; font-size: 13px; line-height: 1.65; font-weight: 400; color: var(--fox-muted); padding: 14px 16px; margin: 0; background: var(--fox-paper); border: 1px solid var(--fox-rule); border-radius: 16px; box-shadow: 0 8px 24px rgb(23 78 111 / 10%); }
 .fox-privacy::before { content: ""; position: absolute; top: -6px; left: var(--fox-info-tip, 96px); width: 10px; height: 10px; background: var(--fox-paper); border-top: 1px solid var(--fox-rule); border-left: 1px solid var(--fox-rule); transform: translateX(-50%) rotate(45deg); }
 .fox-privacy p { margin: 0; max-height: var(--fox-info-text-height, 240px); overflow-y: auto; overscroll-behavior: contain; }
-.fox-quote { display: flex; align-items: center; gap: 8px; background: #f5f5f5; padding: 7px 9px; margin-bottom: 8px; }
+.fox-quote { display: flex; align-items: center; gap: 8px; background: #eef6fa; border-radius: 12px; padding: 7px 9px; margin-bottom: 8px; }
 .fox-quote span { font-size: 11px; flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .fox-quote button { border: 0; background: none; padding: 0 4px; }
-.fox-error { flex: 0 0 auto; padding: 10px 22px; background: #f7f7f7; color: var(--fox-ink); font-size: 11px; max-height: 110px; overflow: auto; }
+.fox-error { flex: 0 0 auto; padding: 10px 22px; background: #f1f8fc; color: var(--fox-ink); font-size: 11px; max-height: 110px; overflow: auto; }
 .fox-error span { display: block; }
 .fox-retry { background: none; border: 0; text-decoration: underline; padding: 4px 0 0; font-size: 11px !important; }
 .fox-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-.fox-selection { position: fixed; z-index: 90; padding: 8px 12px; background: #191919; color: #fff; border: 0; box-shadow: 0 4px 16px #0002; font: 12px/1.4 "Geist", sans-serif; }
+.fox-selection { position: fixed; z-index: 90; padding: 8px 12px; background: #102d3f; color: #fff; border: 0; border-radius: 12px; box-shadow: 0 4px 16px #0002; font: 12px/1.4 "Geist", sans-serif; }
 body:has(.case-directory) .fox-companion { --fox-bottom: 65px; }
 @media (max-width: 600px) {
   .fox-companion { --fox-bottom: 8px; }

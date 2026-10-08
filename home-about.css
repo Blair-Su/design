@@ -1,0 +1,235 @@
+/* About and projects occupy the same center column of the home workspace. */
+.portfolio-workspace > [hidden] { display: none; }
+.home-page .portfolio-workspace > :is(#work, #about) {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--view-exit-duration, 180ms) ease,
+    transform var(--view-exit-duration, 180ms) ease;
+}
+.home-page .portfolio-workspace > :is(#work, #about).is-view-leaving {
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+.home-page .portfolio-workspace > :is(#work, #about).is-view-preparing {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: none;
+}
+.home-page .portfolio-workspace > :is(#work, #about).is-view-arriving {
+  transition-duration: var(--view-entry-duration, 420ms);
+  transition-timing-function: cubic-bezier(.22, 1, .36, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-page .portfolio-workspace > :is(#work, #about) { transition: none; }
+}
+.home-page .workspace-about { min-width: 0; scroll-margin-top: var(--workspace-top); }
+.home-page .workspace-about:focus { outline: none; }
+.home-page .workspace-about-card {
+  --glass-radius: 28px;
+  --about-inset: 0px;
+  position: relative;
+  container: about-card / inline-size;
+  width: var(--workspace-card-width);
+  max-width: var(--workspace-card-max-width);
+  margin-inline: auto;
+  padding: 28px;
+}
+.workspace-about-card .frame { width: 100%; max-width: none; margin: 0; border: 0; }
+.workspace-about-card .band { border: 0; }
+.workspace-about-card .about-intro-frame { display: block; }
+.workspace-about-card .about-intro-copy { padding: 0; border: 0; }
+.workspace-about-card .about-intro-heading { margin: 0 0 24px; }
+.workspace-about-card #about-title {
+  font: 300 clamp(30px, 6cqi, 42px)/1.15 "Averia Serif Libre", Georgia, serif;
+  letter-spacing: -.035em;
+}
+.workspace-about-card .about-intro-prose { color: #36576a; font: 400 15px/1.8 "Geist", Arial, sans-serif; }
+.workspace-about-card .about-intro-prose p + p { margin-top: 18px; }
+.workspace-about-card .about-intro-prose strong { font-weight: 500; }
+.workspace-about-card .about-intro-photos {
+  padding: 28px 0 0;
+  grid-template-columns: .85fr 1.15fr;
+  grid-template-rows: repeat(2, clamp(110px, 25cqi, 155px));
+  gap: 12px;
+}
+.workspace-about-card .about-intro-photos figure { border-radius: 16px; min-width: 0; min-height: 0; }
+.workspace-about-card .about-portrait { grid-column: 1; grid-row: 1 / 3; aspect-ratio: auto; }
+.workspace-about-card .about-team-photo,
+.workspace-about-card .about-outdoors-photo { grid-column: 2; height: 100%; }
+.workspace-about-card .about-portrait img { object-position: center 43%; }
+.workspace-about-card .about-resume-section,
+.workspace-about-card .about-gallery-section { margin-top: 40px; }
+.workspace-about-card .about-section-heading {
+  min-height: 0;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0 0 22px;
+  border: 0;
+}
+.workspace-about-card .about-section-heading h2 { font-size: 28px; }
+.workspace-about-card .about-resume-link { font: 400 13px/1.5 "Geist", Arial, sans-serif; }
+.workspace-about-card .about-resume-link:hover { color: #526a7b; }
+.workspace-about-card .about-resume-arrow {
+  width: 14px;
+  height: 14px;
+  vertical-align: -2px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  shape-rendering: geometricPrecision;
+}
+.workspace-about-card .about-resume-row { display: block; padding: 0; border: 0; }
+.workspace-about-card .about-resume-row + .about-resume-row { margin-top: 28px; }
+.workspace-about-card .about-resume-toggle {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 44px;
+  list-style: none;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.workspace-about-card .about-resume-toggle::-webkit-details-marker { display: none; }
+.workspace-about-card .about-resume-toggle:focus-visible { outline: 2px solid #52788e; outline-offset: 6px; }
+.workspace-about-card .about-resume-toggle-icon {
+  position: relative;
+  flex: 0 0 28px;
+  height: 28px;
+  color: #526a7b;
+}
+.workspace-about-card .about-resume-toggle-icon::before,
+.workspace-about-card .about-resume-toggle-icon::after {
+  content: "";
+  position: absolute;
+  top: 13px;
+  left: 7px;
+  width: 14px;
+  height: 1.5px;
+  border-radius: 1px;
+  background: currentColor;
+}
+.workspace-about-card .about-resume-toggle-icon::after {
+  transform-origin: center;
+  transform: rotate(90deg) scaleX(1);
+  transition: transform 320ms cubic-bezier(.22, 1, .36, 1);
+}
+.workspace-about-card .about-resume-row:is([data-expanded="true"], [open]:not([data-expanded])) > .about-resume-toggle .about-resume-toggle-icon::after {
+  transform: rotate(90deg) scaleX(0);
+}
+.workspace-about-card .about-resume-toggle:hover .about-resume-toggle-icon { color: var(--ink); }
+.workspace-about-card .about-resume-identity { flex: 1; min-width: 0; padding: 0; gap: 16px; border: 0; }
+.workspace-about-card .about-resume-logos { flex-basis: 40px; gap: 8px; }
+.workspace-about-card .about-resume-logos img { width: 40px; height: 36px; }
+.workspace-about-card .about-resume-identity h3 { color: var(--ink); font: 500 16px/1.5 "Geist", Arial, sans-serif; }
+.workspace-about-card .about-role { margin-top: 4px; color: #36576a; font-size: 14px; }
+.workspace-about-card .about-dates { margin-top: 4px; color: #526a7b; font-size: 12px; }
+.workspace-about-card .about-resume-description { padding: 12px 0 0 56px; }
+.workspace-about-card .about-resume-description p { color: #36576a; font: 400 14px/1.75 "Geist", Arial, sans-serif; }
+.workspace-about-card .about-resume-panel.is-resume-animating { overflow: hidden; }
+.workspace-about-card .about-reveal-accessible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.workspace-about-card .about-reveal-word { display: inline-block; white-space: nowrap; }
+.workspace-about-card .about-reveal-letter { display: inline-block; }
+.workspace-about-card .is-revealing .about-reveal-letter {
+  animation: about-letter-reveal 300ms ease both;
+  animation-delay: var(--reveal-delay);
+}
+@keyframes about-letter-reveal {
+  from { opacity: 0; filter: blur(10px); }
+  to { opacity: 1; filter: blur(0); }
+}
+/* Share Education's heading and row spacing while retaining the larger logos. */
+.workspace-about-card .about-experience-section {
+  --experience-logo-size: 48px;
+  --experience-row-gap: 16px;
+}
+.workspace-about-card .about-experience-section .about-section-heading {
+  flex-wrap: nowrap;
+}
+.workspace-about-card .about-experience-section .about-resume-link {
+  margin-left: auto;
+  white-space: nowrap;
+}
+.workspace-about-card .about-experience-section .about-resume-toggle {
+  align-items: center;
+}
+.workspace-about-card .about-experience-section .about-resume-identity {
+  align-items: center;
+  gap: var(--experience-row-gap);
+}
+.workspace-about-card .about-experience-section .about-resume-identity > div:last-child { min-width: 0; }
+.workspace-about-card .about-experience-section .about-resume-logos {
+  flex-basis: var(--experience-logo-size);
+  height: var(--experience-logo-size);
+  justify-content: center;
+  padding: 0;
+  border-radius: 10px;
+  background: #fff;
+  overflow: hidden;
+}
+.workspace-about-card .about-experience-section .about-resume-logos img { width: 100%; height: 100%; }
+.workspace-about-card .about-experience-section .about-resume-description {
+  padding: 12px 44px 0 calc(var(--experience-logo-size) + var(--experience-row-gap));
+}
+@container about-card (max-width: 420px) {
+  .workspace-about-card .about-experience-section {
+    --experience-logo-size: 40px;
+    --experience-row-gap: 12px;
+  }
+  .workspace-about-card .about-experience-section .about-resume-toggle { gap: 12px; }
+  .workspace-about-card .about-experience-section .about-resume-description { padding: 12px 0 0; }
+}
+@container about-card (max-width: 300px) {
+  .workspace-about-card .about-experience-section .about-section-heading { flex-wrap: wrap; }
+}
+.workspace-about-card .about-gallery { --photo-height: 200px; --photo-gap: 12px; padding: 4px 0; }
+.workspace-about-card .about-gallery-photo { border-radius: 12px; }
+.workspace-about-card .gallery-toggle {
+  width: 90px;
+  min-width: 90px;
+  min-height: 34px;
+  gap: 7px;
+  padding: 6px 12px;
+  border: 1px solid #e1e5e8;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font: 400 13px/1.4 "Geist", Arial, sans-serif;
+  box-shadow: none;
+  transition: color 180ms ease, border-color 180ms ease, transform 140ms ease;
+}
+.workspace-about-card .gallery-toggle svg { width: 14px; height: 14px; }
+.workspace-about-card .gallery-toggle .gallery-pause-icon { stroke-width: 2; }
+.workspace-about-card .gallery-toggle .gallery-play-icon { fill: currentColor; stroke: none; }
+.workspace-about-card .gallery-toggle:hover { color: #526a7b; border-color: #c5cfd5; }
+.workspace-about-card .gallery-toggle:active { transform: scale(.98); }
+.workspace-about-card .gallery-toggle:focus-visible { outline: 2px solid #526a7b; outline-offset: 3px; }
+.home-page .photo-lightbox { border-radius: 20px; }
+@media (min-width: 768px) {
+  .workspace-about-card .about-school-second-line { display: block; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .workspace-about-card .gallery-toggle { transition: none; }
+  .workspace-about-card .gallery-toggle:active { transform: none; }
+  .workspace-about-card .about-resume-toggle-icon::after { transition: none; }
+  .workspace-about-card .is-revealing .about-reveal-letter { animation: none; }
+}
+@media (max-width: 767px) {
+  .home-page .workspace-about-card { padding: 22px 18px; }
+  .workspace-about-card .about-intro-prose { font-size: 14px; line-height: 1.75; }
+  .workspace-about-card .about-section-heading h2 { font-size: 25px; }
+  .workspace-about-card .about-resume-description { padding-left: 0; }
+  .workspace-about-card .about-gallery { --photo-height: 180px; }
+}

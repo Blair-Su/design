@@ -37,8 +37,8 @@ let galleryLastTime = 0;
 
 function updateGalleryControl() {
   galleryToggle.dataset.paused = String(galleryPaused);
-  galleryToggle.setAttribute('aria-label', galleryPaused ? 'Resume photo scrolling' : 'Pause photo scrolling');
-  galleryToggle.querySelector('span').textContent = galleryPaused ? 'Resume' : 'Pause';
+  galleryToggle.setAttribute('aria-label', galleryPaused ? 'Play photo scrolling' : 'Pause photo scrolling');
+  galleryToggle.querySelector('span').textContent = galleryPaused ? 'Play' : 'Pause';
 }
 galleryToggle.addEventListener('click', () => {
   galleryPaused = !galleryPaused;

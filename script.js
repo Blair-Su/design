@@ -4,7 +4,7 @@ void import('/scroll-reveal.js').then(({ initScrollReveal }) => initScrollReveal
 });
 const foxStyle = document.createElement('link');
 foxStyle.rel = 'stylesheet';
-foxStyle.href = '/assets/chat/pet.css';
+foxStyle.href = '/assets/chat/pet.css?v=send-hover-74';
 document.head.append(foxStyle);
 void import('/assets/chat/pet.js');
 
@@ -13,25 +13,64 @@ const menuToggle = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('#primary-navigation');
 const phoneLayout = matchMedia('(max-width: 767px)');
 
-function setMenu(open, returnFocus = false) {
-  const expanded = open && phoneLayout.matches;
-  header.classList.toggle('menu-open', expanded);
-  menuToggle.setAttribute('aria-expanded', String(expanded));
-  menuToggle.setAttribute('aria-label', expanded ? 'Close menu' : 'Open menu');
-  if (returnFocus) menuToggle.focus();
-}
+if (header && menuToggle && navigation) {
+  const isFullScreenMenu = document.body.classList.contains('home-page') || header.classList.contains('case-mobile-header');
+  const main = document.querySelector('main');
+  function setMenu(open, returnFocus = false) {
+    const expanded = open && phoneLayout.matches;
+    header.classList.toggle('menu-open', expanded);
+    menuToggle.setAttribute('aria-expanded', String(expanded));
+    menuToggle.setAttribute('aria-label', expanded ? 'Close menu' : 'Open menu');
+    if (isFullScreenMenu) {
+      document.documentElement.classList.toggle('mobile-menu-open', expanded);
+      document.body.classList.toggle('mobile-menu-open', expanded);
+      if (main) main.inert = expanded;
+      for (const selector of ['.fox-companion', '.site-footer', '.case-mobile-back-row']) {
+        const background = document.querySelector(selector);
+        if (background) background.inert = expanded;
+      }
+    }
+    if (returnFocus || (isFullScreenMenu && expanded)) menuToggle.focus({ preventScroll: true });
+  }
 
-menuToggle.addEventListener('click', () => setMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
-navigation.addEventListener('click', event => {
-  if (event.target.closest('a')) setMenu(false);
-});
-document.addEventListener('pointerdown', event => {
-  if (!header.contains(event.target)) setMenu(false);
-});
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') setMenu(false, true);
-});
-phoneLayout.addEventListener('change', () => setMenu(false));
+  menuToggle.addEventListener('click', () => setMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
+  header.addEventListener('click', event => {
+    const link = event.target.closest('a');
+    if (!link) return;
+    if (link.getAttribute('aria-disabled') === 'true') {
+      event.preventDefault();
+      return;
+    }
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button > 0) return;
+    setMenu(false, isFullScreenMenu && phoneLayout.matches);
+  });
+  document.addEventListener('pointerdown', event => {
+    if (!header.contains(event.target)) setMenu(false);
+  });
+  document.addEventListener('keydown', event => {
+    if (menuToggle.getAttribute('aria-expanded') !== 'true') return;
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      setMenu(false, true);
+    } else if (isFullScreenMenu && event.key === 'Tab') {
+      const controls = [...header.querySelectorAll('a[href], button:not([disabled])')].filter(el => el.getClientRects().length > 0);
+      const first = controls[0];
+      const last = controls.at(-1);
+      if (!controls.includes(document.activeElement)) {
+        event.preventDefault();
+        (event.shiftKey ? last : first)?.focus();
+      } else if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    }
+  });
+  phoneLayout.addEventListener('change', () => setMenu(false));
+  window.addEventListener('pagehide', () => setMenu(false));
+}
 
 // Start with the centered brand, then reveal the supplied composition only once
 // its image is decoded. No hover is required.

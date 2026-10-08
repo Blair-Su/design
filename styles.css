@@ -214,8 +214,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
   [data-label-kind="link"] .cursor-link-icon { display: block; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
   [data-label-kind="caption"] .cursor-label svg { display: none; }
   /* Keep the compact label size while it fades back into a dot. */
-  body:not(.case-page):not(.about-page) .custom-cursor[data-label-kind="project"] { --cursor-inline-padding: 10px; --cursor-label-height: 30px; }
-  body:not(.case-page):not(.about-page) [data-label-kind="project"] .cursor-label { gap: 8px; font-size: 14px; }
+  body:not(.case-page):not(.about-page) .custom-cursor:is([data-label-kind="project"], [data-label-kind="caption"]) { --cursor-inline-padding: 10px; --cursor-label-height: 30px; }
+  body:not(.case-page):not(.about-page) :is([data-label-kind="project"], [data-label-kind="caption"]) .cursor-label { gap: 8px; font-size: 14px; }
   body:not(.case-page):not(.about-page) [data-label-kind="project"] .cursor-label svg { width: 16px; height: 16px; stroke-width: 1.7; }
 }
 

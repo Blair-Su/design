@@ -8,6 +8,12 @@ GitHub Pages serves the static website directly from the root of the `main` bran
 
 Before committing a website update, run `npm run build`: it syncs the approved case-study drafts to the four public `project-*` routes and prepares `public-dist/`. Commit the public route files as well as the editable drafts; GitHub Pages serves the repository root. `npm run site:sync` performs only the case-study sync.
 
+## Current portfolio experience (October 2026)
+
+The homepage uses a fixed sky background, a scroll-triggered introduction, and an inline My Project / About Me workspace. `/?view=work` and `/?view=about` open the workspace directly; `/about.html` redirects to the inline About view. Shared project navigation, mobile menus, contact labels and the availability tag match the homepage. The four public project pages use a light reading background and keep their responsive Contents controls. The fox chat continues using the existing Cloudflare endpoint.
+
+Run `npm test` and `npm run build` before publication. The test suite includes the introduction/workspace transitions, mobile menu focus and scroll handling, project section navigation and About disclosures. The case-study drafts have been synchronized with the approved public pages so rebuilding preserves these updates. The older design notes below describe the previous iteration where they differ from this section.
+
 Start with `npm start`, then open http://127.0.0.1:4173/.
 No package installation is needed. Node.js is the only runtime requirement.
 
