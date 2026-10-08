@@ -88,7 +88,7 @@ html:has(.home-page.platform-ready:not([data-stage="workspace"])) { overflow-y: 
   transform: translateX(-50%);
   padding: 12px;
   min-height: 44px;
-  color: #365b72;
+  color: #52788e;
   font: 400 14px/1.4 "Departure Mono", "Geist Mono", monospace;
   letter-spacing: .08em;
   transition: opacity 180ms ease, visibility 180ms;
