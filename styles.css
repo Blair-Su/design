@@ -120,27 +120,19 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
 .southern-laptop video { position: absolute; left: 10.2%; top: 6.3%; width: 79.6%; height: 82.9%; object-fit: cover; background: #000; }
 .southern-laptop img { position: relative; z-index: 1; object-fit: contain; }
 .nalu-cover { position: relative; overflow: hidden; background: #fcf9fc; --nalu-cycle: 12s; }
-.nalu-cover::before { content: ""; position: absolute; inset: -30% -15% -90%; background: url("assets/case-studies/KUU4zVZwe0AyAhWi26OOCIMBDl4.webp") center / contain no-repeat; opacity: 0.75; }
-.nalu-cover .nalu-cover-scene { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transform: scale(1.035); pointer-events: none; }
-.nalu-cover-logo { position: absolute; left: 50%; top: 50%; width: 30%; transform: translate(-50%, -50%); pointer-events: none; }
-.nalu-cover-logo img { width: 100%; height: auto; object-fit: contain; }
-/* Recolor only the wordmark over the dark scene; the supplied icon stays intact. */
-.nalu-cover-logo::after { content: ""; position: absolute; inset: 0; background: #fcf8f3; -webkit-mask: url("assets/nalu-logo.png") center / 100% 100% no-repeat; mask: url("assets/nalu-logo.png") center / 100% 100% no-repeat; clip-path: inset(0 30% 0 0); opacity: 0; }
-/* The opening logo travels and fades into the wordmark included in the artwork. */
-.nalu-cover.is-ready .nalu-cover-scene { animation: nalu-scene-reveal var(--nalu-cycle) cubic-bezier(.4, 0, .2, 1) infinite both; }
-.nalu-cover.is-ready .nalu-cover-logo { animation: nalu-logo-travel var(--nalu-cycle) cubic-bezier(.4, 0, .2, 1) infinite both; }
-.nalu-cover.is-ready .nalu-cover-logo::after { animation: nalu-logo-contrast var(--nalu-cycle) ease-in-out infinite both; }
-@keyframes nalu-scene-reveal {
-  0%, 20%, 96%, 100% { opacity: 0; transform: scale(1.035); }
-  36%, 80% { opacity: 1; transform: scale(1); }
-}
-@keyframes nalu-logo-travel {
-  0%, 20%, 96%, 100% { left: 50%; top: 50%; transform: translate(-50%, -50%) scale(1); opacity: 1; }
-  36%, 80% { left: 91.6%; top: 91%; transform: translate(-50%, -50%) scale(.3233); opacity: 0; }
-}
-@keyframes nalu-logo-contrast {
-  0%, 23%, 94%, 100% { opacity: 0; }
-  36%, 80% { opacity: 1; }
+.nalu-cover-brand { position: absolute; inset: 0; overflow: hidden; display: grid; place-items: center; background: #fcf9fc; pointer-events: none; }
+.nalu-cover-brand::before { content: ""; position: absolute; inset: -30% -15% -90%; background: url("assets/case-studies/KUU4zVZwe0AyAhWi26OOCIMBDl4.webp") center / contain no-repeat; opacity: 0.75; }
+.nalu-cover-brand img { position: relative; width: 30%; height: auto; object-fit: contain; }
+.nalu-cover .nalu-cover-frame { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.nalu-cover-scene { opacity: 0; }
+/* Keep the first complete frame opaque below the second so the dissolve never
+   flashes through the background. Both pictures stay fixed throughout the loop. */
+.nalu-cover.is-ready .nalu-cover-scene { animation: nalu-cover-crossfade var(--nalu-cycle) cubic-bezier(.45, 0, .55, 1) infinite both paused; }
+.nalu-cover.is-ready.is-playing .nalu-cover-scene { animation-play-state: running; }
+.nalu-cover.is-static .nalu-cover-scene { opacity: 1; }
+@keyframes nalu-cover-crossfade {
+  0%, 35%, 100% { opacity: 0; }
+  50%, 85% { opacity: 1; }
 }
 /* Lighthouse keeps the Selected Projects default artwork; only its phones move.
    Preserve its existing six-second movement and screen transitions. */
@@ -285,7 +277,5 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
   html { scroll-behavior: auto; }
   .copy-status, .custom-cursor, .custom-cursor .cursor-label, .footer-card { transition: none; }
   .lighthouse-phone, .lighthouse-screen-next { animation: none; }
-  .nalu-cover.is-ready .nalu-cover-scene { animation: none; opacity: 1; transform: none; }
-  .nalu-cover.is-ready .nalu-cover-logo { animation: none; opacity: 0; }
-  .nalu-cover.is-ready .nalu-cover-logo::after { animation: none; opacity: 1; }
+  .nalu-cover.is-ready .nalu-cover-scene { animation: none; opacity: 1; }
 }

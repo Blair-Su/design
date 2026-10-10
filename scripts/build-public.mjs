@@ -7,7 +7,7 @@ await rm(target, { recursive: true, force: true });
 await mkdir(target, { recursive: true });
 // Only browser assets are published. Server modules, credentials, tests and references stay out.
 for (const entry of await readdir(root, { withFileTypes: true })) {
-  const publicDirectory = entry.isDirectory() && (entry.name === 'assets' || /^project-\d-/.test(entry.name));
+  const publicDirectory = entry.isDirectory() && (entry.name === 'assets' || entry.name === 'cube' || /^project-\d-/.test(entry.name));
   const publicFile = entry.isFile() && /\.(html|css|js)$/.test(entry.name) && entry.name !== 'preview.html';
   if (publicDirectory || publicFile) await cp(`${root}${entry.name}`, `${target}/${entry.name}`, { recursive: true });
 }

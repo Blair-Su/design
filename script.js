@@ -72,13 +72,29 @@ if (header && menuToggle && navigation) {
   window.addEventListener('pagehide', () => setMenu(false));
 }
 
-// Start with the centered brand, then reveal the supplied composition only once
-// its image is decoded. No hover is required.
+// Dissolve between two complete, stationary pictures after both have decoded.
 const naluCover = document.querySelector('.nalu-cover');
 if (naluCover) {
   const scene = naluCover.querySelector('.nalu-cover-scene');
-  scene.decode().then(() => naluCover.classList.add('is-ready')).catch(() => {
-    // Keep the branded opening if the artwork cannot load.
+  const images = [...naluCover.querySelectorAll('img')];
+  Promise.allSettled(images.map(image => image.decode())).then(results => {
+    if (results.some(result => result.status === 'rejected')) {
+      // Wait for both loads before choosing the surviving picture.
+      if (scene.complete && scene.naturalWidth) naluCover.classList.add('is-static');
+      return;
+    }
+    naluCover.classList.add('is-ready');
+    let inView = !('IntersectionObserver' in window);
+    const updatePlayback = () => naluCover.classList.toggle('is-playing', inView && !document.hidden);
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(([entry]) => {
+        inView = entry.isIntersecting;
+        updatePlayback();
+      });
+      observer.observe(naluCover);
+    }
+    document.addEventListener('visibilitychange', updatePlayback);
+    updatePlayback();
   });
 }
 

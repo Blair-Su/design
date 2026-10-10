@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const assert = require('node:assert/strict');
 const shared = fs.readFileSync('script.js', 'utf8');
-const source = shared.slice(shared.indexOf("const header ="), shared.indexOf('// Start with the centered brand'));
+const source = shared.slice(shared.indexOf("const header ="), shared.indexOf('const naluCover ='));
 
 function setup({ home = true, casePage = false, mobile = true, hasHeader = true } = {}) {
   const documentEvents = {}, windowEvents = {};
