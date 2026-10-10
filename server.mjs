@@ -18,6 +18,7 @@ const localCasePreviews = new Map([
   ['/project-1-lighthouse', '/lighthouse-preview/'],
   ['/project-2-southerncrafted', '/southern-preview/'],
   ['/project-4-nalu', '/nalu-preview/'],
+  ['/project-5-cube', '/cube-preview/'],
 ]);
 const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.woff2': 'font/woff2', '.png': 'image/png', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.gif': 'image/gif', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.mp4': 'video/mp4', '.json': 'application/json' };
 http.createServer(async (req, res) => {

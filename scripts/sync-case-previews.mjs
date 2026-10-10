@@ -7,6 +7,7 @@ const pages = [
   ['southern', 'project-2-southerncrafted'],
   ['hhi', 'project-3-hhi'],
   ['nalu', 'project-4-nalu'],
+  ['cube', 'project-5-cube'],
 ];
 
 // Approved drafts remain editable; GitHub Pages serves these canonical copies.
@@ -20,9 +21,10 @@ for (const [name, route] of pages) {
   for (const extension of ['css', 'js']) {
     await cp(`${source}/${name}.${extension}`, `${target}/${name}.${extension}`);
   }
-  if (name === 'hhi') {
+  if (name === 'hhi' || name === 'cube') {
     await cp(`${source}/assets`, `${target}/assets`, { recursive: true });
   }
+  if (name === 'cube') await cp(`${source}/card.css`, `${target}/card.css`);
 }
 
-console.log('Synced four approved case studies to their public routes.');
+console.log('Synced five approved case studies to their public routes.');

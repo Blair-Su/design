@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="cube-illustration" viewBox="0 0 540 540" role="img" aria-labelledby="cube-visual-title">
+          <title id="cube-visual-title">A simple blue cube, seen from a different angle</title>
+          <defs>
+            <linearGradient id="cube-top" x1="0" y1="0" x2=".85" y2="1"><stop stop-color="#e2e6ff"/><stop offset="1" stop-color="#9ba5ff"/></linearGradient>
+            <linearGradient id="cube-left" x1="0" y1="0" x2="1" y2=".8"><stop stop-color="#7d8aff"/><stop offset=".55" stop-color="#5866f3"/><stop offset="1" stop-color="#5059ed"/></linearGradient>
+            <linearGradient id="cube-right" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5664ef"/><stop offset="1" stop-color="#3543c2"/></linearGradient>
+            <radialGradient id="cube-floor"><stop stop-color="#5059ed" stop-opacity=".2"/><stop offset=".65" stop-color="#5059ed" stop-opacity=".06"/><stop offset="1" stop-color="#5059ed" stop-opacity="0"/></radialGradient>
+          </defs>
+          <ellipse class="cube-floor" cx="270" cy="482" rx="186" ry="43" fill="url(#cube-floor)"/>
+          <g class="cube-body" stroke-linejoin="round">
+            <path d="M270 54 445 155 270 256 95 155Z" fill="url(#cube-top)"/>
+            <path d="M95 155 270 256v202L95 357Z" fill="url(#cube-left)"/>
+            <path d="m270 256 175-101v202L270 458Z" fill="url(#cube-right)"/>
+            <path d="M95 155 270 256 445 155M270 256v202" fill="none" stroke="#eef0ff" stroke-opacity=".65" stroke-width="1.4"/>
+            <path d="M95 155 270 54 445 155" fill="none" stroke="#d6dcff" stroke-width="1.4"/>
+          </g>
+        </svg>

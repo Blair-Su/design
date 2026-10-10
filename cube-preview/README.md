@@ -1,8 +1,8 @@
-# Cube.AI — local portfolio draft
+# Cube.AI — portfolio case study
 
-Open `/cube-preview/` using the portfolio's local server. The local homepage links to this draft after the existing four projects.
+Edit `/cube-preview/` using the portfolio's local server. The homepage links to the published case study at `/project-5-cube/`.
 
-This case-study page is excluded from the case preview sync and public build. Its homepage card is enclosed in `local-draft` markers, which the build removes. The two interactive experiences are published independently; see their public URLs below.
+The case-study page, styles, scripts, card and artwork are synchronized to `/project-5-cube/` by `npm run build`. The user approved publishing the complete case study on October 10, 2026. The two interactive experiences remain published independently; see their public URLs below.
 
 ## Content sources
 
@@ -18,7 +18,7 @@ The project duration was not specified in the supplied material or the reviewed 
 
 ## Public prototype and demo
 
-The two experiences are published through the portfolio's GitHub Pages repository. Their canonical public files are in `../cube/prototype/` and `../cube/demo/`; the older copies here are local snapshots. Each experience keeps its own browser-storage namespace. Cross-links work between the public directories, and Copy app link returns the public app URL. The case study itself remains a local draft.
+The two experiences are published through the portfolio's GitHub Pages repository. Their canonical public files are in `../cube/prototype/` and `../cube/demo/`; the older copies here are local snapshots. Each experience keeps its own browser-storage namespace. Cross-links work between the public directories, and Copy app link returns the public app URL. The case study is published at https://www.blairsu.design/project-5-cube/.
 
 - Prototype: https://www.blairsu.design/cube/prototype/
 - Demo: https://www.blairsu.design/cube/demo/

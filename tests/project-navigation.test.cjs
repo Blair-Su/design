@@ -8,6 +8,7 @@ for (const [folder, file, prefix] of [
   ['project-2-southerncrafted', 'southern', 'sc'],
   ['project-3-hhi', 'hhi', 'hhi'],
   ['project-4-nalu', 'nalu', 'nl'],
+  ['project-5-cube', 'cube', 'cb'],
   ['cube-preview', 'cube', 'cb'],
 ]) {
   const html = fs.readFileSync(`${folder}/index.html`, 'utf8');

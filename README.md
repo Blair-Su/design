@@ -6,7 +6,7 @@ Source code and assets for Blair Su's portfolio. Repository: https://github.com/
 
 GitHub Pages serves the static website directly from the root of the `main` branch. The `.nojekyll` file preserves the generated HTML, CSS, JavaScript and assets without Jekyll processing. The production domain is `www.blairsu.design`; its binding is recorded in `CNAME`. Push website updates to `main` to publish them. The Node.js server below is only for local preview.
 
-Before committing a website update, run `npm run build`: it syncs the approved case-study drafts to the four public `project-*` routes and prepares `public-dist/`. Commit the public route files as well as the editable drafts; GitHub Pages serves the repository root. `npm run site:sync` performs only the case-study sync.
+Before committing a website update, run `npm run build`: it syncs the approved case-study drafts to the five public `project-*` routes and prepares `public-dist/`. Commit the public route files as well as the editable drafts; GitHub Pages serves the repository root. `npm run site:sync` performs only the case-study sync.
 
 ## Current portfolio experience (October 2026)
 
@@ -18,6 +18,8 @@ Start with `npm start`, then open http://127.0.0.1:4173/.
 No package installation is needed. Node.js is the only runtime requirement.
 
 Open http://127.0.0.1:4173/preview.html to switch between the homepage, About and four case studies, and between Studio (2160px), Desktop (1440px), Tablet (834px), and Phone (390px). Homepage previews use a fixed display viewport and scroll inside the frame, so the first-screen Hero is represented accurately. Case-study previews also scroll inside a viewport so their fixed Contents bar stays visible. Use `preview.html?device=studio` to open the 2160 × 1200 large-display preset directly. This review page is separate from the portfolio itself.
+
+The Playground at `/?view=playground` contains five works: Vibe Coding Sky Signature, Ski on Vinyl, Quiet Luxury Research, Butterfly Flutter and Snow Mountain. Cube.AI is also published as the fifth case study at `/project-5-cube/`, with its prototype and demo under `/cube/`.
 
 ## Little fox AI companion
 
@@ -109,7 +111,7 @@ The intro keeps the heading and three-photo composition without the former typin
 
 ## Case studies
 
-The editable case studies live in `hhi-preview/`, `lighthouse-preview/`, `southern-preview/` and `nalu-preview/`. Each uses the shared homepage header, footer, fonts and cursor, with a responsive Table of Contents and project-specific CSS/JavaScript. Back and Table of Contents match the navigation entries' type size. Run `npm run site:sync` or `npm run build` to copy the approved pages, styles, scripts and local HHI artwork into their canonical routes. Preview pages retain `noindex`; the published copies do not.
+The editable case studies live in `hhi-preview/`, `lighthouse-preview/`, `southern-preview/`, `nalu-preview/` and `cube-preview/`. Each uses the shared homepage header, footer, fonts and cursor, with a responsive Table of Contents and project-specific CSS/JavaScript. Back and Table of Contents match the navigation entries' type size. Run `npm run site:sync` or `npm run build` to copy the approved pages, styles, scripts and local HHI artwork into their canonical routes. Preview pages retain `noindex`; the published copies do not.
 
 - `/project-3-hhi/`: Overview, The problem, Why this touchpoint, The design, Results and Reflection. Ticket-confirmation artwork opens in a scrollable, keyboard-accessible dialog.
 - `/project-1-lighthouse/`: the revised diabetes-travel story, with responsive high-resolution cover and Final Solution boards.
