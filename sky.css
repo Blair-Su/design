@@ -71,7 +71,7 @@ body.case-page, .case-page .site-header nav { background: var(--paper); }
 .case-page {
   --case-toc-highlight: #e1e1e1;
 }
-.case-page :is(.lh-toc, .sc-toc, .hhi-toc, .nl-toc) ol a:is(:hover, [aria-current="location"]) {
+.case-page :is(.lh-toc, .sc-toc, .hhi-toc, .nl-toc, .cb-toc) ol a:is(:hover, [aria-current="location"]) {
   color: var(--ink);
   background: var(--case-toc-highlight);
 }
@@ -90,7 +90,7 @@ body.case-page, .case-page .site-header nav { background: var(--paper); }
     pointer-events: none;
     transition: transform 300ms cubic-bezier(.22, 1, .36, 1), height 300ms cubic-bezier(.22, 1, .36, 1);
   }
-  .case-page :is(.lh-toc, .sc-toc, .hhi-toc, .nl-toc) .has-toc-indicator a[aria-current="location"] {
+  .case-page :is(.lh-toc, .sc-toc, .hhi-toc, .nl-toc, .cb-toc) .has-toc-indicator a[aria-current="location"] {
     background: transparent;
   }
 }
@@ -99,6 +99,10 @@ body.case-page, .case-page .site-header nav { background: var(--paper); }
 }
 /* Project directories share the homepage sidebar's width and left edge. */
 @media (min-width: 1024px) {
+  .case-page {
+    --case-layout-gutter: max(var(--portfolio-page-gutter), calc((100vw - var(--portfolio-max-width)) / 2));
+    --case-fox-right: max(calc(var(--gutter) + 8px), calc((100vw - var(--rail-width)) / 2 + 8px));
+  }
   /* A subtle full-height surface ends halfway through the sidebar/content gap. */
   body.case-page::before {
     content: "";
@@ -110,14 +114,25 @@ body.case-page, .case-page .site-header nav { background: var(--paper); }
     z-index: -1;
   }
   .case-page .site-footer { display: none; }
-  .case-page :is(.lh-layout, .sc-layout, .hhi-layout, .nl-layout) {
+  .case-page :is(.lh-layout, .sc-layout, .hhi-layout, .nl-layout, .cb-layout) {
     width: calc(100% - var(--portfolio-page-gutter) * 2);
     max-width: var(--portfolio-max-width);
     grid-template-columns: var(--portfolio-sidebar-width) minmax(0, 1fr);
     column-gap: var(--portfolio-column-gap);
     padding-inline: 0;
+    /* Balance the visible gap to the fox with the gap from the sidebar surface. */
+    padding-right: calc(var(--case-fox-right) + 96px + var(--portfolio-column-gap) / 2 - var(--case-layout-gutter) - 6px);
   }
-  .case-page :is(.lh-sidebar, .sc-sidebar, .hhi-sidebar, .nl-sidebar) {
+  .case-page:has(.fox-companion.is-open) :is(.lh-layout, .sc-layout, .hhi-layout, .nl-layout, .cb-layout) {
+    /* Expand the right rail only while chat is visible. */
+    padding-right: clamp(352px, calc(50vw - 544px), 472px);
+  }
+  .case-page .fox-companion .fox-panel {
+    right: max(16px, calc(var(--fox-right) - 32px));
+    width: 320px;
+    height: min(560px, calc(var(--fox-view-height) - 160px));
+  }
+  .case-page :is(.lh-sidebar, .sc-sidebar, .hhi-sidebar, .nl-sidebar, .cb-sidebar) {
     padding: 32px 12px 0 0;
   }
   .case-sidebar-inner {
@@ -133,7 +148,7 @@ body.case-page, .case-page .site-header nav { background: var(--paper); }
     scrollbar-color: #b7c6ce transparent;
   }
   .case-sidebar-connect { display: block; flex-shrink: 0; }
-  .case-page :is(.lh-toc, .sc-toc, .hhi-toc, .nl-toc) {
+  .case-page :is(.lh-toc, .sc-toc, .hhi-toc, .nl-toc, .cb-toc) {
     position: static;
     padding: 0;
     flex-shrink: 0;
@@ -145,7 +160,7 @@ body.case-page, .case-page .site-header nav { background: var(--paper); }
     letter-spacing: .06em;
     text-transform: uppercase;
   }
-  .case-page :is(.lh-toc, .sc-toc, .hhi-toc, .nl-toc) ol a {
+  .case-page :is(.lh-toc, .sc-toc, .hhi-toc, .nl-toc, .cb-toc) ol a {
     margin-left: 0;
     padding-inline: 12px;
   }
@@ -175,7 +190,7 @@ body.case-page, .case-page .site-header nav { background: var(--paper); }
     text-transform: none;
   }
   .case-page .case-sidebar-label a:hover { color: var(--ink); }
-  .case-page :is(.lh-intro, .sc-intro, .hhi-intro, .nl-intro) { padding-top: 32px; }
+  .case-page :is(.lh-intro, .sc-intro, .hhi-intro, .nl-intro, .cb-intro) { padding-top: 32px; }
 }
 .portfolio-sky {
   position: fixed;
@@ -377,22 +392,22 @@ body.case-page, .case-page .site-header nav { background: var(--paper); }
 }
 .footer-brand p, .footer-column h3 { color: #36576a; }
 .about-page { --about-muted: #36576a; }
-.case-page :is(.lh-article, .sc-article, .hhi-article, .nl-article) { --project-ink: #193b50; }
-.case-page :is(.lh-layout, .sc-layout, .hhi-layout, .nl-layout,
-  .lh-article, .sc-article, .hhi-article, .nl-article,
-  .lh-project-meta dl, .sc-project-meta dl, .hhi-project-meta dl, .nl-project-meta dl,
+.case-page :is(.lh-article, .sc-article, .hhi-article, .nl-article, .cb-article) { --project-ink: #193b50; }
+.case-page :is(.lh-layout, .sc-layout, .hhi-layout, .nl-layout, .cb-layout,
+  .lh-article, .sc-article, .hhi-article, .nl-article, .cb-article,
+  .lh-project-meta dl, .sc-project-meta dl, .hhi-project-meta dl, .nl-project-meta dl, .cb-project-meta dl,
   .lh-project-meta dl > div, .sc-project-meta dl > div,
-  .hhi-project-meta dl > div, .nl-project-meta dl > div) { border: 0; }
+  .hhi-project-meta dl > div, .nl-project-meta dl > div, .cb-project-meta dl > div) { border: 0; }
 /* Chapter dividers share the content inset at every screen size. */
 .case-page { --case-content-inset: 32px; }
-.case-page :is(.lh-inset, .sc-inset, .hhi-inset, .nl-inset) {
+.case-page :is(.lh-inset, .sc-inset, .hhi-inset, .nl-inset, .cb-inset) {
   padding-inline: var(--case-content-inset);
 }
-.case-page :is(.lh-section, .sc-section, .hhi-section, .nl-section) {
+.case-page :is(.lh-section, .sc-section, .hhi-section, .nl-section, .cb-section) {
   position: relative;
   border-top: 1px solid transparent;
 }
-.case-page :is(.lh-section, .sc-section, .hhi-section, .nl-section)::before {
+.case-page :is(.lh-section, .sc-section, .hhi-section, .nl-section, .cb-section)::before {
   content: "";
   position: absolute;
   top: -1px;
@@ -413,11 +428,13 @@ body.case-page, .case-page .site-header nav { background: var(--paper); }
   .home-page #work .project-caption { padding: 18px; gap: 18px; }
   .home-page #work .project-summary { font-size: 28px; }
 }
-@media (max-width: 767px) {
-  .portfolio-sky-image { height: 100%; }
+@media (max-width: 1023px) {
   .header-inner { height: 64px; }
   .site-header nav { background: #dff3fc; border: 0; border-radius: 12px; }
   .site-header nav a { border: 0; color: var(--ink); }
+}
+@media (max-width: 767px) {
+  .portfolio-sky-image { height: 100%; }
   .project-grid { row-gap: 24px; }
   .home-page #work .project-grid { padding-inline: 0; }
   .home-page #work .project-card { --glass-radius: 26px; padding: 12px; }

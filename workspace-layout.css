@@ -29,7 +29,7 @@ html:has(.home-page.platform-ready:not([data-stage="workspace"])) { overflow-y: 
   letter-spacing: .04em;
 }
 .mobile-menu-content { display: none; }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .home-page .site-header nav {
     align-self: center;
     gap: clamp(28px, 4vw, 60px);
@@ -191,21 +191,76 @@ html:has(.home-page.platform-ready:not([data-stage="workspace"])) { overflow-y: 
 }
 .profile-explore { margin-top: 28px; }
 .profile-nav {
+  --profile-nav-indicator-index: 0;
+  --profile-nav-item-step: 45px;
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
   margin-top: 10px;
+  padding: 5px 5px 10px;
+  border: 1px solid transparent;
+  border-radius: 18px;
+  background: rgb(255 255 255 / 45%);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
 }
+.profile-nav::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 5px;
+  right: 5px;
+  left: 5px;
+  height: 42px;
+  border: 1px solid rgb(255 255 255 / 32%);
+  border-radius: 12px;
+  background: linear-gradient(135deg,
+    rgb(255 255 255 / 60%) 0%,
+    rgb(255 255 255 / 38%) 42%,
+    rgb(237 249 255 / 26%) 72%,
+    rgb(255 255 255 / 46%) 100%);
+  -webkit-backdrop-filter: blur(26px) saturate(115%);
+  backdrop-filter: blur(26px) saturate(115%);
+  box-shadow:
+    inset 0 -1px 2px rgb(76 144 177 / 12%),
+    0 3px 10px rgb(23 78 111 / 8%),
+    0 1px 3px rgb(23 78 111 / 4%);
+  transform: translateY(calc(var(--profile-nav-indicator-index) * var(--profile-nav-item-step)));
+  transition: transform 220ms cubic-bezier(.22, 1, .36, 1);
+  pointer-events: none;
+}
+.profile-nav:has(> a:nth-child(1)[aria-current]) { --profile-nav-indicator-index: 0; }
+.profile-nav:has(> a:nth-child(2)[aria-current]) { --profile-nav-indicator-index: 1; }
+.profile-nav:has(> a:nth-child(3)[aria-current]) { --profile-nav-indicator-index: 2; }
+.profile-nav:has(> a:nth-child(1):is(:hover, :focus-visible)) { --profile-nav-indicator-index: 0; }
+.profile-nav:has(> a:nth-child(2):is(:hover, :focus-visible)) { --profile-nav-indicator-index: 1; }
+.profile-nav:has(> a:nth-child(3):is(:hover, :focus-visible)) { --profile-nav-indicator-index: 2; }
 .profile-nav a {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
-  gap: 12px;
-  min-height: 44px;
-  padding: 10px 12px;
+  justify-content: flex-start;
+  min-width: 0;
+  min-height: 42px;
+  padding: 9px 12px;
   border-radius: 12px;
-  font: 400 .9375rem/1.5 "Geist", Arial, sans-serif;
+  color: #33463b;
+  font: 400 16px/1.5 "Geist", Arial, sans-serif;
+  text-align: left;
+  white-space: nowrap;
+  transition: background-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
 }
-.profile-nav a[aria-current], .profile-nav a:not([aria-disabled]):hover { background: rgb(255 255 255 / 45%); }
+.profile-nav a[aria-current] {
+  background: transparent;
+  color: var(--ink);
+  box-shadow: none;
+}
+.profile-nav a:not([aria-disabled]):not([aria-current]):hover { background: transparent; }
+@media (prefers-reduced-motion: reduce) {
+  .profile-nav::before { transition: none; }
+}
 .profile-nav-pending { position: relative; cursor: default; }
 .profile-nav-tooltip {
   position: absolute;
@@ -224,40 +279,73 @@ html:has(.home-page.platform-ready:not([data-stage="workspace"])) { overflow-y: 
 .profile-nav-pending:is(:hover, :focus-visible) .profile-nav-tooltip { visibility: visible; }
 .profile-connect { display: flex; flex-wrap: wrap; gap: 10px 16px; margin-top: 30px; }
 .profile-availability-row { flex-basis: 100%; text-align: left; }
+.home-page .profile-availability {
+  box-sizing: border-box;
+  border: 1px solid rgb(255 255 255 / 70%);
+  background: linear-gradient(135deg,
+    rgb(255 255 255 / 72%) 0%,
+    rgb(255 255 255 / 48%) 42%,
+    rgb(237 249 255 / 34%) 72%,
+    rgb(255 255 255 / 57%) 100%);
+  -webkit-backdrop-filter: blur(26px) saturate(115%);
+  backdrop-filter: blur(26px) saturate(115%);
+  box-shadow:
+    inset 0 1px 1px rgb(255 255 255 / 90%),
+    inset 1px 0 1px rgb(255 255 255 / 46%),
+    inset 0 -1px 2px rgb(76 144 177 / 18%),
+    0 6px 18px rgb(23 78 111 / 8%);
+}
 .profile-section-title { width: 100%; color: #52788e; font: 400 .8125rem/1.5 "Departure Mono", "Geist Mono", monospace; text-transform: uppercase; letter-spacing: .06em; }
 .profile-connect a { font: 400 .875rem/1.5 "Geist", Arial, sans-serif; padding-block: 4px; }
 .profile-connect .profile-contact { flex-basis: 100%; overflow-wrap: anywhere; }
 .profile-connect a:hover { text-decoration: underline; text-underline-offset: 4px; }
-@media (min-width: 900px) {
+@media (min-width: 1024px) {
+  .portfolio-workspace {
+    /* Match the sticky sidebar's bottom inset so it stays put at page end. */
+    padding-bottom: var(--workspace-top);
+  }
   .profile-sidebar {
     display: flex;
     flex-direction: column;
     height: calc(100svh - var(--workspace-top) * 2);
+    overflow: visible;
+    padding-bottom: 0;
   }
   .profile-identity { flex-shrink: 0; }
   .profile-details {
     display: flex;
     flex-direction: column;
-    flex: 1 0 auto;
+    flex: 1;
+    min-height: 0;
   }
+  .profile-details > * { flex-shrink: 0; }
   .profile-explore {
-    margin-top: 28px;
-    margin-bottom: clamp(40px, 6svh, 72px);
+    margin-top: clamp(12px, 3svh, 28px);
+    margin-bottom: 12px;
   }
-  .profile-nav { gap: 6px; margin-top: 14px; }
+  .profile-nav { gap: 3px; margin-top: 14px; }
+  .profile-nav::before { border-radius: 14px; }
   .profile-nav a {
     min-height: 42px;
-    padding-block: 0;
+    padding: 9px 12px;
     border-radius: 14px;
     font-size: 16px;
-    line-height: 24px;
+    line-height: 1.5;
   }
   .profile-connect {
     margin-top: auto;
-    padding-top: 22px;
+    padding-top: clamp(12px, 2.5svh, 22px);
     border-top: 1px solid rgb(61 102 124 / 18%);
-    gap: 10px 20px;
+    gap: clamp(6px, 1.2svh, 10px) 20px;
   }
+}
+@media (min-width: 1024px) and (max-height: 620px) {
+  .home-page { --workspace-top: 12px; }
+  .profile-identity h2 { font-size: 28px; }
+  .profile-note { margin-top: 12px; font-size: 13px; line-height: 1.5; }
+  .profile-explore { margin-top: 12px; }
+  .profile-nav { margin-top: 8px; }
+  .profile-connect { padding-top: 12px; row-gap: 6px; }
 }
 .workspace-chat-rail { display: none; }
 .home-page .portfolio-workspace #work { min-width: 0; scroll-margin-top: var(--workspace-top); }
@@ -400,24 +488,17 @@ html:has(.home-page.platform-ready:not([data-stage="workspace"])) { overflow-y: 
   .profile-explore { margin-top: 6px; text-align: left; }
   .profile-connect { grid-column: 1 / -1; margin-top: 12px; gap: 4px 12px; text-align: left; }
   .profile-connect .profile-contact { flex-basis: auto; }
-  .profile-nav { flex-direction: row; gap: 6px; margin-top: 6px; }
-  .profile-nav a { min-height: 44px; padding: 8px; font-size: .875rem; }
+  .profile-nav { flex-direction: column; gap: 3px; margin-top: 6px; }
+  .profile-nav a { min-height: 42px; padding: 9px 12px; border-radius: 12px; font-size: 1rem; }
   .home-page .portfolio-workspace #work { scroll-margin-top: calc(var(--profile-height, 130px) + 28px); }
 }
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   html:has(.home-page) { scrollbar-gutter: auto; }
   html.mobile-menu-open,
   .home-page.mobile-menu-open { overflow: hidden; overscroll-behavior: none; }
   .home-page {
-    --workspace-gutter: 16px;
-    --workspace-card-width: 100%;
     --intro-header-height: calc(64px + env(safe-area-inset-top, 0px));
     --workspace-top: calc(var(--intro-header-height) + 24px);
-    /* Fox height + its bottom offset + a 24px gap after the last card. */
-    --workspace-fox-clearance: calc(96px + 14px + 24px);
-  }
-  .home-page .portfolio-workspace {
-    padding-bottom: calc(var(--workspace-fox-clearance) + env(safe-area-inset-bottom, 0px));
   }
   .home-page.platform-ready:is([data-stage="entering"], [data-stage="workspace"]) .site-header {
     opacity: 1;
@@ -509,8 +590,26 @@ html:has(.home-page.platform-ready:not([data-stage="workspace"])) { overflow-y: 
     font: 400 12px/1.5 "Geist", Arial, sans-serif;
     letter-spacing: 0;
   }
+  .home-page .portfolio-workspace #work { scroll-margin-top: var(--workspace-top); }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .home-page .portfolio-workspace { display: block; }
   .home-page .profile-sidebar { display: none; }
   .home-page .portfolio-workspace #work { scroll-margin-top: var(--workspace-top); }
+}
+@media (max-width: 767px) {
+  .home-page {
+    --workspace-gutter: 16px;
+    --workspace-card-width: 100%;
+    /* Reserve the wrapped invitation as well as the fox, its bottom offset,
+       and a 24px gap. Keep the space stable while invitation text rotates. */
+    --workspace-fox-bubble-clearance: 72px;
+    --workspace-fox-clearance: calc(96px + 14px + 24px);
+  }
+  .home-page .portfolio-workspace {
+    padding-bottom: calc(var(--workspace-fox-clearance) + var(--workspace-fox-bubble-clearance) + env(safe-area-inset-bottom, 0px));
+  }
+  .home-page .profile-sidebar { display: none; }
   .home-page #work:focus { outline: none; }
   .home-page .portfolio-workspace #work .project-grid { width: 100%; }
   .home-page .portfolio-workspace #work .project-link { grid-template-columns: minmax(0, 1fr); gap: 18px; }
@@ -543,13 +642,22 @@ html:has(.home-page.platform-ready:not([data-stage="workspace"])) { overflow-y: 
   .home-page .portfolio-workspace #work .project-meta > span { max-width: 100%; padding: 6px 8px; text-wrap: balance; }
   .home-page .hero .hero-inner { padding: 84px 16px; }
   .home-page .hero .intro-line { display: inline; }
-  .hero-scroll-cue { bottom: 24px; }
+  .hero-scroll-cue {
+    display: block;
+    bottom: 24px;
+    text-align: center;
+  }
+  .hero-scroll-cue svg {
+    margin-left: 4px;
+    vertical-align: -2px;
+  }
 }
 @media (max-width: 600px) {
   .home-page { --workspace-fox-clearance: calc(80px + 8px + 24px); }
 }
 @media (max-width: 767px) and (max-height: 580px) {
-  .home-page { --workspace-fox-clearance: calc(64px + 5px + 24px); }
+  /* On short screens the bubble sits beside the fox, within the same row. */
+  .home-page { --workspace-fox-clearance: calc(64px + 5px + 24px); --workspace-fox-bubble-clearance: 0px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .intro-portrait,

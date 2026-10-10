@@ -1,27 +1,27 @@
-/* About and projects occupy the same center column of the home workspace. */
+/* Projects, About and Playground share the center column and view transitions. */
 .portfolio-workspace > [hidden] { display: none; }
-.home-page .portfolio-workspace > :is(#work, #about) {
+.home-page .portfolio-workspace > :is(#work, #about, #playground) {
   opacity: 1;
   transform: translateY(0);
   transition: opacity var(--view-exit-duration, 180ms) ease,
     transform var(--view-exit-duration, 180ms) ease;
 }
-.home-page .portfolio-workspace > :is(#work, #about).is-view-leaving {
+.home-page .portfolio-workspace > :is(#work, #about, #playground).is-view-leaving {
   opacity: 0;
   transform: translateY(-10px);
   pointer-events: none;
 }
-.home-page .portfolio-workspace > :is(#work, #about).is-view-preparing {
+.home-page .portfolio-workspace > :is(#work, #about, #playground).is-view-preparing {
   opacity: 0;
   transform: translateY(16px);
   transition: none;
 }
-.home-page .portfolio-workspace > :is(#work, #about).is-view-arriving {
+.home-page .portfolio-workspace > :is(#work, #about, #playground).is-view-arriving {
   transition-duration: var(--view-entry-duration, 420ms);
   transition-timing-function: cubic-bezier(.22, 1, .36, 1);
 }
 @media (prefers-reduced-motion: reduce) {
-  .home-page .portfolio-workspace > :is(#work, #about) { transition: none; }
+  .home-page .portfolio-workspace > :is(#work, #about, #playground) { transition: none; }
 }
 .home-page .workspace-about { min-width: 0; scroll-margin-top: var(--workspace-top); }
 .home-page .workspace-about:focus { outline: none; }
@@ -80,8 +80,8 @@
   border: 0;
 }
 .workspace-about-card .about-section-heading h2 { font-size: 28px; }
-.workspace-about-card .about-resume-link { font: 400 13px/1.5 "Geist", Arial, sans-serif; }
-.workspace-about-card .about-resume-link:hover { color: #526a7b; }
+.workspace-about-card .about-resume-link { color: #36576a; font: 400 13px/1.5 "Geist", Arial, sans-serif; }
+.workspace-about-card .about-resume-link:hover { color: var(--accent-orange); }
 .workspace-about-card .about-resume-arrow {
   width: 14px;
   height: 14px;
@@ -212,10 +212,10 @@
   min-height: 34px;
   gap: 7px;
   padding: 6px 12px;
-  border: 1px solid #e5e5e5;
+  border: 1px solid #526a7b;
   border-radius: 999px;
   background: transparent;
-  color: var(--ink);
+  color: #526a7b;
   font: 400 13px/1.4 "Geist", Arial, sans-serif;
   box-shadow: none;
   transition: color 180ms ease, border-color 180ms ease, transform 140ms ease;
@@ -223,7 +223,7 @@
 .workspace-about-card .gallery-toggle svg { width: 14px; height: 14px; }
 .workspace-about-card .gallery-toggle .gallery-pause-icon { stroke-width: 2; }
 .workspace-about-card .gallery-toggle .gallery-play-icon { fill: currentColor; stroke: none; }
-.workspace-about-card .gallery-toggle:hover { color: #526a7b; border-color: #e5e5e5; }
+.workspace-about-card .gallery-toggle:hover { color: #526a7b; }
 .workspace-about-card .gallery-toggle:active { transform: scale(.98); }
 .workspace-about-card .gallery-toggle:focus-visible { outline: 2px solid #526a7b; outline-offset: 3px; }
 .home-page .photo-lightbox { border-radius: 20px; }

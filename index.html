@@ -10,17 +10,22 @@
     <link rel="preload" href="assets/fonts/averia-serif-libre.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/fonts/departure-mono.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="styles.css?v=black-cursor-124">
-    <script src="script.js?v=home-invitation-128" defer></script>
-  <link rel="stylesheet" href="/sky.css?v=project-connect-95">
+    <link rel="stylesheet" href="styles.css?v=nalu-brand-crossfade-168">
+    <script src="script.js?v=nalu-brand-crossfade-168" defer></script>
+  <link rel="stylesheet" href="/sky.css?v=tablet-header-159">
   <link rel="stylesheet" href="/about-page.css">
-  <link rel="stylesheet" href="/workspace-layout.css?v=home-invitation-128">
-  <script type="module" src="/workspace-layout.js?v=about-photos-92"></script>
+  <link rel="stylesheet" href="/workspace-layout.css?v=desktop-sidebar-fit-169">
+  <script type="module" src="/workspace-layout.js?v=tablet-header-159"></script>
   <link rel="preload" href="/assets/about/blair-selfie-intro.webp" as="image" fetchpriority="high">
   <link rel="preload" href="/assets/about/midterm-team-intro.webp" as="image" fetchpriority="high">
   <link rel="preload" href="/assets/about/weekend-intro.webp" as="image" fetchpriority="high">
   <link rel="preload" href="/assets/about/skiing-intro.webp" as="image" fetchpriority="high">
-  <link rel="stylesheet" href="/home-about.css?v=matched-name-size-129">
+  <link rel="stylesheet" href="/home-about.css?v=resume-hover-orange-174">
+  <link rel="stylesheet" href="/playground.css?v=butterfly-black-11">
+  <script src="/playground.js?v=butterfly-1" defer></script>
+  <!-- local-draft:start -->
+    <link rel="stylesheet" href="/cube-preview/card.css?v=monitor-cover-2">
+  <!-- local-draft:end -->
   <script src="/home-about.js?v=about-text-reveal-79" defer></script>
   <script type="module" src="/about-intro-photos.js?v=instant-photos-102"></script>
   <script src="/about-page.js?v=webp-gallery-101" defer></script>
@@ -30,7 +35,7 @@
   <body id="top" class="home-page">
     <script>
       // Set the return destination before the hero is painted.
-      if (['work', 'about'].includes(new URLSearchParams(location.search).get('view'))) {
+      if (['work', 'about', 'playground'].includes(new URLSearchParams(location.search).get('view'))) {
         document.body.classList.add('platform-ready', 'workspace-mode');
         document.body.dataset.stage = 'workspace';
         document.body.dataset.workspaceView = new URLSearchParams(location.search).get('view');
@@ -62,7 +67,7 @@
 
             <a href="#work" data-mobile-page="workspace" data-workspace-view="work">My Project</a>
             <a href="/?view=about" data-workspace-view="about" data-mobile-page="about">About Me</a>
-            <a role="link" aria-disabled="true"><span>Playground<small>Coming soon</small></span></a>
+            <a href="/?view=playground" data-workspace-view="playground" data-mobile-page="playground">Playground</a>
             <p class="mobile-menu-label">Let's connect</p>
             <div class="mobile-menu-other">
               <a href="mailto:suxun70@gmail.com">Email</a>
@@ -103,7 +108,7 @@
               <nav class="profile-nav" aria-labelledby="profile-explore-title">
                 <a href="#work" data-workspace-view="work" aria-current="location">My Project</a>
                 <a href="/?view=about" data-workspace-view="about">About Me</a>
-                <a class="profile-nav-pending" role="link" aria-disabled="true" aria-describedby="playground-tooltip" tabindex="0">Playground<span class="profile-nav-tooltip" id="playground-tooltip" role="tooltip">Coming soon</span></a>
+                <a href="/?view=playground" data-workspace-view="playground">Playground</a>
               </nav>
             </div>
             <div class="profile-connect">
@@ -119,17 +124,6 @@
       <section class="work" id="work" aria-label="Selected projects" tabindex="-1">
         <div class="frame project-grid">
           <article class="project-card">
-            <a class="project-link" data-cursor="sponsored" draggable="false" href="/project-3-hhi/" aria-label="HHI Concours · Improved Car Concours Journey, Figma Make Prototype">
-              <div class="project-image hhi-cover" aria-hidden="true" data-scroll-reveal="off" style="background-image: url(data:image/webp;base64,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); background-size: cover; background-position: center;">
-                <img src="/assets/selected-projects/hhi-project-cover-1280.webp" srcset="/assets/selected-projects/hhi-project-cover-640.webp 640w, /assets/selected-projects/hhi-project-cover-1280.webp 1280w" sizes="(max-width: 767px) calc(100vw - 92px), (max-width: 1100px) 70vw, 360px" alt="" width="1280" height="720" loading="eager" fetchpriority="high" decoding="async" draggable="false">
-              </div>
-              <div class="project-caption">
-                <h3 class="project-description"><span class="project-name">HHI Concours</span><span class="project-separator"> · </span><span class="project-summary">Improved Car Concours Journey</span></h3>
-                <p class="project-meta"><span>Figma Make Prototype</span></p>
-              </div>
-            </a>
-          </article>
-          <article class="project-card">
             <a class="project-link" draggable="false" href="/project-1-lighthouse/" aria-label="Lighthouse · Diabetic Travel Support Concept, CodeX &amp; Figma Prototype">
               <div class="project-image lighthouse-cover" aria-hidden="true">
                 <img class="lighthouse-droplet" src="assets/selected-projects/mM7MY3MEJ.svg" alt="" width="500" height="668" draggable="false">
@@ -137,15 +131,15 @@
                 <img class="lighthouse-station lighthouse-station-front" src="assets/case-studies/T0SHogVNSxextrYjmCSlr4D4OgA.webp" alt="" width="2048" height="1152" draggable="false">
                 <div class="lighthouse-phone lighthouse-phone-left">
                   <div class="lighthouse-screen">
-                    <img src="assets/case-studies/4asSqDFBe4gQhXKqSerGZrbQsQ.webp" alt="" width="944" height="2048" draggable="false">
-                    <img class="lighthouse-screen-next" src="assets/selected-projects/DB3WiU99cDHkX5zihTTQ7XgQ.png" alt="" draggable="false">
+                    <img src="assets/selected-projects/lighthouse-screens/home-onboarding-2.webp" alt="" width="1572" height="3408" draggable="false">
+                    <img class="lighthouse-screen-next" src="assets/case-studies/lighthouse-motion/df-restaurant-list-directions.png" alt="" width="1572" height="3408" draggable="false">
                   </div>
                   <img class="lighthouse-phone-frame" src="assets/case-studies/za89hDhO3s3x8bS5lV34G3I.webp" alt="" width="1017" height="2048" draggable="false">
                 </div>
                 <div class="lighthouse-phone lighthouse-phone-right">
                   <div class="lighthouse-screen">
-                    <img src="assets/case-studies/Ml4L5ZApGUYrPQaxrwAFTZ8W8jw.webp" alt="" width="945" height="2048" draggable="false">
-                    <img class="lighthouse-screen-next" src="assets/selected-projects/VE8MPWzaiZmaWQv5oJCFWb7M.png" alt="" draggable="false">
+                    <img src="assets/selected-projects/lighthouse-screens/home-onboarding-3.webp" alt="" width="1572" height="3408" draggable="false">
+                    <img class="lighthouse-screen-next" src="assets/selected-projects/lighthouse-screens/home-lock-screen.webp" alt="" width="1575" height="3408" draggable="false">
                   </div>
                   <img class="lighthouse-phone-frame" src="assets/case-studies/za89hDhO3s3x8bS5lV34G3I.webp" alt="" width="1017" height="2048" draggable="false">
                 </div>
@@ -160,7 +154,7 @@
             <a class="project-link" draggable="false" href="/project-2-southerncrafted/" aria-label="Southern Crafted · Redesigned Home Goods Website Experience, UI/UX Design">
               <div class="project-image southern-cover" aria-hidden="true">
                 <div class="southern-laptop">
-                  <video autoplay muted loop playsinline preload="metadata" tabindex="-1" poster="assets/case-studies/fTNwgzhihUwdXBxzkZoPmY715s.webp">
+                  <video autoplay muted loop playsinline preload="auto" tabindex="-1" poster="assets/case-studies/fTNwgzhihUwdXBxzkZoPmY715s.webp">
                     <source src="assets/case-studies/ruGh492Q5ryQERn5JMd03pJao.mp4" type="video/mp4">
                   </video>
                   <img src="assets/case-studies/pH2TNbno4vDLDNLVZa7jWqYM0X8.webp" alt="" width="2048" height="1241" draggable="false">
@@ -172,13 +166,40 @@
               </div>
             </a>
           </article>
+          <!-- local-draft:start -->
+          <article class="project-card">
+            <a class="project-link" draggable="false" href="/cube-preview/" aria-label="Cube.AI · A thinking space for designers, Solo design and build">
+              <div class="project-image cube-project-cover" aria-hidden="true">
+                <picture>
+                  <source media="(prefers-reduced-motion: reduce)" srcset="/cube-preview/assets/cube-monitor-poster.png?v=2">
+                  <img src="/cube-preview/assets/cube-monitor.gif?v=2" alt="" width="960" height="540" loading="lazy" decoding="async" draggable="false">
+                </picture>
+              </div>
+              <div class="project-caption">
+                <h3 class="project-description"><span class="project-name">Cube.AI</span><span class="project-separator"> · </span><span class="project-summary">A thinking space for designers</span></h3>
+                <p class="project-meta"><span>Solo Design &amp; Build</span></p>
+              </div>
+            </a>
+          </article>
+          <!-- local-draft:end -->
+          <article class="project-card">
+            <a class="project-link" data-cursor="sponsored" draggable="false" href="/project-3-hhi/" aria-label="HHI Concours · Improved Car Concours Journey, Figma Make Prototype">
+              <div class="project-image hhi-cover" aria-hidden="true" data-scroll-reveal="off" style="background-image: url(data:image/webp;base64,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); background-size: cover; background-position: center;">
+                <img src="/assets/selected-projects/hhi-project-cover-1280.webp" srcset="/assets/selected-projects/hhi-project-cover-640.webp 640w, /assets/selected-projects/hhi-project-cover-1280.webp 1280w" sizes="(max-width: 767px) calc(100vw - 92px), (max-width: 1100px) 70vw, 360px" alt="" width="1280" height="720" loading="eager" fetchpriority="high" decoding="async" draggable="false">
+              </div>
+              <div class="project-caption">
+                <h3 class="project-description"><span class="project-name">HHI Concours</span><span class="project-separator"> · </span><span class="project-summary">Improved Car Concours Journey</span></h3>
+                <p class="project-meta"><span>Figma Make Prototype</span></p>
+              </div>
+            </a>
+          </article>
           <article class="project-card">
             <a class="project-link" draggable="false" href="/project-4-nalu/" aria-label="Nalu · Menstrual Cycle Based Wellness Service, Product Concept">
               <div class="project-image nalu-cover" aria-hidden="true">
-                <img class="nalu-cover-scene" src="assets/case-studies/nalu-cover-1920.webp" srcset="assets/case-studies/nalu-cover-960.webp 960w, assets/case-studies/nalu-cover-1920.webp 1920w, assets/case-studies/nalu-cover-3840.webp 3840w" sizes="(max-width: 767px) calc(100vw - 66px), min(800px, 44vw)" alt="" width="3840" height="2160" decoding="async" draggable="false">
-                <div class="nalu-cover-logo">
+                <div class="nalu-cover-brand">
                   <img src="assets/nalu-logo.png" alt="" width="743" height="198" draggable="false">
                 </div>
+                <img class="nalu-cover-frame nalu-cover-scene" src="assets/case-studies/nalu-cover-1920.webp" srcset="assets/case-studies/nalu-cover-960.webp 960w, assets/case-studies/nalu-cover-1920.webp 1920w, assets/case-studies/nalu-cover-3840.webp 3840w" sizes="(max-width: 767px) calc(100vw - 66px), min(800px, 44vw)" alt="" width="3840" height="2160" decoding="async" draggable="false">
               </div>
               <div class="project-caption">
                 <h3 class="project-description"><span class="project-name">Nalu</span><span class="project-separator"> · </span><span class="project-summary">Menstrual Cycle Based Wellness Service</span></h3>
@@ -199,7 +220,7 @@
                 </div>
                 <div class="about-intro-prose">
                   <p>I’m a product designer with a background in <strong>business and service design.</strong> I turn ambiguous problems into clear product experiences by connecting user needs, stakeholder priorities, and the systems around them.</p>
-                  <p>I’m curious about how things work and how small design decisions can make an experience feel noticeably better. I use AI to explore ideas, prototype quickly, and turn early thinking into something tangible.</p>
+                  <p>I’m curious about how things work and how small design decisions can make an experience feel noticeably better. I use AI to explore ideas, prototype quickly, and turn early thinking into something tangible. Lately I’ve been obsessed with new motion trends and can’t stop building my own. Come play in my <a href="/?view=playground" data-workspace-view="playground">Playground →</a></p>
                   <p>Previously worked on projects with <strong>Hilton Head Island Concours, BMW, FINRA and Deloitte.</strong> Reach me on <a href="https://www.linkedin.com/in/blair-xun-su-1263921a9" target="_blank" rel="noopener noreferrer">LinkedIn</a> or <a href="mailto:suxun70@gmail.com">email</a>.</p>
                 </div>
               </div>
@@ -213,7 +234,7 @@
           </section>
           <section class="band about-resume-section about-experience-section" aria-labelledby="experience-title">
             <div class="frame">
-              <div class="about-section-heading"><h2 id="experience-title">Experience</h2><a class="about-resume-link" href="https://docs.google.com/document/d/1EQt0uCxezmY4o4NZ14qj3Sk8BYZWphJlj4wIumuw6OQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer">View my Resume <svg class="about-resume-arrow" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 13 13 3M5 3h8v8"/></svg></a></div>
+              <div class="about-section-heading"><h2 id="experience-title">Experience</h2><a class="about-resume-link" href="https://docs.google.com/document/d/1EQt0uCxezmY4o4NZ14qj3Sk8BYZWphJlj4wIumuw6OQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer">View my Resume →</a></div>
               <details class="about-resume-row">
                 <summary class="about-resume-toggle">
                   <div class="about-resume-identity">
@@ -299,6 +320,31 @@
 
         </article>
       </section>
+      <section class="workspace-playground" id="playground" aria-label="Playground" tabindex="-1" hidden>
+        <div class="playground-grid">
+          <!-- Two cards are reserved for future Playground works. -->
+          <figure class="playground-card" data-title="Vibe Coding Sky Signature" data-description="A dreamy 3D glass text effect floating in the sky.">
+            <img class="playground-card-shot" src="/assets/playground/vibe-coding-sky-signature.png" data-playground-enlarged="/assets/playground/blair-su/index.html?mode=detail&amp;v=5" alt="Blair Su glass lettering floating in a blue sky" width="1156" height="854" loading="lazy" decoding="async">
+            <button class="playground-card-open" type="button" aria-label="Open Vibe Coding Sky Signature" aria-haspopup="dialog" aria-controls="playground-lightbox"></button>
+          </figure>
+          <figure class="playground-card" data-title="Ski on Vinyl" data-description="One record, one run, one winter on loop.">
+            <video class="playground-card-video" data-playground-video="/assets/playground/ski-on-vinyl/loop.mp4" poster="/assets/playground/ski-on-vinyl/poster.webp" aria-label="A skier carving through snow on a spinning vinyl record, with mountains and moving chairlifts" width="1080" height="1080" muted loop playsinline preload="none"></video>
+            <button class="playground-card-open" type="button" aria-label="Open Ski on Vinyl" aria-haspopup="dialog" aria-controls="playground-lightbox"></button>
+          </figure>
+          <figure class="playground-card" data-title="Quiet Luxury Research" data-description="An editorial research report on how quiet luxury brands win trust through emotional resonance, not loud branding.">
+            <video class="playground-card-video playground-card-video--book" data-playground-video="/assets/playground/quiet-luxury-book/quiet-luxury-book-page-turn.mp4?v=blue-gray-2" data-playground-ratio="book" poster="/assets/playground/quiet-luxury-book/poster-16s.webp?v=blue-gray-2" aria-label="Quiet Luxury Research editorial book opening and turning through its pages" width="1390" height="1228" muted loop playsinline preload="none"></video>
+            <button class="playground-card-open" type="button" aria-label="Open Quiet Luxury Research" aria-haspopup="dialog" aria-controls="playground-lightbox"></button>
+          </figure>
+          <figure class="playground-card" data-title="Butterfly Flutter" data-description="A butterfly made entirely of ASCII characters, fluttering to life in motion.">
+            <video class="playground-card-video playground-card-video--landscape playground-card-video--butterfly" data-playground-video="/assets/playground/butterfly-flutter/loop-monochrome.mp4" data-playground-ratio="landscape" poster="/assets/playground/butterfly-flutter/poster-monochrome.webp" aria-label="A white butterfly made of ASCII characters fluttering its wings against a black background" width="1448" height="1086" muted loop playsinline preload="none"></video>
+            <button class="playground-card-open" type="button" aria-label="Open Butterfly Flutter" aria-haspopup="dialog" aria-controls="playground-lightbox"></button>
+          </figure>
+          <figure class="playground-card" data-title="Snow Mountain" data-description="Turned my own photo of Mount Rainier into a hand-painted scene with AI.">
+            <img class="playground-card-image--mountain" src="/assets/playground/snow-mountain/footer.png" alt="Illustrated snow-capped mountains and evergreen forests beneath a textured blue sky" width="1866" height="843" loading="lazy" decoding="async">
+            <button class="playground-card-open" type="button" aria-label="Enlarge Snow Mountain" aria-haspopup="dialog" aria-controls="playground-lightbox"></button>
+          </figure>
+        </div>
+      </section>
         <div class="workspace-chat-rail" aria-hidden="true"></div>
       </div>
     </main>
@@ -308,6 +354,17 @@
     <img class="photo-lightbox-image" alt="">
     <div class="photo-lightbox-navigation"><button type="button" data-photo-step="-1">Previous</button><span class="photo-count"></span><button type="button" data-photo-step="1">Next</button></div>
   </dialog>
+
+    <dialog class="playground-lightbox" id="playground-lightbox" aria-labelledby="playground-lightbox-title">
+      <div class="playground-lightbox-actions">
+        <button class="playground-lightbox-close" type="button" aria-label="Close preview" autofocus><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
+      </div>
+      <div class="playground-lightbox-stage"></div>
+      <div class="playground-lightbox-details">
+        <p id="playground-lightbox-title"></p>
+        <p class="playground-lightbox-description"></p>
+      </div>
+    </dialog>
 
     <div class="custom-cursor" aria-hidden="true">
       <span class="cursor-label">

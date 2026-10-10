@@ -11,33 +11,91 @@
 .site-footer .footer-mobile-label,
 .site-footer .footer-mobile-only { display: none; }
 
+.case-page .case-jump-design {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: min(100%, 220px);
+  min-height: 44px;
+  margin-top: 20px;
+  padding: 0 16px;
+  border: 1px solid #aebfcb;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink);
+  font: 400 16px/1.4 "Geist", Arial, sans-serif;
+  white-space: nowrap;
+  opacity: 1;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+.case-page .case-jump-design::after { display: none; }
+.case-page .case-jump-design:hover {
+  border-color: #9bafbd;
+  background: #f1f4f6;
+  opacity: 1;
+}
+.case-page .case-jump-design svg {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 160ms ease;
+}
+.case-page .case-jump-design:hover svg { transform: translateX(3px); }
+@media (prefers-reduced-motion: reduce) {
+  .case-page .case-jump-design,
+  .case-page .case-jump-design svg { transition: none; }
+}
+
+/* Keep the opening artwork compact enough to reveal the project title in the first view. */
+@media (min-width: 1024px) {
+  .case-page :is(.lh-cover, .sc-cover, .nl-cover, .cb-hero-image) {
+    height: clamp(360px, 52svh, 520px);
+  }
+  .case-page :is(.lh-cover, .sc-cover, .nl-cover, .cb-hero-image) > img,
+  .case-page .sc-cover > picture > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .case-page .cb-hero-image > img {
+    object-fit: contain;
+  }
+}
+
 @media (max-width: 1023px) {
   .case-page {
     --case-directory-height: var(--lh-directory-height, var(--sc-directory-height, var(--hhi-directory-height, var(--nl-directory-height, 56px))));
     --case-bar-fallback: calc(var(--case-directory-height) + 1px + env(safe-area-inset-bottom, 0px));
     --case-bar-clearance: var(--case-bar-height, var(--case-bar-fallback));
   }
-  .case-page :is(.lh-toc, .sc-toc, .hhi-toc, .nl-toc) { align-items: center; }
-  .case-page :is(.lh-sidebar, .sc-sidebar, .hhi-sidebar, .nl-sidebar,
-    .lh-toc, .sc-toc, .hhi-toc, .nl-toc),
-  .case-page :is(.lh-toc, .sc-toc, .hhi-toc, .nl-toc) ol { background: var(--paper); }
-  .case-page :is(.lh-toc-toggle, .sc-toc-toggle, .hhi-toc-toggle, .nl-toc-toggle),
-  .case-page :is(.lh-toc, .sc-toc, .hhi-toc, .nl-toc) ol a {
+  .case-page :is(.lh-toc, .sc-toc, .hhi-toc, .nl-toc, .cb-toc) { align-items: center; }
+  .case-page :is(.lh-sidebar, .sc-sidebar, .hhi-sidebar, .nl-sidebar, .cb-sidebar,
+    .lh-toc, .sc-toc, .hhi-toc, .nl-toc, .cb-toc),
+  .case-page :is(.lh-toc, .sc-toc, .hhi-toc, .nl-toc, .cb-toc) ol { background: var(--paper); }
+  .case-page :is(.lh-toc-toggle, .sc-toc-toggle, .hhi-toc-toggle, .nl-toc-toggle, .cb-toc-toggle),
+  .case-page :is(.lh-toc, .sc-toc, .hhi-toc, .nl-toc, .cb-toc) ol a {
     min-height: 44px;
     padding: 11px 12px;
     font-size: 14px;
     line-height: 22px;
     box-sizing: border-box;
   }
-  .case-page :is(.lh-toc-toggle, .sc-toc-toggle, .hhi-toc-toggle, .nl-toc-toggle) {
+  .case-page :is(.lh-toc-toggle, .sc-toc-toggle, .hhi-toc-toggle, .nl-toc-toggle, .cb-toc-toggle) {
     height: 44px;
     align-self: center;
     border: 0;
     border-radius: 6px;
     background: #f5f5f5;
   }
-  .case-page :is(.lh-toc-toggle, .sc-toc-toggle, .hhi-toc-toggle, .nl-toc-toggle):hover { background: #ededed; }
-  .case-page :is(.lh-sidebar, .sc-sidebar, .hhi-sidebar, .nl-sidebar):has(.is-open) { z-index: 85; }
+  .case-page :is(.lh-toc-toggle, .sc-toc-toggle, .hhi-toc-toggle, .nl-toc-toggle, .cb-toc-toggle):hover { background: #ededed; }
+  .case-page :is(.lh-sidebar, .sc-sidebar, .hhi-sidebar, .nl-sidebar, .cb-sidebar):has(.is-open) { z-index: 85; }
   .case-page .fox-companion .fox-pet-dock {
     bottom: calc(var(--case-bar-clearance) + 12px + var(--fox-keyboard));
   }
@@ -50,7 +108,7 @@
   .case-page .fox-companion.is-keyboard .fox-pet-dock { bottom: calc(4px + var(--fox-keyboard)); }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   html:has(.case-page) {
     --header-height: calc(64px + env(safe-area-inset-top, 0px));
     scroll-padding-top: var(--header-height);
@@ -121,7 +179,10 @@
   .case-mobile-menu-content small { display: block; margin-top: 5px; font: 400 12px/1.5 "Geist", Arial, sans-serif; letter-spacing: 0; }
   .case-page .case-mobile-back-row { display: block; padding: 8px 22px 0; }
   .case-mobile-back { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font: 400 14px/1.5 "Geist", Arial, sans-serif; }
-  .case-page :is(.lh-intro, .sc-intro, .hhi-intro, .nl-intro) { padding-top: 12px; }
+}
+
+@media (max-width: 767px) {
+  .case-page :is(.lh-intro, .sc-intro, .hhi-intro, .nl-intro, .cb-intro) { padding-top: 12px; }
 
   .case-page .site-footer { display: none; }
 }

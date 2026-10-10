@@ -11,13 +11,13 @@ void import('/assets/chat/pet.js?v=home-invitation-128');
 const header = document.querySelector('.site-header');
 const menuToggle = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('#primary-navigation');
-const phoneLayout = matchMedia('(max-width: 767px)');
+const compactHeader = matchMedia('(max-width: 1023px)');
 
 if (header && menuToggle && navigation) {
   const isFullScreenMenu = document.body.classList.contains('home-page') || header.classList.contains('case-mobile-header');
   const main = document.querySelector('main');
   function setMenu(open, returnFocus = false) {
-    const expanded = open && phoneLayout.matches;
+    const expanded = open && compactHeader.matches;
     header.classList.toggle('menu-open', expanded);
     menuToggle.setAttribute('aria-expanded', String(expanded));
     menuToggle.setAttribute('aria-label', expanded ? 'Close menu' : 'Open menu');
@@ -42,7 +42,7 @@ if (header && menuToggle && navigation) {
       return;
     }
     if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button > 0) return;
-    setMenu(false, isFullScreenMenu && phoneLayout.matches);
+    setMenu(false, isFullScreenMenu && compactHeader.matches);
   });
   document.addEventListener('pointerdown', event => {
     if (!header.contains(event.target)) setMenu(false);
@@ -68,17 +68,33 @@ if (header && menuToggle && navigation) {
       }
     }
   });
-  phoneLayout.addEventListener('change', () => setMenu(false));
+  compactHeader.addEventListener('change', () => setMenu(false));
   window.addEventListener('pagehide', () => setMenu(false));
 }
 
-// Start with the centered brand, then reveal the supplied composition only once
-// its image is decoded. No hover is required.
+// Dissolve between two complete, stationary pictures after both have decoded.
 const naluCover = document.querySelector('.nalu-cover');
 if (naluCover) {
   const scene = naluCover.querySelector('.nalu-cover-scene');
-  scene.decode().then(() => naluCover.classList.add('is-ready')).catch(() => {
-    // Keep the branded opening if the artwork cannot load.
+  const images = [...naluCover.querySelectorAll('img')];
+  Promise.allSettled(images.map(image => image.decode())).then(results => {
+    if (results.some(result => result.status === 'rejected')) {
+      // Wait for both loads before choosing the surviving picture.
+      if (scene.complete && scene.naturalWidth) naluCover.classList.add('is-static');
+      return;
+    }
+    naluCover.classList.add('is-ready');
+    let inView = !('IntersectionObserver' in window);
+    const updatePlayback = () => naluCover.classList.toggle('is-playing', inView && !document.hidden);
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(([entry]) => {
+        inView = entry.isIntersecting;
+        updatePlayback();
+      });
+      observer.observe(naluCover);
+    }
+    document.addEventListener('visibilitychange', updatePlayback);
+    updatePlayback();
   });
 }
 

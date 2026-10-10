@@ -3,7 +3,7 @@ const vm = require('node:vm');
 const assert = require('node:assert/strict');
 const source = fs.readFileSync('workspace-layout.js', 'utf8');
 
-function setup({ reduced = false, mobile = false, hash = '', search = '', navigation = 'navigate', entered = false } = {}) {
+function setup({ reduced = false, mobile = false, tablet = false, hash = '', search = '', navigation = 'navigate', entered = false } = {}) {
   let now = 0, serial = 0;
   const timers = new Map(), frames = new Map(), windowEvents = {}, documentEvents = {};
   const location = { pathname: '/', search, hash };
@@ -37,15 +37,16 @@ function setup({ reduced = false, mobile = false, hash = '', search = '', naviga
   const identity = element('identity'); identity.href = '#top'; identity.parent = 'portfolio-workspace';
   const work = element('work'); work.parent = 'portfolio-workspace';
   const about = element('about'); about.parent = 'portfolio-workspace';
+  const playground = element('playground'); playground.parent = 'portfolio-workspace';
   const aboutPhotos = Array.from({ length: 3 }, () => ({ loading: 'lazy' }));
   about.querySelectorAll = selector => selector === '.about-intro-photos img' ? aboutPhotos : [];
-  els['#work'] = work; els['#about'] = about;
-  els['.portfolio-workspace'].querySelector = selector => selector === '#work' ? work : selector === '#about' ? about : identity;
-  const mobileLinks = ['intro', 'workspace', 'about'].map(stage => {
+  els['#work'] = work; els['#about'] = about; els['#playground'] = playground;
+  els['.portfolio-workspace'].querySelector = selector => els[selector] || identity;
+  const mobileLinks = ['intro', 'workspace', 'about', 'playground'].map(stage => {
     const link = element('mobile-link'); link.dataset.mobilePage = stage; return link;
   });
-  const viewLinks = ['work', 'about'].map(view => {
-    const link = element('view-link'); link.dataset.workspaceView = view; link.href = view === 'about' ? '/?view=about' : '#work'; return link;
+  const viewLinks = ['work', 'about', 'playground'].map(view => {
+    const link = element('view-link'); link.dataset.workspaceView = view; link.href = view === 'work' ? '#work' : `/?view=${view}`; return link;
   });
   els['.site-header'].querySelectorAll = () => mobileLinks;
   els['.hero-scroll-cue'].href = '#work'; els['.hero-scroll-cue'].parent = 'hero';
@@ -56,7 +57,8 @@ function setup({ reduced = false, mobile = false, hash = '', search = '', naviga
   };
   const motion = { matches: reduced, addEventListener: (name, fn) => { motion[name] = fn; } };
   const phoneLayout = { matches: mobile, addEventListener: (name, fn) => { phoneLayout[name] = fn; } };
-  const win = { scrollY: 0, innerHeight: 900, matchMedia: query => query.includes('767px') ? phoneLayout : motion,
+  const compactHeader = { matches: mobile || tablet, addEventListener: (name, fn) => { compactHeader[name] = fn; } };
+  const win = { scrollY: 0, innerHeight: 900, matchMedia: query => query.includes('767px') ? phoneLayout : query.includes('1023px') ? compactHeader : motion,
     addEventListener: (name, fn) => { windowEvents[name] = fn; },
     scrollTo({ top }) { this.scrollY = top; },
   };
@@ -99,7 +101,7 @@ function setup({ reduced = false, mobile = false, hash = '', search = '', naviga
     (surface === 'window' ? windowEvents : documentEvents)[type]?.(event); flush(); return event;
   };
   vm.runInContext(source, context); flush();
-  return { body, els, identity, work, about, aboutPhotos, viewLinks, mobileLinks, doc, win, history, location, motion, phoneLayout, element, advance, dispatch, stage: () => body.dataset.stage };
+  return { body, els, identity, work, about, playground, aboutPhotos, viewLinks, mobileLinks, doc, win, history, location, motion, phoneLayout, compactHeader, element, advance, dispatch, stage: () => body.dataset.stage };
 }
 
 let h = setup();
@@ -234,12 +236,18 @@ assert.equal(h.mobileLinks[1]['aria-current'],'location');
 h.els['.site-header'].classList.add('menu-open');
 h.dispatch('window','wheel',{deltaY:-100}); assert.equal(h.stage(),'workspace');
 h.els['.site-header'].classList.toggle('menu-open',false);
-h.phoneLayout.matches=false; h.phoneLayout.change(); assert.equal(h.els['.site-header'].inert,true);
-h.phoneLayout.matches=true; h.phoneLayout.change(); assert.equal(h.els['.site-header'].inert,false);
+h.compactHeader.matches=false; h.compactHeader.change(); assert.equal(h.els['.site-header'].inert,true);
+h.compactHeader.matches=true; h.compactHeader.change(); assert.equal(h.els['.site-header'].inert,false);
 h.dispatch('window','wheel',{deltaY:-100}); assert.equal(h.stage(),'intro');
 assert.equal(h.els['.site-header'].inert,false);
 h=setup({mobile:true,search:'?view=work'});
 assert.equal(h.stage(),'workspace'); assert.equal(h.els['.site-header'].inert,false);
+h=setup({tablet:true});
+h.dispatch('document','click',{target:h.els['.hero-scroll-cue'],detail:0}); h.advance(1800);
+assert.equal(h.stage(),'workspace'); assert.equal(h.els['.site-header'].inert,false);
+assert(h.work.focused); assert(!h.identity.focused); // The tablet sidebar is hidden, so focus the project list.
+h.compactHeader.matches=false; h.compactHeader.change(); assert.equal(h.els['.site-header'].inert,true);
+h.compactHeader.matches=true; h.compactHeader.change(); assert.equal(h.els['.site-header'].inert,false);
 console.log('PASS: intro persistence, forward/upward gestures, native scrolling, explicit Back return, focus, mobile header availability, menu gesture isolation, resize and reduced motion.');
 
 // About shares the homepage workspace without rerendering the sidebar or fox.
@@ -444,3 +452,35 @@ for (const mobile of [false, true]) {
   assert(h.aboutPhotos.every(image => image.loading === 'eager'));
 }
 console.log('PASS: About photo loading starts immediately on direct entry and view selection, including mobile and history return.');
+
+// Playground is a third view: preserve direct URLs, history and native scrolling.
+for (const mobile of [false, true]) {
+  for (const reduced of [false, true]) {
+    h = setup({ mobile, reduced, search: '?view=playground' });
+    assert.equal(h.stage(), 'workspace');
+    assert(!h.playground.hidden); assert(h.work.hidden); assert(h.about.hidden);
+    assert.equal(h.doc.title, 'Playground — Blair Su');
+    assert.equal(h.mobileLinks[3]['aria-current'], 'location');
+    assert.equal(h.viewLinks[2]['aria-current'], 'location');
+    assert.equal(h.location.search, '?view=playground');
+    assert(!h.dispatch('window', 'wheel', { deltaY: -100 }).defaultPrevented);
+    assert(!h.dispatch('document', 'keydown', { key: 'Home' }).defaultPrevented);
+    h.dispatch('window', 'pageshow', { persisted: true });
+    assert.equal(h.body.dataset.workspaceView, 'playground');
+    h.dispatch('document', 'click', { target: h.viewLinks[1] }); h.advance(600);
+    assert(h.playground.hidden); assert(!h.about.hidden);
+    h.history.back(); h.advance(600);
+    assert(!h.playground.hidden); assert(!h.playground.inert); assert(h.about.hidden);
+    h.dispatch('document', 'click', { target: h.viewLinks[0] }); h.advance(600);
+    assert(!h.work.hidden); assert(h.playground.hidden);
+  }
+  h = setup({ mobile });
+  h.dispatch('document', 'click', { target: h.viewLinks[2] }); h.advance(1800);
+  assert.equal(h.body.dataset.workspaceView, 'playground'); assert(h.playground.focused);
+  h = setup({ mobile, search: '?view=work' });
+  h.dispatch('document', 'click', { target: h.viewLinks[1] }); h.advance(90);
+  h.dispatch('document', 'click', { target: h.viewLinks[2] }); h.advance(600);
+  assert(!h.playground.hidden); assert(!h.playground.inert);
+  assert(h.work.hidden); assert(h.about.hidden);
+}
+console.log('PASS: Playground direct entry, desktop/mobile navigation, focus, history, reduced motion and rapid three-view switching.');

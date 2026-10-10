@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Blair Su — Hero</title>
+  <script>
+    const mode = new URLSearchParams(location.search).get('mode');
+    if (mode === 'card' || mode === 'detail') document.documentElement.dataset.mode = mode;
+  </script>
+  <style>
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+    body { background: #bcefff url('/assets/sky/hero-dither-2.png') center / cover; }
+    .hero-title { position: absolute; inset: 0; opacity: 0; }
+    .fallback { position: absolute; inset: 0; display: grid; place-content: center; margin: 0; color: #f5fcff; text-align: center; font: italic 500 clamp(36px, 16vw, 100px)/.95 Georgia, serif; text-shadow: 0 2px 12px #6592aa; }
+    .ready .fallback { display: none; }
+    .ready .hero-title { opacity: 1; }
+    [data-mode="card"] .hero-title,
+    [data-mode="detail"] .hero-title { inset: 15%; }
+    [data-mode="card"] .fallback,
+    [data-mode="detail"] .fallback {
+      inset: 15%;
+      font-size: clamp(30px, 11vw, 72px);
+    }
+    .embedded-cursor { display: none; }
+    @media (hover: hover) and (pointer: fine) {
+      html.cursor-ready,
+      .cursor-ready * { cursor: none !important; }
+      .embedded-cursor {
+        position: fixed;
+        z-index: 20;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #000;
+        opacity: 0;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        transition: opacity 100ms ease;
+      }
+      .embedded-cursor.is-visible { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <p class="fallback" aria-hidden="true">Blair<br>Su</p>
+  <div class="hero-title" data-us-project-src="./assets/unicorn-embed-hero-blair-rounded-cursor-11.json" data-us-arialabel="Blair Su interactive lettering"></div>
+  <div class="embedded-cursor" aria-hidden="true"></div>
+  <script src="./assets/unicornStudio.umd.js"></script>
+  <script src="./preview.js?v=5"></script>
+</body>
+</html>

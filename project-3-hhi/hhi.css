@@ -53,11 +53,13 @@
 .hhi-small-label { font: 400 12px/1.5 "Geist Mono", monospace; color: var(--hhi-muted); }
 .hhi-email-preview { display: block; position: relative; width: 100%; padding: 0; border: 1px solid var(--rule); overflow: hidden; background: #fff; text-align: left; }
 .hhi-email-preview img { display: block; width: 100%; height: auto; }
-.hhi-email-before { aspect-ratio: 2048 / 1928; }
+.hhi-email-before { aspect-ratio: 4680 / 9668; }
 .hhi-email-before img { height: 100%; object-fit: contain; }
-.hhi-enlarge { position: absolute; right: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 10px; padding: 8px 12px; border: 1px solid var(--ink); border-radius: 999px; background: #fff; color: var(--ink); font: 400 12px/1.4 "Geist", sans-serif; }
-.hhi-enlarge svg { width: 16px; height: 16px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-.hhi-email-preview:is(:hover, :focus-visible) .hhi-enlarge { background: #f5f5f5; }
+/* Reuse the prototype button while keeping its overlay legible on email artwork. */
+.case-page .hhi-enlarge.case-jump-design { position: absolute; right: 12px; bottom: 12px; width: max-content; max-width: calc(100% - 24px); min-height: 34px; gap: 8px; margin: 0; padding: 0 10px; background: var(--paper); font-size: 13px; }
+.case-page .hhi-enlarge.case-jump-design svg { width: 18px; height: 18px; }
+.case-page .hhi-email-preview:is(:hover, :focus-visible) .hhi-enlarge { border-color: #9bafbd; background: #f1f4f6; }
+.case-page .hhi-email-preview:is(:hover, :focus-visible) .hhi-enlarge svg { transform: translateX(3px); }
 .hhi-before { display: grid; grid-template-columns: minmax(0, 1fr) minmax(190px, .65fr); align-items: center; gap: 40px; }
 .hhi-before h3 { font-size: 27px; }
 .hhi-final-intro { margin-top: 64px; }
@@ -86,6 +88,8 @@
 .hhi-prototype-outro { margin-top: 36px; }
 .hhi-copy.hhi-prototype-outro p { font-size: 16px; line-height: 1.7; }
 .hhi-prototype-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 24px; padding: 0 0 1px; border: 0; border-bottom: 1px solid currentColor; border-radius: 0; background: transparent; color: var(--hhi-muted); font: 400 14px/1.5 "Geist", sans-serif; }
+/* Fit the longer label and arrow inside the shared button's padding. */
+.case-page .hhi-prototype-link.case-jump-design { width: max-content; max-width: 100%; gap: 16px; white-space: nowrap; }
 .hhi-prototype-link svg { width: 18px; height: 18px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .hhi-prototype-link:hover { color: var(--ink); }
 .hhi-impact { display: grid; grid-template-columns: .65fr 1.35fr; column-gap: 40px; align-items: center; padding: 36px; border: 1px solid var(--rule); background: #f7f7f7; }

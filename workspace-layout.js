@@ -20,10 +20,11 @@ function initWorkspace() {
   body.style.setProperty('--stage-entry-delay', `${stageEntryDelayMs}ms`);
   body.style.setProperty('--view-exit-duration', `${viewExitMs}ms`);
   body.style.setProperty('--view-entry-duration', `${viewEnterMs}ms`);
-  const phoneLayout = window.matchMedia('(max-width: 767px)');
+  const compactHeader = window.matchMedia('(max-width: 1023px)');
   const mobilePageLinks = header.querySelectorAll('[data-mobile-page]');
   const viewLinks = document.querySelectorAll('[data-workspace-view]');
-  const views = { work: document.querySelector('#work'), about: document.querySelector('#about') };
+  const views = { work: document.querySelector('#work'), about: document.querySelector('#about'), playground: document.querySelector('#playground') };
+  const hasView = view => Object.hasOwn(views, view) && Boolean(views[view]);
   const homeTitle = document.title;
   let activeView = 'work';
   let displayedView = 'work';
@@ -72,7 +73,7 @@ function initWorkspace() {
   }
   function updateNavigation() {
     for (const link of mobilePageLinks) {
-      const active = link.dataset.mobilePage === (stage === 'intro' ? 'intro' : activeView === 'about' ? 'about' : 'workspace');
+      const active = link.dataset.mobilePage === (stage === 'intro' ? 'intro' : activeView === 'work' ? 'workspace' : activeView);
       if (active) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
     }
@@ -82,7 +83,7 @@ function initWorkspace() {
     }
   }
   function selectWorkspaceView(view) {
-    activeView = view === 'about' && views.about ? 'about' : 'work';
+    activeView = hasView(view) ? view : 'work';
     if (activeView === 'about') {
       // Begin loading while the panel is still hidden or fading into view.
       // These three photos should not depend on the browser's lazy-load threshold.
@@ -91,7 +92,7 @@ function initWorkspace() {
       }
     }
     body.dataset.workspaceView = activeView;
-    document.title = activeView === 'about' ? 'About — Blair Su' : homeTitle;
+    document.title = ({ about: 'About — Blair Su', playground: 'Playground — Blair Su' })[activeView] || homeTitle;
     updateNavigation();
   }
   function resetViewMotion() {
@@ -149,7 +150,7 @@ function initWorkspace() {
       }
       outgoing.classList.remove('is-view-leaving');
       displayedView = activeView;
-      // Reset the reading position only while both content views are invisible.
+      // Reset the reading position only while the content views are invisible.
       window.scrollTo({ top: 0, behavior: 'instant' });
       incoming.getBoundingClientRect();
       incoming.classList.remove('is-view-preparing');
@@ -165,7 +166,7 @@ function initWorkspace() {
       params.set('view', activeView);
       const state = { ...history.state, portfolioEntered: true, portfolioView: activeView };
       history.pushState(state, '', `${location.pathname}?${params}`);
-    } catch { /* Both views still work when history storage is unavailable. */ }
+    } catch { /* Workspace views still work when history storage is unavailable. */ }
   }
   function setStage(next) {
     stage = next;
@@ -173,7 +174,7 @@ function initWorkspace() {
     body.classList.add('platform-ready');
     body.classList.toggle('workspace-mode', next !== 'intro');
     hero.inert = next !== 'intro';
-    header.inert = next !== 'intro' && !phoneLayout.matches;
+    header.inert = next !== 'intro' && !compactHeader.matches;
     workspace.inert = next !== 'workspace';
     updateNavigation();
     if (scrollCue) {
@@ -189,7 +190,7 @@ function initWorkspace() {
     setStage('workspace');
     rememberEntry(true);
     scheduleMeasure();
-    if (focusOnEntry) workspace.querySelector(activeView === 'about' ? '#about' : phoneLayout.matches ? '#work' : '.profile-identity')?.focus({ preventScroll: true });
+    if (focusOnEntry) workspace.querySelector(activeView !== 'work' ? `#${activeView}` : compactHeader.matches ? '#work' : '.profile-identity')?.focus({ preventScroll: true });
     focusOnEntry = false;
   }
   function finishWhenSettled() {
@@ -240,7 +241,7 @@ function initWorkspace() {
     focusOnEntry = false;
     wheelDistance = 0;
     lastWheelAt = -Infinity;
-    const destination = view === 'about' && views.about ? 'about' : 'work';
+    const destination = hasView(view) ? view : 'work';
     const animate = stage === 'workspace' && !motion.matches && (destination !== displayedView || viewPhase);
     if (animate) transitionWorkspaceView(destination, focus);
     else setWorkspaceView(destination);
@@ -268,7 +269,7 @@ function initWorkspace() {
     const now = performance.now();
     const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1;
     if (stage === 'workspace') {
-      if (activeView === 'about' || event.deltaY >= 0 || !atWorkspaceTop(event.target)) {
+      if (activeView !== 'work' || event.deltaY >= 0 || !atWorkspaceTop(event.target)) {
         wheelDistance = 0;
         lastWheelAt = -Infinity;
         return;
@@ -306,7 +307,7 @@ function initWorkspace() {
     const dy = touch.y - event.touches[0].clientY;
     if (Math.abs(dx) > Math.abs(dy)) return;
     if (stage === 'workspace') {
-      if (activeView === 'about' || dy >= 0 || !atWorkspaceTop(event.target)) {
+      if (activeView !== 'work' || dy >= 0 || !atWorkspaceTop(event.target)) {
         touch = { x: event.touches[0].clientX, y: event.touches[0].clientY };
         return;
       }
@@ -325,7 +326,7 @@ function initWorkspace() {
     if (insideControl(event.target)) return;
     if (event.key === ' ' && event.target?.closest?.('a, button, summary')) return;
     if (stage === 'workspace') {
-      if (activeView === 'about') return;
+      if (activeView !== 'work') return;
       const upward = ['ArrowUp', 'PageUp', 'Home'].includes(event.key) || (event.key === ' ' && event.shiftKey);
       if (upward && atWorkspaceTop(event.target)) {
         event.preventDefault();
@@ -344,7 +345,7 @@ function initWorkspace() {
     if (!link) return;
     const hash = link.getAttribute('href');
     const view = link.dataset.workspaceView || (['#about', '/about.html', '/?view=about'].includes(hash) ? 'about' : null);
-    if (view === 'about' || view === 'work') {
+    if (hasView(view)) {
       event.preventDefault();
       const changed = activeView !== view || stage === 'intro';
       if (stage === 'intro') {
@@ -364,6 +365,7 @@ function initWorkspace() {
   function handleHash() {
     if (location.hash === '#top' || location.hash === '#intro') return showIntro();
     if (location.hash === '#about') return showWorkspace('about');
+    if (location.hash === '#playground') return showWorkspace('playground');
     if (stage === 'workspace' && location.hash === '#work') return showWorkspace('work');
     if (stage === 'intro') {
       // A saved #work URL must not dismiss the opening screen without input.
@@ -374,13 +376,13 @@ function initWorkspace() {
   window.addEventListener('hashchange', handleHash);
   window.addEventListener('popstate', () => {
     const view = new URLSearchParams(location.search).get('view');
-    if (view === 'about' || view === 'work') showWorkspace(view);
+    if (hasView(view)) showWorkspace(view);
     else if (history.state?.portfolioEntered) showWorkspace(history.state.portfolioView);
     else showIntro();
   });
   window.addEventListener('resize', scheduleMeasure);
   window.addEventListener('pageshow', event => {
-    if (event.persisted && activeView !== 'about') showIntro();
+    if (event.persisted && activeView === 'work') showIntro();
     if (stage === 'intro') window.scrollTo({ top: 0, behavior: 'instant' });
     scheduleMeasure();
   });
@@ -389,8 +391,8 @@ function initWorkspace() {
     if (viewPhase) setWorkspaceView(activeView);
     if (stage === 'entering') finishEntry();
   });
-  phoneLayout.addEventListener('change', () => {
-    header.inert = stage !== 'intro' && !phoneLayout.matches;
+  compactHeader.addEventListener('change', () => {
+    header.inert = stage !== 'intro' && !compactHeader.matches;
     scheduleMeasure();
   });
   motion.addEventListener('change', () => {
@@ -408,8 +410,7 @@ function initWorkspace() {
   // Explicit workspace destinations open the requested home view directly.
   // Saved anchors and ordinary fresh visits still wait for the user's gesture.
   const initialView = new URLSearchParams(location.search).get('view');
-  if (initialView === 'about') showWorkspace('about');
-  else if (initialView === 'work') showWorkspace('work', { consumeView: true });
+  if (hasView(initialView)) showWorkspace(initialView, { consumeView: initialView === 'work' });
   else showIntro();
 }
 

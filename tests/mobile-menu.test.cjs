@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const assert = require('node:assert/strict');
 const shared = fs.readFileSync('script.js', 'utf8');
-const source = shared.slice(shared.indexOf("const header ="), shared.indexOf('// Start with the centered brand'));
+const source = shared.slice(shared.indexOf("const header ="), shared.indexOf('const naluCover ='));
 
 function setup({ home = true, casePage = false, mobile = true, hasHeader = true } = {}) {
   const documentEvents = {}, windowEvents = {};
@@ -34,7 +34,7 @@ function setup({ home = true, casePage = false, mobile = true, hasHeader = true 
   const footer = el('footer');
   const back = el('back');
   const brand = el('brand', { href: '#top' }); brand.link = true;
-  const links = ['#top', '#work', '/?view=about'].map(href => {
+  const links = ['#top', '#work', '/?view=about', '/?view=playground'].map(href => {
     const link = el('link', { href }); link.link = true; return link;
   });
   const pending = el('pending', { 'aria-disabled': 'true' }); pending.link = true;
@@ -54,7 +54,10 @@ function setup({ home = true, casePage = false, mobile = true, hasHeader = true 
   const clickToggle = () => { toggle.focus(); toggle.listeners.click(event(toggle)); };
   const clickLink = (link, extras) => { const e = event(link, extras); header.listeners.click(e); return e; };
   const key = (key, extras) => { const e = event(doc.activeElement, { key, ...extras }); documentEvents.keydown(e); return e; };
-  vm.runInNewContext(source, { document: doc, window: win, matchMedia: () => phone });
+  vm.runInNewContext(source, { document: doc, window: win, matchMedia: query => {
+    assert.equal(query, '(max-width: 1023px)');
+    return phone;
+  } });
   return { body, root, header, toggle, main, fox, footer, back, brand, links, pending, doc, phone, windowEvents, clickToggle, clickLink, key };
 }
 
@@ -117,4 +120,4 @@ assert.equal(properties['--case-bar-height'],'80px');
 barHeight=114; observerCallback(); assert.equal(properties['--case-bar-height'],'114px');
 compact.matches=false; compact.change(); assert.equal(properties['--case-bar-height'],'0px');
 compact.matches=true; barHeight=56; events.resize(); assert.equal(properties['--case-bar-height'],'56px');
-console.log('PASS: home/project full-screen menu locking, focus, close/resize cleanup, footer/Back isolation, disabled Playground, and fox clearance measurement at changing bar heights.');
+console.log('PASS: home/project menu locking, focus, Playground link closure, disabled-link handling, resize cleanup, and fox clearance.');

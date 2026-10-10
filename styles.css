@@ -114,33 +114,25 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
 .hhi-cover { overflow: hidden; background: #bdb6a5; }
 .hhi-cover img { object-fit: contain; }
 .southern-cover { display: grid; place-items: center; background: #2b422d; overflow: hidden; }
-.southern-laptop { position: relative; width: 76%; aspect-ratio: 2048 / 1241; pointer-events: none; }
+.southern-laptop { position: relative; width: 76%; aspect-ratio: 2048 / 1241; overflow: hidden; pointer-events: none; }
 /* Extend a black screen backing beneath the bezel to seal fractional-pixel gaps. */
 .southern-laptop::before { content: ""; position: absolute; left: calc(10% - 1px); top: calc(6% - 1px); width: calc(80% + 2px); height: calc(83.5% + 2px); background: #000; }
-.southern-laptop video { position: absolute; left: 10.2%; top: 6.3%; width: 79.6%; height: 82.9%; object-fit: cover; background: #000; }
+.southern-laptop video { position: absolute; left: 10.2%; top: 6.3%; width: 79.6%; height: 82.9%; object-fit: cover; object-position: center; background: #000; transform: scale(1.035); transform-origin: center; filter: none; }
 .southern-laptop img { position: relative; z-index: 1; object-fit: contain; }
 .nalu-cover { position: relative; overflow: hidden; background: #fcf9fc; --nalu-cycle: 12s; }
-.nalu-cover::before { content: ""; position: absolute; inset: -30% -15% -90%; background: url("assets/case-studies/KUU4zVZwe0AyAhWi26OOCIMBDl4.webp") center / contain no-repeat; opacity: 0.75; }
-.nalu-cover .nalu-cover-scene { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transform: scale(1.035); pointer-events: none; }
-.nalu-cover-logo { position: absolute; left: 50%; top: 50%; width: 30%; transform: translate(-50%, -50%); pointer-events: none; }
-.nalu-cover-logo img { width: 100%; height: auto; object-fit: contain; }
-/* Recolor only the wordmark over the dark scene; the supplied icon stays intact. */
-.nalu-cover-logo::after { content: ""; position: absolute; inset: 0; background: #fcf8f3; -webkit-mask: url("assets/nalu-logo.png") center / 100% 100% no-repeat; mask: url("assets/nalu-logo.png") center / 100% 100% no-repeat; clip-path: inset(0 30% 0 0); opacity: 0; }
-/* The opening logo travels and fades into the wordmark included in the artwork. */
-.nalu-cover.is-ready .nalu-cover-scene { animation: nalu-scene-reveal var(--nalu-cycle) cubic-bezier(.4, 0, .2, 1) infinite both; }
-.nalu-cover.is-ready .nalu-cover-logo { animation: nalu-logo-travel var(--nalu-cycle) cubic-bezier(.4, 0, .2, 1) infinite both; }
-.nalu-cover.is-ready .nalu-cover-logo::after { animation: nalu-logo-contrast var(--nalu-cycle) ease-in-out infinite both; }
-@keyframes nalu-scene-reveal {
-  0%, 20%, 96%, 100% { opacity: 0; transform: scale(1.035); }
-  36%, 80% { opacity: 1; transform: scale(1); }
-}
-@keyframes nalu-logo-travel {
-  0%, 20%, 96%, 100% { left: 50%; top: 50%; transform: translate(-50%, -50%) scale(1); opacity: 1; }
-  36%, 80% { left: 91.6%; top: 91%; transform: translate(-50%, -50%) scale(.3233); opacity: 0; }
-}
-@keyframes nalu-logo-contrast {
-  0%, 23%, 94%, 100% { opacity: 0; }
-  36%, 80% { opacity: 1; }
+.nalu-cover-brand { position: absolute; inset: 0; overflow: hidden; display: grid; place-items: center; background: #fcf9fc; pointer-events: none; }
+.nalu-cover-brand::before { content: ""; position: absolute; inset: -30% -15% -90%; background: url("assets/case-studies/KUU4zVZwe0AyAhWi26OOCIMBDl4.webp") center / contain no-repeat; opacity: 0.75; }
+.nalu-cover-brand img { position: relative; width: 30%; height: auto; object-fit: contain; }
+.nalu-cover .nalu-cover-frame { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.nalu-cover-scene { opacity: 0; }
+/* Keep the first complete frame opaque below the second so the dissolve never
+   flashes through the background. Both pictures stay fixed throughout the loop. */
+.nalu-cover.is-ready .nalu-cover-scene { animation: nalu-cover-crossfade var(--nalu-cycle) cubic-bezier(.45, 0, .55, 1) infinite both paused; }
+.nalu-cover.is-ready.is-playing .nalu-cover-scene { animation-play-state: running; }
+.nalu-cover.is-static .nalu-cover-scene { opacity: 1; }
+@keyframes nalu-cover-crossfade {
+  0%, 35%, 100% { opacity: 0; }
+  50%, 85% { opacity: 1; }
 }
 /* Lighthouse keeps the Selected Projects default artwork; only its phones move.
    Preserve its existing six-second movement and screen transitions. */
@@ -154,15 +146,15 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
 .lighthouse-phone-right { left: 30%; animation-name: nalu-float-opposite; }
 .lighthouse-screen { position: absolute; left: 5.65%; top: 2.17%; width: 89.25%; height: 95.53%; border-radius: 12% / 5.5%; overflow: hidden; background: #fff; }
 .lighthouse-screen img { position: absolute; inset: 0; }
-.lighthouse-screen-next { opacity: 0; animation: nalu-screen-swap 6s ease-in-out infinite; }
+.lighthouse-screen-next { opacity: 0; animation: nalu-screen-swap 6s steps(1, end) infinite; }
 .lighthouse-phone .lighthouse-phone-frame { position: relative; z-index: 1; object-fit: fill; }
 @keyframes nalu-float {
   0%, 35%, 100% { transform: translateY(7%); }
   50%, 85% { transform: translateY(-7%); }
 }
 @keyframes nalu-screen-swap {
-  0%, 35%, 100% { opacity: 0; }
-  50%, 85% { opacity: 1; }
+  0%, 49.99%, 100% { opacity: 0; }
+  50%, 99.99% { opacity: 1; }
 }
 @keyframes nalu-float-opposite {
   0%, 35%, 100% { transform: translateY(-7%); }
@@ -234,9 +226,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
   .footer-columns { grid-template-columns: 180px 250px; gap: 24px; }
 }
 
-/* Phone version: one card per row, with the same continuous frame and rules. */
-@media (max-width: 767px) {
-  :root { --gutter: 16px; --cell-inset: 16px; --header-height: 56px; }
+/* Compact header navigation is shared by tablet and phone. */
+@media (max-width: 1023px) {
   .header-inner { padding-left: 12px; }
   .menu-toggle { display: grid; place-items: center; align-self: stretch; width: 56px; padding: 0; border: 0; border-left: 1px solid var(--rule); background: #fff; }
   .menu-toggle svg { width: 22px; height: 22px; stroke-width: 2; }
@@ -248,6 +239,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
   .site-header.menu-open nav { display: flex; flex-direction: column; }
   .site-header nav a { min-width: 0; min-height: 52px; padding: 16px 32px; justify-content: flex-start; border-left: 0; border-bottom: 1px solid var(--rule); color: #383838; }
   .site-header nav a:last-child { border-bottom: 0; }
+}
+
+/* Phone version: one card per row, with the same continuous frame and rules. */
+@media (max-width: 767px) {
+  :root { --gutter: 16px; --cell-inset: 16px; --header-height: 56px; }
   .hero-inner { min-height: 475px; padding: 78px 24px 84px; }
   .hero h1 { max-width: 540px; font-size: clamp(27px, 6.8vw, 32px); line-height: 1.36; letter-spacing: -0.025em; }
   .work-heading .frame { min-height: 108px; }
@@ -285,7 +281,5 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
   html { scroll-behavior: auto; }
   .copy-status, .custom-cursor, .custom-cursor .cursor-label, .footer-card { transition: none; }
   .lighthouse-phone, .lighthouse-screen-next { animation: none; }
-  .nalu-cover.is-ready .nalu-cover-scene { animation: none; opacity: 1; transform: none; }
-  .nalu-cover.is-ready .nalu-cover-logo { animation: none; opacity: 0; }
-  .nalu-cover.is-ready .nalu-cover-logo::after { animation: none; opacity: 1; }
+  .nalu-cover.is-ready .nalu-cover-scene { animation: none; opacity: 1; }
 }

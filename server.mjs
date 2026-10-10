@@ -19,13 +19,14 @@ const localCasePreviews = new Map([
   ['/project-2-southerncrafted', '/southern-preview/'],
   ['/project-4-nalu', '/nalu-preview/'],
 ]);
-const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.woff2': 'font/woff2', '.png': 'image/png', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.mp4': 'video/mp4', '.json': 'application/json' };
+const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.woff2': 'font/woff2', '.png': 'image/png', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.gif': 'image/gif', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.mp4': 'video/mp4', '.json': 'application/json' };
 http.createServer(async (req, res) => {
   try {
     const requestUrl = new URL(req.url, 'http://localhost');
     const pathname = decodeURIComponent(requestUrl.pathname);
+    const publicHeroScene = pathname === '/assets/playground/blair-su/assets/unicorn-embed-hero-blair-rounded-cursor-11.json';
     if (pathname === '/api/chat') { await (process.env.CHAT_PROVIDER === 'openai' ? chatHandler : cloudflareChatHandler)(req, res); return; }
-    if (pathname.split('/').some(segment => segment.startsWith('.')) || /^\/(server|cloudflare|api|tests|scripts|reference|qa|node_modules)(\/|$)/.test(pathname) || /\.(?:mjs|jsonc?|md|toml|pem|key)$/.test(pathname)) {
+    if (pathname.split('/').some(segment => segment.startsWith('.')) || /^\/(server|cloudflare|api|tests|scripts|reference|qa|node_modules)(\/|$)/.test(pathname) || (/\.(?:mjs|jsonc?|md|toml|pem|key)$/.test(pathname) && !publicHeroScene)) {
       res.writeHead(404).end('Not found'); return;
     }
     const preview = localCasePreviews.get(pathname.replace(/\/(?:index\.html)?$/, ''));

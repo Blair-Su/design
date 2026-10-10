@@ -8,6 +8,7 @@ for (const [folder, file, prefix] of [
   ['project-2-southerncrafted', 'southern', 'sc'],
   ['project-3-hhi', 'hhi', 'hhi'],
   ['project-4-nalu', 'nalu', 'nl'],
+  ['cube-preview', 'cube', 'cb'],
 ]) {
   const html = fs.readFileSync(`${folder}/index.html`, 'utf8');
   const source = fs.readFileSync(`${folder}/${file}.js`, 'utf8');
@@ -17,6 +18,17 @@ for (const [folder, file, prefix] of [
   assert.deepEqual(anchors, ids);
   assert(html.includes(`class="${prefix}-back" href="../?view=work"`));
   assert(html.indexOf('/case-navigation.js?') < html.indexOf(`./${file}.js?`));
+  if (prefix !== 'cb') {
+    assert(html.includes(`class="${prefix}-jump-design case-jump-design"`));
+    assert(html.includes('Jump to the design <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>'));
+    if (prefix === 'hhi') {
+      assert(html.includes('class="hhi-prototype-link case-jump-design"'));
+      assert(html.includes('View Figma Prototype <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>'));
+    }
+  } else {
+    assert(html.includes('class="cb-hero-image"'));
+    assert(html.indexOf('class="cb-hero-image"') < html.indexOf('class="cb-eyebrow"'));
+  }
 
   for (const [desktop, headerHeight] of [[true, 0], [false, 64], [false, 98], [false, null]]) {
     for (const reduced of [false, true]) {
@@ -165,4 +177,4 @@ for (const [folder, file, prefix] of [
     }
   }
 }
-console.log('PASS: four project menus select before scrolling, keep destination highlighted in transit, handle rapid clicks and user interruptions, track native scroll/hash, reposition the indicator, respect reduced motion, close mobile Contents, and retain image viewers and Back links.');
+console.log('PASS: all published and local-draft project menus select before scrolling, keep destination highlighted in transit, handle rapid clicks and user interruptions, track native scroll/hash, reposition the indicator, respect reduced motion, close mobile Contents, and retain image viewers and Back links.');

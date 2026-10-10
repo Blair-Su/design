@@ -22,8 +22,12 @@
 .sc-project-meta dl > div + div { border-left: 1px solid var(--rule); }
 .sc-project-meta dt { margin-bottom: 10px; color: var(--ink); font: 500 14px/1.5 "Geist", Arial, sans-serif; }
 .sc-project-meta dd { margin: 0; color: var(--sc-muted); font: 400 14px/1.5 "Geist", sans-serif; }
-.sc-cover { margin: 0 0 40px; border-radius: 24px; overflow: hidden; background: var(--sc-green); }
-.sc-cover img { display: block; width: 100%; height: auto; }
+.sc-cover { position: relative; margin: 0 0 40px; border-radius: 24px; overflow: hidden; background: var(--sc-green); }
+.case-page.sc-local-page .sc-cover { height: auto; }
+.sc-cover-stage { position: relative; width: 100%; aspect-ratio: 2029 / 775; }
+.sc-cover picture { display: contents; }
+.sc-cover img { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
+.sc-cover-screen { position: absolute; z-index: 2; left: 32.87%; top: 13.55%; width: 36.42%; height: 57.94%; object-fit: cover; object-position: center; background: #000; transform: scale(1.008); transform-origin: center; filter: none; pointer-events: none; }
 .sc-summary { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 12px 20px; margin: 28px 0 0; padding: 24px; background: var(--sc-tint); font: 400 15px/1.65 "Geist", Arial, sans-serif; }
 .sc-summary dt, .sc-summary strong { color: var(--ink); font-weight: 500; }
 .sc-summary dd { margin: 0; color: var(--project-ink); }

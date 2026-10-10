@@ -1,6 +1,6 @@
 // Keep the fox clear of the rendered directory, including wrapped titles and safe areas.
 (() => {
-  const bar = document.querySelector('.lh-sidebar, .sc-sidebar, .hhi-sidebar, .nl-sidebar');
+  const bar = document.querySelector('.lh-sidebar, .sc-sidebar, .hhi-sidebar, .nl-sidebar, .cb-sidebar');
   if (!bar) return;
   const compact = matchMedia('(max-width: 1023px)');
   const measure = () => {

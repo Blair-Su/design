@@ -1,0 +1,3 @@
+.home-page #work .cube-project-cover { background: #fafafa; }
+.home-page #work .cube-project-cover picture { display: block; width: 100%; height: 100%; }
+.home-page #work .cube-project-cover img { width: 100%; height: 100%; object-fit: contain; }
