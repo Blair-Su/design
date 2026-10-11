@@ -112,7 +112,7 @@ for slug, name in PROJECTS.items():
         ('meta', {'name': 'viewport', 'content': 'width=device-width, initial-scale=1'}),
         ('base', {'href': '/'}),
         ('meta', {'name': 'description', 'content': f'{name} project case study by Blair Su.'}),
-        ('link', {'rel': 'icon', 'type': 'image/svg+xml', 'href': '/assets/blair-photo-icon-rounded.svg'}),
+        ('link', {'rel': 'icon', 'type': 'image/png', 'sizes': '48x48', 'href': '/assets/favicon/blair-avatar-48.png?v=avatar-20261010'}),
         ('link', {'rel': 'stylesheet', 'href': '/assets/case-studies/layout.css'}),
         ('link', {'rel': 'stylesheet', 'href': '/assets/case-studies/behavior.css'}),
         ('link', {'rel': 'stylesheet', 'href': '/styles.css'}),
