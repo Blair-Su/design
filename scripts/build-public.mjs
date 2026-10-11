@@ -8,7 +8,7 @@ await mkdir(target, { recursive: true });
 // Only browser assets are published. Server modules, credentials, tests and references stay out.
 for (const entry of await readdir(root, { withFileTypes: true })) {
   const publicDirectory = entry.isDirectory() && (entry.name === 'assets' || entry.name === 'cube' || /^project-\d-/.test(entry.name));
-  const publicFile = entry.isFile() && /\.(html|css|js)$/.test(entry.name) && entry.name !== 'preview.html';
+  const publicFile = entry.isFile() && (/\.(html|css|js)$/.test(entry.name) || entry.name === 'robots.txt') && entry.name !== 'preview.html';
   if (publicDirectory || publicFile) {
     await cp(`${root}${entry.name}`, `${target}/${entry.name}`, { recursive: true });
     // Local draft cards link to preview directories that are deliberately unpublished.
