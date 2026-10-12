@@ -166,9 +166,11 @@
 .lh-section .lh-scenario-title { margin: 0; color: var(--ink); font: 500 16px/1.5 "Geist", Arial, sans-serif; letter-spacing: normal; }
 .lh-scenario figcaption p { margin-top: 8px; }
 .lh-scenario > .lh-art { max-width: 800px; border-radius: 16px; }
-.lh-onboarding-demo { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 2.3fr) minmax(0, 1fr); align-items: center; gap: clamp(12px, 1.8vw, 28px); max-width: 1400px; width: 100%; padding: clamp(12px, 2vw, 28px); border-radius: 16px; background: var(--paper); container-type: inline-size; }
-.lh-onboarding-phones { grid-column: 1; grid-row: 1; display: flex; align-items: center; justify-content: center; gap: 10px; min-width: 0; }
-.lh-onboarding-phone { position: relative; display: block; flex: 1 1 0; min-width: 0; aspect-ratio: 507 / 1024; filter: drop-shadow(0 12px 16px rgb(26 39 48 / 14%)); }
+.lh-onboarding-demo { --lh-item-gap: clamp(4px, .75vw, 10px); --lh-art-scale: 1.616; --lh-art-column: 1.616fr; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(0, var(--lh-art-column)) minmax(0, 1fr); align-items: center; gap: var(--lh-item-gap); max-width: 1400px; width: 100%; padding: clamp(12px, 2vw, 28px); border-radius: 16px; background: var(--paper); container-type: inline-size; }
+.lh-onboarding-phones { display: contents; }
+.lh-onboarding-phone { grid-row: 1; position: relative; display: block; min-width: 0; aspect-ratio: 507 / 1024; filter: drop-shadow(0 12px 16px rgb(26 39 48 / 14%)); }
+.lh-onboarding-phones > .lh-onboarding-phone:first-child { grid-column: 1; }
+.lh-onboarding-phones > .lh-onboarding-phone:nth-child(2) { grid-column: 2; }
 .lh-onboarding-phone-screen { position: absolute; left: 5.33%; top: 2.15%; width: 88.9%; height: 95.57%; overflow: hidden; border-radius: 11% / 5%; background: #fff; }
 .lh-onboarding-phone-screen picture { display: block; width: 100%; height: 100%; }
 .lh-onboarding-phone-screen img { display: block; width: 100%; height: 100%; object-fit: fill; }
@@ -189,17 +191,19 @@
   .lh-phone-motion-toggle { transition: none; }
 }
 .lh-onboarding-phone-frame { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
-.lh-onboarding-phone-demo { grid-column: 3; grid-row: 1; width: calc(100% - 5px); justify-self: center; }
-.lh-storyboard-art { --lh-illustration-height: 36cqw; grid-column: 2; grid-row: 1; position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: end; gap: 0 12px; width: 100%; min-width: 0; justify-self: center; }
+.lh-onboarding-phone-demo { grid-column: 4; grid-row: 1; width: 100%; justify-self: center; }
+/* Match each artwork's column to its aspect ratio at the same height as a phone. */
+.lh-storyboard-art { --lh-illustration-height: calc((100cqw - 3 * var(--lh-item-gap)) / (3 + var(--lh-art-scale)) * 1024 / 507); grid-column: 3; grid-row: 1; position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: end; gap: 0 12px; width: 100%; min-width: 0; justify-self: center; }
 .lh-storyboard-art > img { grid-column: 1 / -1; display: block; width: 100%; height: var(--lh-illustration-height); object-fit: contain; mix-blend-mode: multiply; }
-.lh-navigation-demo { background: var(--paper); }
+.lh-navigation-demo { --lh-art-scale: 1.754; --lh-art-column: 1.754fr; background: var(--paper); }
+.lh-postmeal-demo { --lh-art-scale: 2.02; --lh-art-column: 2.02fr; }
 .lh-dialogue { --dialogue-fill: #fff; --dialogue-stroke: #b8b8b8; position: relative; z-index: 1; box-sizing: border-box; width: fit-content; max-width: 100%; min-width: 0; margin: 0; padding: 10px 12px; border: 1px solid var(--dialogue-stroke); border-radius: 18px; background: var(--dialogue-fill); color: #202020; font: 400 14px/1.4 "Geist", Arial, sans-serif; text-align: center; text-wrap: balance; }
 .lh-dialogue::after { content: ""; position: absolute; left: 66%; bottom: -7px; width: 12px; height: 12px; border-right: 1px solid var(--dialogue-stroke); border-bottom: 1px solid var(--dialogue-stroke); background: var(--dialogue-fill); transform: rotate(45deg); }
-.lh-dialogue--question { grid-column: 1; justify-self: end; margin-bottom: calc(var(--lh-illustration-height) * -.17); }
+.lh-dialogue--question { grid-column: 1; justify-self: end; margin-bottom: calc(var(--lh-illustration-height) * -.14); }
 .lh-dialogue--question::after { left: 80%; }
 .lh-dialogue--answer { --dialogue-fill: #fff3bc; --dialogue-stroke: #e5ba37; grid-column: 2; justify-self: start; margin-bottom: calc(var(--lh-illustration-height) * -.11); }
 .lh-dialogue--answer::after { left: 32%; }
-.lh-storyboard-art--postmeal .lh-dialogue--question { margin-bottom: calc(var(--lh-illustration-height) * -.26); }
+.lh-storyboard-art--postmeal .lh-dialogue--question { margin-bottom: calc(var(--lh-illustration-height) * -.23); }
 .lh-storyboard-art--postmeal .lh-dialogue--question::after { left: 64%; }
 .lh-storyboard-art--postmeal .lh-dialogue--answer { margin-bottom: calc(var(--lh-illustration-height) * -.22); }
 .lh-onboarding-phone-screen .lh-postmeal-timer-screen { object-fit: cover; }
@@ -248,12 +252,10 @@
   .lh-art.lh-station-models { gap: 8px; }
   .lh-scenario + .lh-scenario { margin-top: 32px; }
   .lh-scenario figcaption { margin-bottom: 18px; }
-  .lh-onboarding-demo { grid-template-columns: minmax(0, 1.8fr) minmax(0, 2.6fr) minmax(0, .9fr); gap: 8px; padding: 8px 0; border-radius: 12px; }
-  .lh-storyboard-art { --lh-illustration-height: 33cqw; grid-column: 2; grid-row: 1; width: 100%; gap: 0 5px; }
+  .lh-onboarding-demo { --lh-item-gap: 4px; padding: 8px 0; border-radius: 12px; }
+  .lh-storyboard-art { gap: 0 5px; }
   .lh-dialogue { padding: 6px; border-radius: 10px; font-size: clamp(8px, 2.65cqw, 11px); line-height: 1.35; overflow-wrap: anywhere; }
   .lh-dialogue::after { bottom: -4px; width: 6px; height: 6px; }
-  .lh-onboarding-phones { grid-column: 1; grid-row: 1; width: 100%; gap: 4px; justify-self: center; }
-  .lh-onboarding-phone-demo { grid-column: 3; grid-row: 1; width: 100%; }
   .lh-enlarge { right: 8px; bottom: 8px; padding: 5px 8px; font-size: 10px; }
   .lh-art-button, .lh-research-visual, .lh-station-visual, .lh-scenario > .lh-art { border-radius: 12px; }
   .lh-awards > div { gap: 10px; flex-direction: column; }
