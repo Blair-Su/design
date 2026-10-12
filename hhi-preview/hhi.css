@@ -76,7 +76,7 @@
 .hhi-iteration-compare figure { min-width: 0; margin: 0; }
 .hhi-iteration-compare figcaption { margin-bottom: 16px; }
 .hhi-iteration-compare .hhi-email-preview { background: var(--hhi-tint); }
-.hhi-iteration-feedback { margin: 24px 0 0; }
+.hhi-iteration-feedback { margin: 24px 0 0; border-left: 0; }
 .hhi-iteration-feedback p { font-size: 16px; line-height: 1.65; }
 .hhi-iteration-after { padding: 12px; }
 .hhi-iteration-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
