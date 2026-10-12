@@ -76,7 +76,7 @@
 .hhi-iteration-compare figcaption { margin-bottom: 16px; }
 .hhi-iteration-compare .hhi-email-preview { background: var(--hhi-tint); }
 .hhi-iteration-feedback { margin: 24px 0 0; }
-.hhi-feedback-label { display: block; margin-bottom: 10px; color: var(--hhi-muted); font: 400 12px/1.5 "Geist", Arial, sans-serif; }
+.hhi-iteration-feedback p { font-size: 16px; line-height: 1.65; }
 .hhi-iteration-after { padding: 12px; }
 .hhi-iteration-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .hhi-iteration-card { position: relative; display: block; aspect-ratio: 2144 / 1456; overflow: hidden; background: #fff; }
@@ -173,7 +173,7 @@
   .hhi-section h3 { font-size: 27px; }
   .hhi-copy p { font-size: 16px; line-height: 1.7; }
   .hhi-guest-quote { padding-left: 18px; }
-  .hhi-copy .hhi-guest-quote p, .hhi-iteration-feedback p { font-size: 19px; }
+  .hhi-copy .hhi-guest-quote p { font-size: 19px; }
   .hhi-touchpoint-reasons { font-size: 16px; line-height: 1.7; }
   .hhi-before { grid-template-columns: 1fr; gap: 26px; }
   .hhi-final-grid { grid-template-columns: 1fr; gap: 22px; }
