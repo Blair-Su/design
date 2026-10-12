@@ -46,7 +46,7 @@
 .hhi-jump-design::after { content: ""; position: absolute; left: 0; right: 0; bottom: 8px; height: 1px; background: currentColor; opacity: 1; }
 .hhi-jump-design:hover { opacity: .65; }
 .hhi-guest-quote { margin: 24px 0; padding: 4px 0 4px 24px; border-left: 2px solid #d6d6d6; }
-.hhi-copy .hhi-guest-quote p { margin: 0; color: var(--project-ink); font: 400 21px/1.55 "Source Serif 4", Georgia, serif; }
+.hhi-copy .hhi-guest-quote p, .hhi-iteration-feedback p { margin: 0; color: var(--project-ink); font: 400 21px/1.55 "Source Serif 4", Georgia, serif; }
 .hhi-guest-quote cite { display: block; margin-top: 14px; color: var(--hhi-muted); font: 400 12px/1.5 "Geist", Arial, sans-serif; }
 .hhi-touchpoint-reasons { margin: 22px 0 0; padding-left: 22px; color: var(--project-ink); font: 400 16px/1.75 "Geist", Arial, sans-serif; }
 .hhi-touchpoint-reasons li + li { margin-top: 12px; }
@@ -75,6 +75,8 @@
 .hhi-iteration-compare figure { min-width: 0; margin: 0; }
 .hhi-iteration-compare figcaption { margin-bottom: 16px; }
 .hhi-iteration-compare .hhi-email-preview { background: var(--hhi-tint); }
+.hhi-iteration-feedback { margin: 24px 0 0; }
+.hhi-feedback-label { display: block; margin-bottom: 10px; color: var(--hhi-muted); font: 400 12px/1.5 "Geist", Arial, sans-serif; }
 .hhi-iteration-after { padding: 12px; }
 .hhi-iteration-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .hhi-iteration-card { position: relative; display: block; aspect-ratio: 2144 / 1456; overflow: hidden; background: #fff; }
@@ -171,7 +173,7 @@
   .hhi-section h3 { font-size: 27px; }
   .hhi-copy p { font-size: 16px; line-height: 1.7; }
   .hhi-guest-quote { padding-left: 18px; }
-  .hhi-copy .hhi-guest-quote p { font-size: 19px; }
+  .hhi-copy .hhi-guest-quote p, .hhi-iteration-feedback p { font-size: 19px; }
   .hhi-touchpoint-reasons { font-size: 16px; line-height: 1.7; }
   .hhi-before { grid-template-columns: 1fr; gap: 26px; }
   .hhi-final-grid { grid-template-columns: 1fr; gap: 22px; }
