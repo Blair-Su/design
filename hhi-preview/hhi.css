@@ -38,9 +38,10 @@
 .hhi-copy p { margin-top: 18px; color: var(--project-ink); font: 400 16px/1.75 "Geist", Arial, sans-serif; text-wrap: pretty; }
 .hhi-copy > p:first-child { margin-top: 0; }
 .hhi-copy p + p { margin-top: 16px; }
-.hhi-copy strong { font-weight: 500; color: var(--ink); }
+.hhi-copy strong { font-weight: 600; color: var(--ink); }
 .hhi-summary { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 12px 20px; margin: 28px 0 0; padding: 24px; background: var(--hhi-tint); font: 400 15px/1.65 "Geist", Arial, sans-serif; }
-.hhi-summary dt, .hhi-summary strong { color: var(--ink); font-weight: 500; }
+.hhi-summary dt { color: var(--ink); font-weight: 500; }
+.hhi-summary strong { color: var(--ink); font-weight: 600; }
 .hhi-summary dd { margin: 0; color: var(--project-ink); }
 .hhi-jump-design { position: relative; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 16px; padding: 8px 0; border: 0; background: transparent; color: var(--ink); font: 400 14px/1.5 "Geist", Arial, sans-serif; }
 .hhi-jump-design::after { content: ""; position: absolute; left: 0; right: 0; bottom: 8px; height: 1px; background: currentColor; opacity: 1; }
@@ -69,7 +70,7 @@
 .hhi-design-notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, auto); grid-auto-flow: column; gap: 24px 40px; margin: 32px 0 0; padding-left: 22px; color: var(--project-ink); font: 400 15px/1.75 "Geist", Arial, sans-serif; }
 .hhi-design-notes li { min-width: 0; padding-left: 4px; }
 .hhi-design-notes li::marker { color: var(--hhi-muted); }
-.hhi-design-notes strong { font-weight: 500; color: var(--ink); }
+.hhi-design-notes strong { font-weight: 600; color: var(--ink); }
 .hhi-iteration { margin-top: 48px; scroll-margin-top: calc(var(--header-height) + 24px); }
 .hhi-iteration-compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 28px; }
 .hhi-iteration-compare figure { min-width: 0; margin: 0; }
@@ -99,7 +100,7 @@
 .hhi-impact-number span { font-size: .6em; letter-spacing: -.04em; }
 .hhi-impact-conclusion { font: 400 15px/1.7 "Geist", Arial, sans-serif; }
 .hhi-impact-detail { grid-column: 2; margin-top: 16px; color: var(--project-ink); font: 400 15px/1.7 "Geist", Arial, sans-serif; }
-.hhi-impact-detail strong { font-weight: 500; color: var(--ink); }
+.hhi-impact-detail strong { font-weight: 600; color: var(--ink); }
 .hhi-results-copy { margin-top: 24px; }
 .hhi-reflection-copy { max-width: none; }
 .hhi-reflection-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
