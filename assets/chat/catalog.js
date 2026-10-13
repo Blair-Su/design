@@ -1,4 +1,5 @@
 export const projects = {
+  'project-6-mental-model': { title: 'Mental Model', keywords: /mental[ -]model|认知模型|心智模型/i, questions: ['How does Mental Model work?', 'What do Mental Model’s six tutorials cover?', 'How does Mental Model keep the researcher in control?'] },
   'project-3-hhi': { title: 'HHI Concours', keywords: /hhi|concours|ticket|arrival/i, questions: ['What did Blair design for HHI?', 'How did research shape HHI’s ticket email?', 'What did Blair learn from HHI?'] },
   'project-1-lighthouse': { title: 'Lighthouse', keywords: /lighthouse|diabet|travel/i, questions: ['How does Lighthouse work?', 'What was Blair’s role in Lighthouse?', 'How did Blair use AI to rebuild Lighthouse?'] },
   'project-2-southerncrafted': { title: 'Southern Crafted', keywords: /southern|craft|commerce|shopping/i, questions: ['What changed in Southern Crafted’s redesign?', 'How did Blair improve Southern Crafted’s shopping experience?', 'How was Southern Crafted’s redesign tested?'] },
@@ -21,6 +22,7 @@ export function pageContext(pathname, projectSlug) {
 }
 const general = ['What should I explore first?', 'What is Blair’s design background?', 'How does Blair use AI?', 'How can I get in touch with Blair?'];
 const projectNames = {
+  'project-6-mental-model': /mental[ -]model|认知模型|心智模型/i,
   'project-3-hhi': /\bhhi\b|\bhilton head island concours\b/i,
   'project-1-lighthouse': /\blighthouse\b|灯塔/i,
   'project-2-southerncrafted': /\bsouthern\s+crafted\b/i,

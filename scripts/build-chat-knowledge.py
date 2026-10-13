@@ -23,7 +23,7 @@ class ExtractText(HTMLParser):
 
 ROOT = Path(__file__).resolve().parents[1]
 sources = [('about', 'about.html'), *[(slug, f'{slug}/index.html') for slug in (
-    'project-3-hhi', 'project-1-lighthouse', 'project-2-southerncrafted', 'project-4-nalu')],
+    'project-3-hhi', 'project-1-lighthouse', 'project-2-southerncrafted', 'project-4-nalu', 'project-6-mental-model')],
     ('project-3-hhi-preview', 'hhi-preview/index.html'),
     ('project-1-lighthouse-preview', 'lighthouse-preview/index.html')]
 knowledge = {}

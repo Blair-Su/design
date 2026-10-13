@@ -283,3 +283,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
   .lighthouse-phone, .lighthouse-screen-next { animation: none; }
   .nalu-cover.is-ready .nalu-cover-scene { animation: none; opacity: 1; }
 }
+
+/* Mental Model uses the same 16:9 project artwork and caption treatment. */
+.mental-model-cover { background: #191919; }
+.mental-model-cover img { width: 100%; height: 100%; object-fit: contain; }
+.project-link[href="/project-6-mental-model/"] .project-meta span { color: #52665c; }

@@ -10,6 +10,8 @@ for (const [folder, file, prefix] of [
   ['project-4-nalu', 'nalu', 'nl'],
   ['project-5-cube', 'cube', 'cb'],
   ['cube-preview', 'cube', 'cb'],
+  ['project-6-mental-model', 'mental-model', 'mm'],
+  ['mental-model-preview', 'mental-model', 'mm'],
 ]) {
   const html = fs.readFileSync(`${folder}/index.html`, 'utf8');
   const source = fs.readFileSync(`${folder}/${file}.js`, 'utf8');
@@ -19,7 +21,7 @@ for (const [folder, file, prefix] of [
   assert.deepEqual(anchors, ids);
   assert(html.includes(`class="${prefix}-back" href="../?view=work"`));
   assert(html.indexOf('/case-navigation.js?') < html.indexOf(`./${file}.js?`));
-  if (prefix !== 'cb') {
+  if (!['cb', 'mm'].includes(prefix)) {
     assert(html.includes(`class="${prefix}-jump-design case-jump-design"`));
     assert(html.includes('Jump to the design <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>'));
     if (prefix === 'hhi') {
@@ -27,8 +29,8 @@ for (const [folder, file, prefix] of [
       assert(html.includes('View Figma Prototype <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>'));
     }
   } else {
-    assert(html.includes('class="cb-hero-image"'));
-    assert(html.indexOf('class="cb-hero-image"') < html.indexOf('class="cb-eyebrow"'));
+    assert(html.includes(`class="${prefix}-hero-image"`));
+    assert(html.indexOf(`class="${prefix}-hero-image"`) < html.indexOf(`class="${prefix}-eyebrow"`));
   }
 
   for (const [desktop, headerHeight] of [[true, 0], [false, 64], [false, 98], [false, null]]) {

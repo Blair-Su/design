@@ -4,7 +4,7 @@ export const REVEAL_SELECTORS = [
   '.about-intro-heading', '.about-intro-prose > p',
   '.about-section-heading > h2', '.about-resume-identity > div', '.about-resume-description > p',
   '.about-gallery', '.footer-brand', '.footer-column',
-  ...['hhi', 'lh', 'sc', 'nl'].flatMap(prefix => [
+  ...['hhi', 'lh', 'sc', 'nl', 'mm'].flatMap(prefix => [
     `.${prefix}-article :is(h1, h2, h3, h4, p, figure, table)`,
     `.${prefix}-project-meta`, `.${prefix}-summary`, `.${prefix}-reflection-card`,
   ]),

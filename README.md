@@ -138,3 +138,14 @@ Local review screenshots, reports and intermediate exports stay in ignored `qa/`
 Project placement: HHI Concours (2026) at top left, Lighthouse (2023) at top right, Southern Crafted (2024) below HHI Concours, and Nalu (2025) at bottom right. Short descriptions retain the existing homepage wording; years are verified against the existing public Blair Su pages.
 
 Card project names use the muted text color. Type labels use medium weight (500) and each project's accent: HHI brown, Southern Crafted sage green, Lighthouse gold, and Nalu plum. The shared styles apply to both Home and related-project cards; names, descriptions and years retain regular weight, and years stay muted.
+
+
+## Mental Model
+
+The My Project card links to `/project-6-mental-model/`. Edit `mental-model-preview/`; the existing sync/build workflow creates its canonical public copy. The page reuses the portfolio navigation, case-study layout, typography, cursor, responsive Contents bar, and scroll reveals.
+
+Six individual tutorial sections follow the product's `lib/tutorial.ts` lessons: Interviews, Saved quote, Statement editor, Intention tower, Support opportunities, and Practice coach. Copy is grounded in the Mental-Model-Assistant repository and its tutorial storyboard. Screenshots use the existing standalone demo's fictional tour, with scripted feedback labeled in the interface. Demo and product links point to the existing public Mental Model site.
+
+Media lives in `assets/case-studies/mental-model/`. `mental-model-promo.mp4` is the user's 14-second, 1920×1080 Clean Cut film, reused unchanged from the Mental Model AI project. It has user-controlled playback, inline mobile playback, a poster, a direct-file fallback, and a text description. The cover reuses the same film's 6.85-second still. No source project or original media files were changed.
+
+Validation: `npm run build`, `npm test` (63 passing checks, including the new case-study navigation), and browser checks of the public build at 320, 390, 768, 1024 and 1440px. Verified keyboard card entry, all ten chapter links, six image dialogs and focus return, mobile menu/back navigation, native video playback and seeking, reduced motion, direct anchors, and absence of horizontal overflow or missing local assets. The portfolio chat reference has been added to its source catalog; activating that knowledge in the hosted AI guide still uses the existing separate Worker deployment workflow.
