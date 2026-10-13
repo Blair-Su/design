@@ -1,6 +1,6 @@
-"""Mount the existing Mental Model film in the Cube.AI card's monitor geometry.
+"""Mount the Ear to Mind film in the Cube.AI card's monitor geometry.
 
-Requires Pillow and ffmpeg. The original film is unchanged. Outputs a looping
+Requires Pillow and ffmpeg. The input film is unchanged. Outputs a looping
 960×540 GIF and a static PNG for visitors who prefer reduced motion.
 """
 import argparse
