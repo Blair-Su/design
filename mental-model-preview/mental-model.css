@@ -135,3 +135,10 @@
   .mm-viewer-toolbar h2 { padding: 12px; font-size: 14px; }
   .mm-viewer-close { padding: 12px; gap: 10px; }
 }
+
+/* Reuse the card's exact monitor frame; keep the existing Hero dimensions. */
+.case-page.mm-local-page .mm-hero-image{--mm-hero-height:clamp(360px,52svh,520px);display:grid;place-items:center;height:var(--mm-hero-height);background:#000;overflow:hidden}
+.mm-monitor{position:relative;width:min(100%,calc(var(--mm-hero-height) * 16 / 9));aspect-ratio:16 / 9}
+.mm-monitor-frame{display:block;width:100%;height:auto;pointer-events:none}
+.case-page.mm-local-page .mm-monitor > video{position:absolute;left:19.1666667%;top:15.9259259%;width:61.6666667%;height:61.6666667%;aspect-ratio:16 / 9;object-fit:contain;border-radius:0;background:#fefefe}
+@media(max-width:1023px){.case-page.mm-local-page .mm-hero-image{height:auto}.mm-monitor{width:100%}}

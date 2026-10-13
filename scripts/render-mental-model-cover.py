@@ -52,6 +52,7 @@ def main():
     frame_bytes = sw * sh * 3
     assert len(result.stdout) % frame_bytes == 0
     base = monitor()
+    base.save(OUT / 'mental-model-monitor-frame.png', optimize=True)
     frames = []
     for offset in range(0, len(result.stdout), frame_bytes):
         frame = base.copy()

@@ -49,11 +49,15 @@ def put(im,key,cx,cy,scale=1,alpha=1,blur=0,shadow=True):
 def overlay_text(im,txt,x,y,s,col=INK,alpha=1,b=False,anchor='lt'):
  if alpha<=0:return
  l=Image.new('RGBA',(W,H));text(l,txt,x,y,s,(*col,round(255*clamp(alpha))),b,anchor);im.alpha_composite(l)
+@lru_cache(None)
+def brand_symbol():
+ return Image.open(ROOT/'assets/case-studies/mental-model/brand/ear-to-mind-symbol.png').convert('RGBA')
 def logo(im,cx,cy,size=1,color=INK,word=True):
- d=ImageDraw.Draw(im)
- for j,hh in enumerate([28,48,36]):
-  xx=cx+j*14*size;d.rounded_rectangle((xx,cy+(48-hh)*size,xx+8*size,cy+48*size),radius=max(1,1.5*size),fill=color)
- if word:text(im,'Ear to Mind',cx+52*size,cy+7*size,36*size,color)
+ # Match the website's accessible light silhouette without changing the source PNG.
+ mark=Image.new('RGBA',brand_symbol().size,(*color,255));mark.putalpha(brand_symbol().getchannel('A'))
+ mark=mark.resize((round(62*size),round(42*size)),Image.Resampling.LANCZOS)
+ im.alpha_composite(mark,(round(cx),round(cy)))
+ if word:text(im,'Ear to Mind',cx+74*size,cy+8*size,30*size,color)
 
 @lru_cache(None)
 def bg(dark=False):
@@ -120,6 +124,11 @@ def asset(key):
   text(im,'Support opportunities',51,161,30,GRAY)
   d.rounded_rectangle((49,235,1321,461),radius=17,fill=(249,249,246),outline=(201,201,195),width=2)
   return im
+ if key=='brand-lockup':
+  # Trim only the surrounding whitespace while composing the supplied full logo.
+  return Image.open(ROOT/'assets/case-studies/mental-model/brand/ear-to-mind-lockup.png').convert('RGBA').crop((190,300,1064,950))
+ if key=='cta-dark':
+  im=card(428,96,INK,48);text(im,'Try the assistant',214,30,35,WHITE,anchor='mt');return im
  if key=='cta':
   im=card(428,96,WHITE,48);text(im,'Try the assistant',214,30,35,INK,anchor='mt');return im
  if key=='coaching':
@@ -219,23 +228,12 @@ def scene_resolution(t):
  return im
 
 def scene_end(t):
- u=t-10.75;im=bg(True).copy()
- # Three stacked planes compress into the existing brand mark.
- factor=ease(u/.67)
- for j,hh in enumerate([28,48,36]):
-  end=(510+j*14*2.8,405+(48-hh)*2.8,8*2.8,hh*2.8)
-  start=(230+j*550,lerp(500,190,j/2),460,270)
-  r=[lerp(a,b,factor) for a,b in zip(start,end)]
-  d=ImageDraw.Draw(im);d.rounded_rectangle((r[0],r[1],r[0]+r[2],r[1]+r[3]),radius=lerp(22,4,factor),fill=WHITE)
- a=ease((u-.32)/.45)
- overlay_text(im,'Ear to Mind',650,428+40*(1-a),109,WHITE,a)
- overlay_text(im,'From what people say to how they think.',960,628,35,(177,177,173),ease((u-.78)/.4),anchor='mt')
- p=ease((u-1.02)/.38);put(im,'cta',960,773+27*(1-p),1,p,shadow=False)
- for j in range(8):
-  age=u-1.40-j*.035
-  if 0<age<.7:
-   xx=960+(j-3.5)*27*ease(age/.7);yy=728-age*165+100*age*age;r=(4+j%3)*(1-age/.7)
-   ImageDraw.Draw(im).ellipse((xx-r,yy-r,xx+r,yy+r),fill=(225,225,220,round(210*(1-age/.7))))
+ u=t-10.75;im=Image.new('RGBA',(W,H),(254,254,254,255))
+ # A quiet light end frame blends naturally with the supplied full logo's background.
+ a=ease(u/.6)
+ put(im,'brand-lockup',960,440+24*(1-a),.92+.03*a,a,shadow=False)
+ overlay_text(im,'From what people say to how they think.',960,804,35,GRAY,ease((u-.55)/.4),anchor='mt')
+ p=ease((u-.9)/.38);put(im,'cta-dark',960,936+20*(1-p),1,p,shadow=False)
  return im
 
 CUTS=[(0,scene_open),(1.4,scene_quote),(3,scene_editor),(4.9,scene_board),(7.2,scene_support),(9.15,scene_resolution),(10.75,scene_end)]
