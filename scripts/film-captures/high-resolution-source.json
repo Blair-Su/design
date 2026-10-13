@@ -1,0 +1,38 @@
+{
+  "background": "rgb(241, 241, 241)",
+  "cards": [
+    {
+      "height": 185.9453125,
+      "html": "<article data-tour-region=\"tower\" class=\"map-statement-card\" draggable=\"true\"><span class=\"badge\">Action</span><p>Check what is in the fridge</p><details><summary>Source quote</summary><blockquote>“I kept opening the fridge. I just didn’t want to make another decision. By the end of the day, even choosing dinner felt like work.”</blockquote></details><select aria-label=\"Move Check what is in the fridge to tower\"><option value=\"\">Ungrouped</option><option value=\"daa94def-49be-4a8b-86b8-7351db9e7cb1\">Take stock</option><option value=\"a2b25ca0-178b-4668-9546-14dd38302b71\">Find a manageable option</option><option value=\"281fc592-18ba-4d5b-8c85-82cdaebd31b6\">Make room to recover</option></select></article>",
+      "value": "daa94def-49be-4a8b-86b8-7351db9e7cb1",
+      "width": 254
+    },
+    {
+      "height": 185.9453125,
+      "html": "<article data-tour-region=\"tower\" class=\"map-statement-card\" draggable=\"true\"><span class=\"badge\">Action</span><p>Choose a familiar meal</p><details><summary>Source quote</summary><blockquote>“I was thinking about what I could manage before it got too late. I made the same pasta I always make.”</blockquote></details><select aria-label=\"Move Choose a familiar meal to tower\"><option value=\"\">Ungrouped</option><option value=\"daa94def-49be-4a8b-86b8-7351db9e7cb1\">Take stock</option><option value=\"a2b25ca0-178b-4668-9546-14dd38302b71\">Find a manageable option</option><option value=\"281fc592-18ba-4d5b-8c85-82cdaebd31b6\">Make room to recover</option></select></article>",
+      "value": "a2b25ca0-178b-4668-9546-14dd38302b71",
+      "width": 254
+    },
+    {
+      "height": 209.9453125,
+      "html": "<article data-tour-region=\"tower\" class=\"map-statement-card\" draggable=\"true\"><span class=\"badge\">Thought</span><p>Weigh effort against available time</p><details><summary>Source quote</summary><blockquote>“I was weighing how much energy cooking would take against the time I had left.”</blockquote></details><select aria-label=\"Move Weigh effort against available time to tower\"><option value=\"\">Ungrouped</option><option value=\"daa94def-49be-4a8b-86b8-7351db9e7cb1\">Take stock</option><option value=\"a2b25ca0-178b-4668-9546-14dd38302b71\">Find a manageable option</option><option value=\"281fc592-18ba-4d5b-8c85-82cdaebd31b6\">Make room to recover</option></select></article>",
+      "value": "a2b25ca0-178b-4668-9546-14dd38302b71",
+      "width": 254
+    },
+    {
+      "height": 185.9453125,
+      "html": "<article data-tour-region=\"tower\" class=\"map-statement-card\" draggable=\"true\"><span class=\"badge\">Feeling</span><p>Feel worn out by choosing</p><details><summary>Source quote</summary><blockquote>“It felt like I could finally stop working things out. I wanted one less thing to decide.”</blockquote></details><select aria-label=\"Move Feel worn out by choosing to tower\"><option value=\"\">Ungrouped</option><option value=\"daa94def-49be-4a8b-86b8-7351db9e7cb1\">Take stock</option><option value=\"a2b25ca0-178b-4668-9546-14dd38302b71\">Find a manageable option</option><option value=\"281fc592-18ba-4d5b-8c85-82cdaebd31b6\">Make room to recover</option></select></article>",
+      "value": "281fc592-18ba-4d5b-8c85-82cdaebd31b6",
+      "width": 254
+    },
+    {
+      "height": 185.9453125,
+      "html": "<article data-tour-region=\"tower\" class=\"map-statement-card\" draggable=\"true\"><span class=\"badge\">Philosophy</span><p>Value time to recover</p><details><summary>Source quote</summary><blockquote>“I believe evenings should leave room to recover. I did not want the whole evening to become another set of tasks.”</blockquote></details><select aria-label=\"Move Value time to recover to tower\"><option value=\"\">Ungrouped</option><option value=\"daa94def-49be-4a8b-86b8-7351db9e7cb1\">Take stock</option><option value=\"a2b25ca0-178b-4668-9546-14dd38302b71\">Find a manageable option</option><option value=\"281fc592-18ba-4d5b-8c85-82cdaebd31b6\">Make room to recover</option></select></article>",
+      "value": "281fc592-18ba-4d5b-8c85-82cdaebd31b6",
+      "width": 254
+    }
+  ],
+  "support": "<label data-tour=\"support\" class=\"support-area\"><span data-tour-region=\"support\">Support opportunities</span><textarea data-tour-region=\"support\" maxlength=\"3000\" rows=\"4\" placeholder=\"Where could you help?\">Reduce the effort of comparing familiar options.</textarea></label>",
+  "title": "<div class=\"tower-title\"><h3 data-tour-region=\"tower\">Find a manageable option</h3><button data-tour-region=\"tower\" class=\"plain edit-action\">Edit tower</button></div>",
+  "value": "Reduce the effort of comparing familiar options."
+}

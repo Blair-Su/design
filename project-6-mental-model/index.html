@@ -13,10 +13,10 @@
   <link rel="preload" href="../assets/fonts/averia-serif-libre.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../styles.css?v=mental-model-1">
-  <link rel="stylesheet" href="./mental-model.css?v=rounded-controls-6">
+  <link rel="stylesheet" href="./mental-model.css?v=hero-edge-11">
   <script src="../script.js?v=tablet-header-159" defer></script>
   <script src="/case-navigation.js?v=smooth-toc-71" defer></script>
-  <script src="./mental-model.js?v=hover-controls-5" defer></script>
+  <script src="./mental-model.js?v=project-film-9" defer></script>
 <link rel="stylesheet" href="/sky.css?v=mental-model-1">
   <link rel="stylesheet" href="/mobile-case.css?v=mental-model-hero-video-2">
   <script src="/mobile-case.js?v=mental-model-1" defer></script>
@@ -60,8 +60,8 @@
           <p class="mm-directory-project">Ear to Mind</p>
           <ol id="mm-toc-list">
             <li><a href="#overview" aria-current="location">Overview</a></li>
-            <li><a href="#the-idea">The idea</a></li>
-            <li><a href="#key-decisions">Key decisions</a></li>
+            <li><a href="#the-problem">The problem</a></li>
+            <li><a href="#how-it-works">How it works</a></li>
             <li><a href="#the-design">The design</a></li>
             <li><a href="#reflection">Reflection</a></li>
           </ol>
@@ -83,11 +83,11 @@
       <section id="overview" class="mm-intro mm-inset" data-case-section aria-label="Project overview">
         <figure id="product-film" class="mm-hero-image">
           <div class="mm-monitor">
-            <img class="mm-monitor-frame" src="/assets/case-studies/mental-model/mental-model-monitor-frame.png?v=logo-1" alt="" width="960" height="540" aria-hidden="true" fetchpriority="high">
             <div class="mm-player" role="group" aria-label="Ear to Mind film player">
-              <video controls playsinline preload="metadata" poster="/assets/case-studies/mental-model/promo-poster.jpg?v=ear-to-mind-logo-2" aria-label="Ear to Mind promotional film, 14 seconds">
-                <source src="/assets/case-studies/mental-model/mental-model-promo.mp4?v=ear-to-mind-logo-2" type="video/mp4">
-                Your browser does not support embedded video. <a href="/assets/case-studies/mental-model/mental-model-promo.mp4?v=ear-to-mind-logo-2">Open the film</a>.
+              <video controls playsinline preload="metadata" poster="/assets/case-studies/mental-model/project-film-poster.jpg?v=prototype-sharp-12" data-wide-src="/assets/case-studies/mental-model/ear-to-mind-project-film.mp4?v=prototype-sharp-12" data-wide-poster="/assets/case-studies/mental-model/project-film-poster.jpg?v=prototype-sharp-12" data-compact-src="/assets/case-studies/mental-model/mental-model-promo.mp4?v=prototype-sharp-12" data-compact-poster="/assets/case-studies/mental-model/promo-poster.jpg?v=prototype-sharp-12" aria-label="Ear to Mind promotional film, 14 seconds">
+                <source src="/assets/case-studies/mental-model/ear-to-mind-project-film.mp4?v=prototype-sharp-12" media="(min-width: 1024px)" type="video/mp4">
+                <source src="/assets/case-studies/mental-model/mental-model-promo.mp4?v=prototype-sharp-12" type="video/mp4">
+                Your browser does not support embedded video. <a href="/assets/case-studies/mental-model/mental-model-promo.mp4?v=prototype-sharp-12">Open the film</a>.
               </video>
               <div class="mm-player-controls" hidden>
                 <label class="mm-player-seek"><span class="mm-player-sr">Video progress</span><input type="range" min="0" max="100" step="0.1" value="0" disabled aria-valuetext="Loading video"><span class="mm-player-track" aria-hidden="true"><span></span></span></label>
@@ -128,27 +128,41 @@
         </div>
       </section>
 
-      <section id="the-idea" class="mm-section mm-inset" data-case-section aria-labelledby="idea-title">
-        <header class="mm-section-heading"><h2 id="idea-title">The idea</h2></header>
-        <div class="mm-copy"><h3>Make space for the thinking between a quote and a conclusion.</h3>
-          <p>A transcript can tell us what happened. Understanding the intention behind it takes another pass: what was the person weighing, feeling, or trying to achieve? Ear to Mind gives that work a clear sequence, from original words to reviewed statements and shared intentions.</p>
-          <p>The four lenses—<strong>Action, Thought, Feeling, and Philosophy</strong>—offer different ways to look at the same moment. The source quote stays close, so each interpretation can be checked against what the participant actually said.</p>
-          <p>The guided tour starts with a prepared dinner-planning example. Each small explanation sits beside the control it describes. People can explore, edit, skip ahead, or return later without completing an assignment first.</p>
+      <section id="the-problem" class="mm-section mm-inset" data-case-section aria-labelledby="problem-title">
+        <header class="mm-section-heading"><h2 id="problem-title">The problem</h2></header>
+        <div class="mm-copy">
+          <p>Designers learning mental models rarely struggle with the diagram. They struggle before it: interviews stop at what people did, and quotes turn into features instead of thinking.</p>
+          <p>Most AI research tools summarize transcripts for you. Ear to Mind coaches you to do it yourself, using Indi Young’s mental model method.</p>
         </div>
+        <figure class="mm-quote-comparison">
+          <div class="mm-quote-grid">
+            <div class="mm-quote-card"><p class="mm-quote-label">What they did</p><blockquote>“I made the same pasta I always make.”</blockquote></div>
+            <div class="mm-quote-card"><p class="mm-quote-label">How they think</p><blockquote>“I just didn’t want to make another decision.”</blockquote></div>
+          </div>
+          <figcaption>Illustrative quotes from the fictional dinner-planning example.</figcaption>
+        </figure>
       </section>
 
-      <section id="key-decisions" class="mm-section mm-inset" data-case-section aria-labelledby="key-decisions-title">
-        <header class="mm-section-heading"><h2 id="key-decisions-title">Key decisions</h2></header>
-        <div class="mm-copy"><ul class="mm-findings">
-          <li><strong>Coach, not ghostwriter.</strong> The AI can’t write statements or regroup the map. The interpretation stays yours.</li>
-          <li><strong>Text first, not live audio.</strong> I scoped out real-time listening for now: consent, speaker separation, and distracting the interviewer were too risky for a first release.</li>
-          <li><strong>Your ChatGPT, your call.</strong> Coaching runs through a personal plugin, only when you ask, and only after participant consent is recorded.</li>
-        </ul></div>
+      <section id="how-it-works" class="mm-section mm-inset" data-case-section aria-labelledby="how-it-works-title">
+        <header class="mm-section-heading"><h2 id="how-it-works-title">How it works</h2></header>
+        <div class="mm-workflow">
+          <div class="mm-workflow-step">
+            <div class="mm-copy"><h3>01 Interview.</h3><p>Save the quotes that matter and get neutral follow-up prompts that go one layer deeper.</p></div>
+            <figure class="mm-workflow-image"><a class="mm-expand" href="/assets/case-studies/mental-model/how-interview.png" target="_blank" rel="noopener" data-tutorial-image data-title="How it works · Interview" aria-label="Enlarge Interview screenshot" aria-haspopup="dialog" aria-controls="mm-image-viewer"><img src="/assets/case-studies/mental-model/how-interview.png" alt="Interview notes beside neutral follow-up prompts in the fictional dinner-planning demo" width="1205" height="840" loading="lazy" decoding="async"></a></figure>
+          </div>
+          <div class="mm-workflow-step">
+            <div class="mm-copy"><h3>02 Statements.</h3><p>Write the cognitive statement yourself. Get feedback on six checks, never a finished answer.</p></div>
+            <figure class="mm-workflow-image"><a class="mm-expand" href="/assets/case-studies/mental-model/how-statements.png" target="_blank" rel="noopener" data-tutorial-image data-title="How it works · Statements" aria-label="Enlarge Statement editor screenshot" aria-haspopup="dialog" aria-controls="mm-image-viewer"><picture><source media="(prefers-reduced-motion: reduce)" srcset="/assets/case-studies/mental-model/how-statements.png"><img src="/assets/case-studies/mental-model/how-statements.gif" alt="A researcher drafts a cognitive statement beside the original quote and receives feedback that asks them to reconsider their own wording" width="931" height="750" loading="lazy" decoding="async"></picture></a></figure>
+          </div>
+          <div class="mm-workflow-step">
+            <div class="mm-copy"><h3>03 Map.</h3><p>Group statements into towers and mental spaces, then find where your product can help.</p></div>
+            <figure class="mm-workflow-image"><a class="mm-expand" href="/assets/case-studies/mental-model/how-map.png" target="_blank" rel="noopener" data-tutorial-image data-title="How it works · Map" aria-label="Enlarge Mental model map screenshot" aria-haspopup="dialog" aria-controls="mm-image-viewer"><img src="/assets/case-studies/mental-model/how-map.png" alt="Cognitive statements grouped in three intention towers across two mental spaces, with support opportunities below" width="975" height="835" loading="lazy" decoding="async"></a></figure>
+          </div>
+        </div>
       </section>
 
       <section id="the-design" class="mm-section mm-inset" data-case-section aria-labelledby="the-design-title">
         <header class="mm-section-heading"><h2 id="the-design-title">The design</h2></header>
-        <div class="mm-copy"><p class="mm-research-note">Select any tutorial image below to explore it at a larger size.</p></div>
         <section id="tutorial-interviews" class="mm-tutorial" aria-labelledby="tutorial-interviews-title">
           <header class="mm-section-heading"><h3 id="tutorial-interviews-title">Tutorial 01 · Interviews</h3></header>
           <div class="mm-copy"><h4>Start with what was actually said.</h4><p>Paste a transcript or import interview notes, keep the speaker labels, and save a selected passage as a quote. The first tutorial introduces the evidence that everything else will return to, using a fictional conversation about deciding what to eat after a long day.</p></div>

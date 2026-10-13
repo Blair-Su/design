@@ -143,6 +143,49 @@
     video.tabIndex = -1;
     controls.hidden = false;
     video.controls = false;
+    fitFilmToFrame(player, video, showError);
+  }
+
+  function fitFilmToFrame(player, video, showError) {
+    if (!video.dataset?.wideSrc || !video.dataset?.compactSrc) return;
+    let variant = '';
+    let restore = null;
+    let resizeTimer;
+    function selectFilm() {
+      // Fullscreen contains the current film; it must not restart or switch edits.
+      if (document.fullscreenElement === player || video.webkitDisplayingFullscreen) return;
+      const { width, height } = player.getBoundingClientRect();
+      if (!width || !height) return;
+      // Choose by the frame itself: its height changes with the window height.
+      // The geometric midpoint minimizes cropping between 16:9 and 5:2 edits.
+      const next = width / height >= Math.sqrt((16 / 9) * (5 / 2)) ? 'wide' : 'compact';
+      if (next === variant) return;
+      restore ||= { time: video.currentTime || 0, playing: !video.paused && !video.ended };
+      variant = next;
+      video.poster = video.dataset[`${next}Poster`];
+      video.src = video.dataset[`${next}Src`];
+      video.load();
+    }
+    function scheduleSelection() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(selectFilm, 120);
+    }
+    video.addEventListener('loadedmetadata', () => {
+      if (!restore) return;
+      const previous = restore;
+      restore = null;
+      // Do not seek on the initial load: keep the intended poster visible.
+      if (previous.time > 0) video.currentTime = Math.min(previous.time, video.duration || previous.time);
+      if (previous.playing) video.play().catch(error => {
+        if (error.name !== 'AbortError') showError('Unable to resume. Please press Play.');
+      });
+    });
+    if (typeof window.ResizeObserver === 'function') {
+      new window.ResizeObserver(scheduleSelection).observe(player);
+    } else window.addEventListener('resize', scheduleSelection);
+    document.addEventListener('fullscreenchange', scheduleSelection);
+    video.addEventListener('webkitendfullscreen', scheduleSelection);
+    selectFilm();
   }
 
   // Enhance ordinary image links with the same native-dialog pattern as HHI.

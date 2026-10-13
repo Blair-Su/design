@@ -1,0 +1,185 @@
+{
+  "url": "http://127.0.0.1:4198/demo/",
+  "viewport": {
+    "width": 1640,
+    "height": 1100
+  },
+  "captured": "2026-10-13",
+  "editor": {
+    ".source-card": {
+      "height": 156,
+      "width": 681,
+      "x": 537,
+      "y": 250
+    },
+    ".statement-editor": {
+      "height": 397,
+      "width": 681,
+      "x": 537,
+      "y": 427
+    },
+    ".statement-layout > .coach-column": {
+      "height": 679,
+      "width": 340,
+      "x": 1245,
+      "y": 250
+    }
+  },
+  "map": {
+    ".intention-tower": [
+      {
+        "height": 708,
+        "width": 254,
+        "x": 574,
+        "y": 491
+      },
+      {
+        "height": 708,
+        "width": 254,
+        "x": 846,
+        "y": 491
+      },
+      {
+        "height": 684,
+        "width": 254,
+        "x": 1168,
+        "y": 491
+      }
+    ],
+    ".map-spaces": [
+      {
+        "height": 808,
+        "width": 1032,
+        "x": 553,
+        "y": 391
+      }
+    ],
+    ".map-statement-card": [
+      {
+        "height": 187,
+        "width": 254,
+        "x": 574,
+        "y": 714
+      },
+      {
+        "height": 187,
+        "width": 254,
+        "x": 846,
+        "y": 491
+      },
+      {
+        "height": 211,
+        "width": 254,
+        "x": 846,
+        "y": 690
+      },
+      {
+        "height": 187,
+        "width": 254,
+        "x": 1168,
+        "y": 491
+      },
+      {
+        "height": 187,
+        "width": 254,
+        "x": 1168,
+        "y": 690
+      }
+    ],
+    ".mental-space-column": [
+      {
+        "height": 808,
+        "width": 568,
+        "x": 553,
+        "y": 391
+      },
+      {
+        "height": 784,
+        "width": 357,
+        "x": 1147,
+        "y": 391
+      }
+    ],
+    ".support-area": [
+      {
+        "height": 186,
+        "width": 254,
+        "x": 574,
+        "y": 1012
+      },
+      {
+        "height": 186,
+        "width": 254,
+        "x": 846,
+        "y": 1012
+      },
+      {
+        "height": 186,
+        "width": 254,
+        "x": 1168,
+        "y": 988
+      }
+    ],
+    ".tower-title": [
+      {
+        "height": 101,
+        "width": 254,
+        "x": 574,
+        "y": 912
+      },
+      {
+        "height": 101,
+        "width": 254,
+        "x": 846,
+        "y": 912
+      },
+      {
+        "height": 101,
+        "width": 254,
+        "x": 1168,
+        "y": 888
+      }
+    ]
+  },
+  "quotes": [
+    {
+      "height": 276,
+      "width": 637,
+      "x": 290,
+      "y": 321
+    },
+    {
+      "height": 276,
+      "width": 637,
+      "x": 948,
+      "y": 321
+    },
+    {
+      "height": 276,
+      "width": 637,
+      "x": 290,
+      "y": 618
+    }
+  ],
+  "support": {
+    "x": 846,
+    "y": 912,
+    "width": 254,
+    "height": 286
+  },
+  "notes": "Real UI captures; source and editor retained in full, original draft and support opportunity restored after typing sequences.",
+  "highResolution": {
+    "density": 3,
+    "folder": "3x",
+    "source": "high-resolution-source.json",
+    "stylesheetSnapshot": "high-resolution-support.html",
+    "method": "Captured prototype DOM and original product CSS rendered at CSS zoom 3, then captured at native pixels.",
+    "supportPadding": 20,
+    "statementPadding": 10,
+    "scope": [
+      "Support opportunities states",
+      "Map statement cards"
+    ],
+    "captured": "2026-10-13"
+  }
+}

@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const source = fs.readFileSync('mental-model-preview/mental-model.js', 'utf8');
 
-function setup({ rejectPlay = false, fullscreen = true } = {}) {
+function setup({ rejectPlay = false, fullscreen = true, frame = null } = {}) {
   class Element {
     constructor() {
       this.listeners = {}; this.attrs = {}; this.hidden = true; this.value = 0;
@@ -25,6 +25,13 @@ function setup({ rejectPlay = false, fullscreen = true } = {}) {
     video.paused = false; video.ended = false; await video.emit('play');
   };
   video.pause = () => { video.paused = true; video.emit('pause'); };
+  let resized;
+  if (frame) {
+    player.getBoundingClientRect = () => frame;
+    video.dataset = { wideSrc: '/project-film.mp4', compactSrc: '/card-film.mp4', widePoster: '/wide.jpg', compactPoster: '/compact.jpg' };
+    video.load = () => { video.loads = (video.loads || 0) + 1; video.currentTime = 0; video.paused = true; video.duration = NaN; };
+    window.ResizeObserver = class { constructor(callback) { resized = callback; } observe() {} };
+  }
   player.querySelector = s => nodes[s];
   document.querySelector = s => s === '.mm-player' ? player : null;
   document.fullscreenEnabled = fullscreen;
@@ -33,7 +40,7 @@ function setup({ rejectPlay = false, fullscreen = true } = {}) {
   window.initCaseNavigation = () => {};
   const timers = new Map(); let id = 0;
   vm.runInNewContext(source, { document, window, setTimeout: fn => { timers.set(++id, fn); return id; }, clearTimeout: key => timers.delete(key) });
-  return { nodes, player, document, window, video, async click(selector) { await nodes[selector].emit('click'); }, idle() { for (const fn of timers.values()) fn(); } };
+  return { nodes, player, document, window, video, resize(next) { frame = next; resized(); }, async click(selector) { await nodes[selector].emit('click'); }, idle() { for (const [key, fn] of [...timers]) { timers.delete(key); fn(); } } };
 }
 
 test('film remains usable without dialog support; media events drive playback and replay', async () => {
@@ -105,4 +112,42 @@ test('a tap reveals hidden controls before pausing the film', async () => {
   await h.video.emit('pointerdown', { pointerType: 'touch' });
   await h.video.emit('click');
   assert.equal(h.video.paused, true);
+});
+
+test('the actual Hero frame selects the matching film, including short desktop windows', () => {
+  for (const [width, height, source] of [[958, 384, '/project-film.mp4'], [1284, 520, '/project-film.mp4'], [915, 520, '/card-film.mp4'], [314, 176.625, '/card-film.mp4']]) {
+    const h = setup({ frame: { width, height } });
+    assert.equal(h.video.src, source);
+    assert.equal(h.video.poster, source === '/project-film.mp4' ? '/wide.jpg' : '/compact.jpg');
+    h.resize({ width: width + 1, height }); h.idle();
+    assert.equal(h.video.loads, 1, 'Minor frame changes must not reload playback');
+  }
+});
+
+test('changing the frame ratio preserves time and playback, including rapid resizes', async () => {
+  const h = setup({ frame: { width: 958, height: 384 } });
+  h.video.duration = 14; await h.video.emit('loadedmetadata');
+  await h.click('.mm-player-toggle'); h.video.currentTime = 6.4;
+  h.resize({ width: 915, height: 520 }); h.idle();
+  h.resize({ width: 958, height: 384 }); h.idle();
+  h.video.duration = 14; await h.video.emit('loadedmetadata');
+  assert.equal(h.video.currentTime, 6.4);
+  assert.equal(h.video.paused, false);
+  await h.click('.mm-player-toggle');
+  h.resize({ width: 915, height: 520 }); h.idle();
+  h.video.duration = 14; await h.video.emit('loadedmetadata');
+  assert.equal(h.video.currentTime, 6.4);
+  assert.equal(h.video.paused, true);
+});
+
+test('fullscreen contains the existing film without selecting a different edit', async () => {
+  const h = setup({ frame: { width: 958, height: 384 } });
+  h.video.duration = 14; await h.video.emit('loadedmetadata');
+  await h.click('.mm-player-fullscreen');
+  h.resize({ width: 1920, height: 1080 }); h.idle();
+  assert.equal(h.video.src, '/project-film.mp4');
+  assert.equal(h.video.loads, 1);
+  await h.click('.mm-player-fullscreen');
+  h.resize({ width: 958, height: 384 }); h.idle();
+  assert.equal(h.video.loads, 1);
 });
