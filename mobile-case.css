@@ -58,14 +58,16 @@
     height: clamp(360px, 52svh, 520px);
   }
   .case-page :is(.lh-cover, .sc-cover, .nl-cover, .cb-hero-image, .mm-hero-image) > img,
-  .case-page .sc-cover > picture > img {
+  .case-page .sc-cover > picture > img,
+  .case-page .mm-hero-image > video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
   }
   .case-page .cb-hero-image > img,
-  .case-page .mm-hero-image > img {
+  .case-page .mm-hero-image > img,
+  .case-page .mm-hero-image > video {
     object-fit: contain;
   }
 }

@@ -12,8 +12,8 @@
 .mm-back:hover { color: var(--ink); }
 .mm-inset { padding-inline: 32px; }
 .mm-intro { padding-block: 56px 48px; scroll-margin-top: 24px; }
-.mm-hero-image { margin: 0 0 40px; overflow: hidden; border-radius: 24px; background: var(--paper); }
-.mm-hero-image img { display: block; width: 100%; height: auto; }
+.mm-hero-image { scroll-margin-top: calc(var(--header-height) + 24px); margin: 0; overflow: hidden; border-radius: 24px; background: var(--paper); }
+.mm-hero-image video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; background: #191919; }
 .mm-eyebrow { margin: 0 0 16px; color: var(--mm-muted); font: 500 12px/1.6 "Geist", Arial, sans-serif; letter-spacing: .045em; text-transform: uppercase; }
 .mm-intro h1 { margin: 0; font: 300 clamp(32px, 2.6vw, 38px)/1.2 "Averia Serif Libre", Georgia, serif; letter-spacing: -.025em; text-wrap: balance; }
 .mm-overview-copy.mm-copy { max-width: none; margin-top: 24px; }
@@ -100,12 +100,11 @@
   .mm-reflection-card { padding: 20px; }
 }
 
-.mm-film, .mm-tutorial-image { margin: 28px 0 0; }
-.mm-film video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #191919; border-radius: 12px; }
+.mm-tutorial-image { margin: 28px 0 0; }
 .mm-tutorial-image img { display: block; width: 100%; height: auto; border: 1px solid #dfe4e7; border-radius: 12px; background: #fff; }
-.mm-film figcaption, .mm-tutorial-image figcaption { margin-top: 12px; color: var(--mm-muted); font: 400 13px/1.65 "Geist", Arial, sans-serif; }
-.mm-film figcaption a { display: inline-block; padding-block: 6px; text-decoration: underline; text-underline-offset: 3px; }
-.mm-film-transcript { margin-top: 16px; color: var(--project-ink); font: 400 14px/1.7 "Geist", Arial, sans-serif; }
+.mm-tutorial-image figcaption { margin-top: 12px; color: var(--mm-muted); font: 400 13px/1.65 "Geist", Arial, sans-serif; }
+.mm-film-transcript a { display: inline-block; padding-block: 6px; text-decoration: underline; text-underline-offset: 3px; }
+.mm-film-transcript { margin: 8px 0 32px; color: var(--project-ink); font: 400 14px/1.7 "Geist", Arial, sans-serif; }
 .mm-film-transcript summary { width: fit-content; cursor: pointer; min-height: 44px; padding-block: 10px; }
 .mm-film-transcript p { margin: 12px 0 0; max-width: 70ch; }
 .mm-review { margin-top: 24px; padding: 24px; background: var(--mm-tint); }
@@ -114,7 +113,7 @@
 @media (max-width: 767px) {
   .mm-review { padding: 20px; }
   .mm-review ul { grid-template-columns: 1fr; }
-  .mm-film, .mm-tutorial-image { margin-top: 22px; }
+  .mm-tutorial-image { margin-top: 22px; }
   .mm-tutorial-image { margin-inline: -10px; }
 }
 
