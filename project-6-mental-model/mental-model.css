@@ -140,5 +140,42 @@
 .case-page.mm-local-page .mm-hero-image{--mm-hero-height:clamp(360px,52svh,520px);display:grid;place-items:center;height:var(--mm-hero-height);background:#000;overflow:hidden}
 .mm-monitor{position:relative;width:min(100%,calc(var(--mm-hero-height) * 16 / 9));aspect-ratio:16 / 9}
 .mm-monitor-frame{display:block;width:100%;height:auto;pointer-events:none}
-.case-page.mm-local-page .mm-monitor > video{position:absolute;left:19.1666667%;top:15.9259259%;width:61.6666667%;height:61.6666667%;aspect-ratio:16 / 9;object-fit:contain;border-radius:0;background:#fefefe}
+.mm-player{position:absolute;left:19.1666667%;top:15.9259259%;width:61.6666667%;height:61.6666667%;background:#fefefe;container-type:inline-size}
+.case-page.mm-local-page .mm-player > video{width:100%;height:100%;object-fit:contain;border-radius:0;background:#fefefe}
 @media(max-width:1023px){.case-page.mm-local-page .mm-hero-image{height:auto}.mm-monitor{width:100%}}
+
+/* Flat, compact film controls: no browser gradient over the picture. */
+.mm-player [hidden]{display:none!important}
+.mm-player button{display:grid;place-items:center;flex-shrink:0;border:0;padding:0;color:#fff;cursor:pointer;font:inherit;-webkit-tap-highlight-color:transparent}
+.mm-player button svg{width:22px;height:22px;fill:currentColor;pointer-events:none}
+.mm-player button:focus-visible,.mm-player input:focus-visible,.mm-player:focus-visible{outline:2px solid #fff;outline-offset:-3px}
+.mm-player-controls{position:absolute;inset:auto 0 0;z-index:2;padding:0 8px;background:#181818;transition:opacity .18s}
+.mm-player.controls-hidden .mm-player-controls{opacity:0;pointer-events:none}
+.mm-player:has(:focus-visible) .mm-player-controls{opacity:1;pointer-events:auto}
+.mm-player-seek{position:relative;display:block;height:16px;margin-top:-8px;cursor:pointer}
+.mm-player-seek input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer;z-index:1}
+.mm-player-track{position:absolute;inset:6px 0;height:4px;background:#767676;border-radius:2px;pointer-events:none}
+.mm-player-track > span{position:relative;display:block;width:var(--mm-progress,0%);height:100%;background:#fff;border-radius:inherit}
+.mm-player-track > span::after{content:"";position:absolute;right:-5px;top:-3px;width:10px;height:10px;border-radius:50%;background:#fff}
+.mm-player-seek:has(:focus-visible){outline:2px solid #fff;outline-offset:0}
+.mm-player-toolbar{display:flex;align-items:center;gap:0;height:36px;margin-top:-4px}
+.mm-player-toolbar button{width:40px;height:36px;background:transparent;border-radius:3px}
+.mm-player-toolbar button:hover{background:#ffffff20}
+.mm-player-mute .mm-icon-sound,.mm-player-mute .mm-icon-muted,.mm-player .mm-player-fullscreen svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mm-player .mm-icon-pause,.mm-player .mm-icon-muted{display:none}
+.mm-player.is-playing .mm-icon-play,.mm-player.is-muted .mm-icon-sound{display:none}
+.mm-player.is-playing .mm-icon-pause,.mm-player.is-muted .mm-icon-muted{display:block}
+.mm-player-audio{display:flex;align-items:center}
+.mm-player-volume{width:0;height:24px;margin:0;visibility:hidden;accent-color:#fff;cursor:pointer}
+.mm-player-audio:hover .mm-player-volume,.mm-player-audio:focus-within .mm-player-volume{width:56px;margin:0 12px 0 2px;visibility:visible}
+.mm-player-time{color:#fff;font:400 12px/1 Arial,sans-serif;white-space:nowrap;font-variant-numeric:tabular-nums}
+.mm-player-toolbar .mm-player-fullscreen{margin-left:auto}
+.mm-player-status{position:absolute;top:8px;left:8px;right:8px;margin:0;padding:8px;background:#181818;color:#fff;font:12px/1.4 Arial,sans-serif;z-index:3}
+.mm-player-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.mm-player:fullscreen{position:fixed;inset:0;width:100%;height:100%;background:#000}
+.case-page.mm-local-page .mm-player:fullscreen > video{background:#000}
+.mm-player:fullscreen .mm-player-toolbar{height:48px}
+.mm-player:fullscreen .mm-player-toolbar button{width:48px;height:44px}
+@container(max-width:360px){.mm-player-volume{display:none}}
+@container(max-width:240px){.mm-player-time{display:none}.mm-player-controls{padding-inline:4px}.mm-player-toolbar{height:32px}.mm-player-toolbar button{height:32px}.mm-player-toolbar .mm-player-fullscreen{margin-left:0}.mm-player-toolbar{justify-content:space-between}}
+@media(prefers-reduced-motion:reduce){.mm-player-controls{transition:none}}
