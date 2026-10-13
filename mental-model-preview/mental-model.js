@@ -42,7 +42,7 @@
         try { await video.play(); }
         catch (error) {
           // A quick second click can interrupt a pending play request normally.
-          if (error.name !== 'AbortError') showError('Unable to play. Please try again or use “Open video” below.');
+          if (error.name !== 'AbortError') showError('Unable to play. Please try again.');
         }
       }
     }
@@ -82,7 +82,7 @@
         if (document.fullscreenElement === player) await document.exitFullscreen();
         else if (player.requestFullscreen && document.fullscreenEnabled) await player.requestFullscreen();
         else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
-      } catch { showError('Fullscreen is unavailable. Use “Open video” below for a larger view.'); }
+      } catch { showError('Fullscreen is unavailable in this browser.'); }
     }
     fullscreen.hidden = !(player.requestFullscreen && document.fullscreenEnabled) && !video.webkitEnterFullscreen;
     fullscreen.addEventListener('click', toggleFullscreen);
@@ -120,7 +120,7 @@
     for (const event of ['play', 'pause', 'ended']) video.addEventListener(event, updatePlayback);
     for (const event of ['loadedmetadata', 'durationchange', 'timeupdate']) video.addEventListener(event, updateTime);
     video.addEventListener('volumechange', updateVolume);
-    video.addEventListener('error', () => showError('The film could not load. Please try “Open video” below.'));
+    video.addEventListener('error', () => showError('The film could not load. Please refresh and try again.'));
     for (const event of ['pointermove', 'pointerdown', 'focusin']) player.addEventListener(event, showControls);
     player.addEventListener('keydown', event => {
       if (event.target.matches('input, button') || event.altKey || event.ctrlKey || event.metaKey) return;

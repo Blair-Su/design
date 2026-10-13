@@ -12,7 +12,7 @@
 .mm-back:hover { color: var(--ink); }
 .mm-inset { padding-inline: 32px; }
 .mm-intro { padding-block: 56px 48px; scroll-margin-top: 24px; }
-.mm-hero-image { scroll-margin-top: calc(var(--header-height) + 24px); margin: 0; overflow: hidden; border-radius: 24px; background: var(--paper); }
+.mm-hero-image { scroll-margin-top: calc(var(--header-height) + 24px); margin: 0 0 32px; overflow: hidden; border-radius: 24px; background: var(--paper); }
 .mm-hero-image video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; background: #191919; }
 .mm-eyebrow { margin: 0 0 16px; color: var(--mm-muted); font: 500 12px/1.6 "Geist", Arial, sans-serif; letter-spacing: .045em; text-transform: uppercase; }
 .mm-intro h1 { margin: 0; font: 300 clamp(32px, 2.6vw, 38px)/1.2 "Averia Serif Libre", Georgia, serif; letter-spacing: -.025em; text-wrap: balance; }
@@ -103,10 +103,6 @@
 .mm-tutorial-image { margin: 28px 0 0; }
 .mm-tutorial-image img { display: block; width: 100%; height: auto; border: 1px solid #dfe4e7; border-radius: 12px; background: #fff; }
 .mm-tutorial-image figcaption { margin-top: 12px; color: var(--mm-muted); font: 400 13px/1.65 "Geist", Arial, sans-serif; }
-.mm-film-transcript a { display: inline-block; padding-block: 6px; text-decoration: underline; text-underline-offset: 3px; }
-.mm-film-transcript { margin: 8px 0 32px; color: var(--project-ink); font: 400 14px/1.7 "Geist", Arial, sans-serif; }
-.mm-film-transcript summary { width: fit-content; cursor: pointer; min-height: 44px; padding-block: 10px; }
-.mm-film-transcript p { margin: 12px 0 0; max-width: 70ch; }
 .mm-review { margin-top: 24px; padding: 24px; background: var(--mm-tint); }
 .mm-review h5 { margin: 0 0 16px; font: 500 16px/1.5 "Geist", Arial, sans-serif; }
 .mm-review ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 32px; margin: 0; padding-left: 20px; color: var(--project-ink); font: 400 14px/1.6 "Geist", Arial, sans-serif; }
@@ -144,23 +140,24 @@
 .case-page.mm-local-page .mm-player > video{width:100%;height:100%;object-fit:contain;border-radius:0;background:#fefefe}
 @media(max-width:1023px){.case-page.mm-local-page .mm-hero-image{height:auto}.mm-monitor{width:100%}}
 
-/* Flat, compact film controls: no browser gradient over the picture. */
+/* Transparent controls appear on hover; the film has no dark control backdrop. */
 .mm-player [hidden]{display:none!important}
 .mm-player button{display:grid;place-items:center;flex-shrink:0;border:0;padding:0;color:#fff;cursor:pointer;font:inherit;-webkit-tap-highlight-color:transparent}
-.mm-player button svg{width:22px;height:22px;fill:currentColor;pointer-events:none}
+.mm-player button svg{width:22px;height:22px;fill:currentColor;pointer-events:none;filter:drop-shadow(0 0 1px #000) drop-shadow(0 1px 1px #000)}
 .mm-player button:focus-visible,.mm-player input:focus-visible,.mm-player:focus-visible{outline:2px solid #fff;outline-offset:-3px}
-.mm-player-controls{position:absolute;inset:auto 0 0;z-index:2;padding:0 8px;background:#181818;transition:opacity .18s}
-.mm-player.controls-hidden .mm-player-controls{opacity:0;pointer-events:none}
-.mm-player:has(:focus-visible) .mm-player-controls{opacity:1;pointer-events:auto}
+.mm-player-controls{position:absolute;inset:auto 0 0;z-index:2;padding:0 8px;background:transparent;opacity:0;pointer-events:none}
+@media(hover:hover){.mm-player:not(.controls-hidden):hover .mm-player-controls{opacity:1;pointer-events:auto}}
+@media(hover:none){.mm-player:not(.controls-hidden) .mm-player-controls{opacity:1;pointer-events:auto}}
+.mm-player:focus-visible .mm-player-controls,.mm-player:has(:focus-visible) .mm-player-controls{opacity:1;pointer-events:auto}
 .mm-player-seek{position:relative;display:block;height:16px;margin-top:-8px;cursor:pointer}
 .mm-player-seek input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer;z-index:1}
-.mm-player-track{position:absolute;inset:6px 0;height:4px;background:#767676;border-radius:2px;pointer-events:none}
+.mm-player-track{position:absolute;inset:6px 0;height:3px;background:#0005;border-radius:2px;pointer-events:none;box-shadow:0 0 1px #fff9}
 .mm-player-track > span{position:relative;display:block;width:var(--mm-progress,0%);height:100%;background:#fff;border-radius:inherit}
-.mm-player-track > span::after{content:"";position:absolute;right:-5px;top:-3px;width:10px;height:10px;border-radius:50%;background:#fff}
+.mm-player-track > span::after{content:"";position:absolute;right:-5px;top:-3px;width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:0 0 1px 1px #0008}
 .mm-player-seek:has(:focus-visible){outline:2px solid #fff;outline-offset:0}
 .mm-player-toolbar{display:flex;align-items:center;gap:0;height:36px;margin-top:-4px}
 .mm-player-toolbar button{width:40px;height:36px;background:transparent;border-radius:3px}
-.mm-player-toolbar button:hover{background:#ffffff20}
+.mm-player-toolbar button:hover svg{filter:drop-shadow(0 0 1px #000) drop-shadow(0 1px 2px #000)}
 .mm-player-mute .mm-icon-sound,.mm-player-mute .mm-icon-muted,.mm-player .mm-player-fullscreen svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .mm-player .mm-icon-pause,.mm-player .mm-icon-muted{display:none}
 .mm-player.is-playing .mm-icon-play,.mm-player.is-muted .mm-icon-sound{display:none}
@@ -168,7 +165,7 @@
 .mm-player-audio{display:flex;align-items:center}
 .mm-player-volume{width:0;height:24px;margin:0;visibility:hidden;accent-color:#fff;cursor:pointer}
 .mm-player-audio:hover .mm-player-volume,.mm-player-audio:focus-within .mm-player-volume{width:56px;margin:0 12px 0 2px;visibility:visible}
-.mm-player-time{color:#fff;font:400 12px/1 Arial,sans-serif;white-space:nowrap;font-variant-numeric:tabular-nums}
+.mm-player-time{color:#fff;font:400 12px/1 Arial,sans-serif;white-space:nowrap;font-variant-numeric:tabular-nums;text-shadow:0 0 1px #000,0 1px 2px #000}
 .mm-player-toolbar .mm-player-fullscreen{margin-left:auto}
 .mm-player-status{position:absolute;top:8px;left:8px;right:8px;margin:0;padding:8px;background:#181818;color:#fff;font:12px/1.4 Arial,sans-serif;z-index:3}
 .mm-player-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
@@ -178,7 +175,6 @@
 .mm-player:fullscreen .mm-player-toolbar button{width:48px;height:44px}
 @container(max-width:360px){.mm-player-volume{display:none}}
 @container(max-width:240px){.mm-player-time{display:none}.mm-player-controls{padding-inline:4px}.mm-player-toolbar{height:32px}.mm-player-toolbar button{height:32px}.mm-player-toolbar .mm-player-fullscreen{margin-left:0}.mm-player-toolbar{justify-content:space-between}}
-@media(prefers-reduced-motion:reduce){.mm-player-controls{transition:none}}
 
 /* Six tutorials form one design chapter; retain their original image frames. */
 .mm-tutorial{padding-block:48px;border-top:1px solid var(--rule);scroll-margin-top:24px}
