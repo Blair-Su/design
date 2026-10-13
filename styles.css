@@ -285,6 +285,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #32404f; outline-offs
 }
 
 /* Mental Model uses the same 16:9 project artwork and caption treatment. */
-.mental-model-cover { background: #191919; }
+.home-page #work .mental-model-cover { background: #000; }
+.mental-model-cover picture { display: block; width: 100%; height: 100%; }
 .mental-model-cover img { width: 100%; height: 100%; object-fit: contain; }
 .project-link[href="/project-6-mental-model/"] .project-meta span { color: #52665c; }
