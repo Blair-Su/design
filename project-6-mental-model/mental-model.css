@@ -108,7 +108,7 @@
 .mm-film-transcript summary { width: fit-content; cursor: pointer; min-height: 44px; padding-block: 10px; }
 .mm-film-transcript p { margin: 12px 0 0; max-width: 70ch; }
 .mm-review { margin-top: 24px; padding: 24px; background: var(--mm-tint); }
-.mm-review h4 { margin: 0 0 16px; font: 500 16px/1.5 "Geist", Arial, sans-serif; }
+.mm-review h5 { margin: 0 0 16px; font: 500 16px/1.5 "Geist", Arial, sans-serif; }
 .mm-review ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 32px; margin: 0; padding-left: 20px; color: var(--project-ink); font: 400 14px/1.6 "Geist", Arial, sans-serif; }
 @media (max-width: 767px) {
   .mm-review { padding: 20px; }
@@ -179,3 +179,14 @@
 @container(max-width:360px){.mm-player-volume{display:none}}
 @container(max-width:240px){.mm-player-time{display:none}.mm-player-controls{padding-inline:4px}.mm-player-toolbar{height:32px}.mm-player-toolbar button{height:32px}.mm-player-toolbar .mm-player-fullscreen{margin-left:0}.mm-player-toolbar{justify-content:space-between}}
 @media(prefers-reduced-motion:reduce){.mm-player-controls{transition:none}}
+
+/* Six tutorials form one design chapter; retain their original image frames. */
+.mm-tutorial{padding-block:48px;border-top:1px solid var(--rule);scroll-margin-top:24px}
+.mm-tutorial:first-of-type{padding-top:28px;border-top:0}
+.mm-tutorial:last-child{padding-bottom:0}
+.mm-tutorial .mm-section-heading h3{font:400 17px/1.5 "Geist",Arial,sans-serif;letter-spacing:0;color:var(--mm-muted)}
+.mm-tutorial .mm-copy h4{font:500 30px/1.22 "Geist",Arial,sans-serif;letter-spacing:-.02em;text-wrap:pretty}
+#the-design > .mm-copy .mm-research-note{margin-top:0}
+#key-decisions .mm-findings{margin-bottom:0}
+@media(max-width:1023px){.mm-tutorial{padding-block:36px}}
+@media(max-width:767px){.mm-tutorial{padding-block:28px}.mm-tutorial .mm-section-heading h3{font-size:16px}.mm-tutorial .mm-copy h4{font-size:27px}}
