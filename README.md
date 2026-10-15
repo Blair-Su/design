@@ -19,7 +19,7 @@ No package installation is needed. Node.js is the only runtime requirement.
 
 Open http://127.0.0.1:4173/preview.html to switch between the homepage, About and four case studies, and between Studio (2160px), Desktop (1440px), Tablet (834px), and Phone (390px). Homepage previews use a fixed display viewport and scroll inside the frame, so the first-screen Hero is represented accurately. Case-study previews also scroll inside a viewport so their fixed Contents bar stays visible. Use `preview.html?device=studio` to open the 2160 × 1200 large-display preset directly. This review page is separate from the portfolio itself.
 
-The Playground at `/?view=playground` contains five works: Vibe Coding Sky Signature, Ski on Vinyl, Quiet Luxury Research, Butterfly Flutter and Snow Mountain. Cube.AI is also published as the fifth case study at `/project-5-cube/`, with its prototype and demo under `/cube/`.
+The Playground at `/?view=playground` contains five works: Vibe Coding Sky Signature, Ski on Vinyl, Quiet Luxury Research, Butterfly Flutter and Snow Mountain. Cube.AI is temporarily removed from the homepage project list. Its case study at `/project-5-cube/`, prototype and demo under `/cube/`, and editable draft remain available for future restoration.
 
 ## Little fox AI companion
 
